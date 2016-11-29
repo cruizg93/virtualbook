@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+ 
+<tiles-definitions>  
+  
+   <!-- Base Definition -->
+   <definition name="base-definition"
+       template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />  
+       <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />  
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
+   </definition>  
+  
+   <definition name="welcome" extends="base-definition">  
+       <put-attribute name="title" value="Welcome" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/welcome.jsp" />  
+   </definition>  
+ 
+   <definition name="login" extends="base-definition">  
+       <put-attribute name="title" value="login" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />  
+   </definition>  
+       
+   <definition name="userlist" extends="base-definition">  
+       <put-attribute name="title" value="List" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/userlist.jsp" />  
+   </definition>
+   
+   <definition name="logout" extends="base-definition">  
+       <put-attribute name="title" value="Bye-Bye" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />  
+   </definition>  
+   
+   <definition name="registration" extends="base-definition">  
+       <put-attribute name="title" value="New User" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/registration.jsp" />  
+   </definition>  
+   
+   <definition name="accessDenied" extends="base-definition">  
+       <put-attribute name="title" value="Access Denied" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/accessDenied.jsp" />  
+   </definition>  
+   
+   <definition name="settings" extends="base-definition">  
+       <put-attribute name="title" value="settings" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings.jsp" />  
+   </definition>
+   
+   <!-- CLIENTS -->
+   <definition name="clientlist" extends="base-definition">  
+       <put-attribute name="title" value="Client List" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/client/clientlist.jsp" />  
+   </definition>
+   
+   <definition name="clientRegistration" extends="base-definition">  
+       <put-attribute name="title" value="Client Registration" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/client/registration.jsp" />  
+   </definition>
+   
+   <!-- LOCATIONS -->
+   <definition name="locationlist" extends="base-definition">  
+       <put-attribute name="title" value="Location List" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/location/locationlist.jsp" />  
+   </definition>
+   <definition name="locationRegistration" extends="base-definition">  
+       <put-attribute name="title" value="Location Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/location/registration.jsp" />  
+   </definition>
+   
+</tiles-definitions>
