@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 
 import com.blacktierental.virtualbook.converter.RoleToUserProfileConverter;
+import com.blacktierental.virtualbook.converter.TypeToItemTypeConverter;
 
 
 @Configuration
@@ -29,6 +30,9 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
+	
+	@Autowired
+	TypeToItemTypeConverter typeToItemTypeConverter;
 	
 	/**
 	 * Configure TilesConfigurer.
@@ -66,6 +70,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(roleToUserProfileConverter);
+        registry.addConverter(typeToItemTypeConverter);
     }
 	
 

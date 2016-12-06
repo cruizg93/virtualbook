@@ -27,7 +27,7 @@
 			</div>
 		</div>
 	 	<div class="col-md-3 col-sm-4">
-	 		<div class="generic-container settings">
+	 		<div class="generic-container settings" onclick="window.location.href = '${pageContext.request.contextPath}/Item'">
 	 			<img src="<c:url value='/static/img/icons/Games-01.png'/>"/>
 	 			<footer>
 	 				<h3>ITEMS</h3>

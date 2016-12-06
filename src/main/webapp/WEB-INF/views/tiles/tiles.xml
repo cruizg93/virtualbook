@@ -25,7 +25,7 @@
        
    <definition name="userlist" extends="base-definition">  
        <put-attribute name="title" value="List" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/userlist.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings/userlist.jsp" />  
    </definition>
    
    <definition name="logout" extends="base-definition">  
@@ -35,7 +35,7 @@
    
    <definition name="registration" extends="base-definition">  
        <put-attribute name="title" value="New User" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/registration.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings/userRegistration.jsp" />  
    </definition>  
    
    <definition name="accessDenied" extends="base-definition">  
@@ -51,22 +51,31 @@
    <!-- CLIENTS -->
    <definition name="clientlist" extends="base-definition">  
        <put-attribute name="title" value="Client List" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/client/clientlist.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings/clientlist.jsp" />  
    </definition>
    
    <definition name="clientRegistration" extends="base-definition">  
        <put-attribute name="title" value="Client Registration" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/client/registration.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings/clientRegistration.jsp" />  
    </definition>
    
    <!-- LOCATIONS -->
    <definition name="locationlist" extends="base-definition">  
        <put-attribute name="title" value="Location List" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/location/locationlist.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings/locationlist.jsp" />  
    </definition>
    <definition name="locationRegistration" extends="base-definition">  
        <put-attribute name="title" value="Location Form" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/location/registration.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings/locationRegistration.jsp" />  
    </definition>
-   
+
+	<!-- ITEMS -->
+   <definition name="itemlist" extends="base-definition">  
+       <put-attribute name="title" value="Item List" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings/itemlist.jsp" />  
+   </definition>
+   <definition name="itemRegistration" extends="base-definition">  
+       <put-attribute name="title" value="Item Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings/itemRegistration.jsp" />  
+   </definition>
 </tiles-definitions>

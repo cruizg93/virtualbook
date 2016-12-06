@@ -145,5 +145,5 @@ public class AppController {
     public List<UserProfile> initializeProfiles() {
         return userProfileService.findAll();
     }
- 
+    
 }

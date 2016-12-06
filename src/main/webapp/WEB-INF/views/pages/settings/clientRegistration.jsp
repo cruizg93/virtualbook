@@ -10,7 +10,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="name">Name</label>
                 <div class="col-md-7">
-                    <form:input type="text" path="name" id="name" class="form-control input-sm"/>
+                    <form:input type="text" path="name" id="name" class="form-control input-sm appText"/>
                     <div class="has-error">
                         <form:errors path="name" class="help-inline"/>
                     </div>
@@ -22,7 +22,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="phoneNumber">Phone</label>
                 <div class="col-md-7">
-                    <form:input type="text" path="phoneNumber" id="phoneNumber" class="form-control input-sm" />
+                    <form:input type="text" path="phoneNumber" id="phoneNumber" class="form-control input-sm appUSPhoneNumber" />
                     <div class="has-error">
                         <form:errors path="phoneNumber" class="help-inline"/>
                      </div>
@@ -33,7 +33,7 @@
              <div class="form-group col-md-12">
                  <label class="col-md-3 control-lable" for="email">Email</label>
                  <div class="col-md-7">
-                     <form:input type="text" path="email" id="email" class="form-control input-sm" />
+                     <form:input type="text" path="email" id="email" class="form-control input-sm appEmail" />
                     <div class="has-error">
                         <form:errors path="email" class="help-inline"/>
                     </div>
@@ -45,7 +45,7 @@
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="companyName">Company Name</label>
                 <div class="col-md-7">
-                    <form:input type="text" path="companyName" id="companyName" class="form-control input-sm"/>
+                    <form:input type="text" path="companyName" id="companyName" class="form-control input-sm appTextNumber"/>
                     <div class="has-error">
                         <form:errors path="companyName" class="help-inline"/>
                     </div>

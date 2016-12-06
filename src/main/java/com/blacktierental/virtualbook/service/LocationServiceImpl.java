@@ -43,7 +43,7 @@ public class LocationServiceImpl implements LocationService{
 		if(entity !=null){
 			entity.setBuildingName(location.getBuildingName());
 			entity.setLocation(location.getLocation());
-			entity.setPhoneNumber(location.getLocation());
+			entity.setPhoneNumber(location.getPhoneNumber());
 		}
 	}
 

@@ -30,7 +30,6 @@ import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.service.LocationService;
  
 @Controller
-@SessionAttributes("roles")
 public class LocationController {
 
 	@Autowired
@@ -110,6 +109,14 @@ public class LocationController {
         if (result.hasErrors()) {
             return "locationRegistration";
         }
+        if(!locationService.isLocationUnique(locationObj.getId(), locationObj.getLocation())){
+        	FieldError clientUniqueError = new FieldError("location", "location",
+					messageSource.getMessage("non.unique.location", new
+					String[] {locationObj.getLocation()}, Locale.getDefault()));
+			result.addError(clientUniqueError);
+			return "locationRegistration";
+		}
+        
         locationService.updateLocation(locationObj);
  
         model.addAttribute("success", "Location " + locationObj.getLocation() + " updated successfully");

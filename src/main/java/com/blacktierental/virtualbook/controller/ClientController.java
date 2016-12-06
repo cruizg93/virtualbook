@@ -31,7 +31,6 @@ import com.blacktierental.virtualbook.service.ClientService;
 
 
 @Controller
-@SessionAttributes("roles")
 public class ClientController {
 
 	@Autowired
