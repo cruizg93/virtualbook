@@ -62,7 +62,8 @@ var year = '${year}';
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<c:if test="${(loopindex.index == 6) || (loopindex.index == 13) || (loopindex.index == 20) || (loopindex.index == 27)|| (loopindex.index == 34) || (loopindex.index == 41) || (loopindex.index == 48)}">
+				<c:if test="${(loopindex.index == 6) || (loopindex.index == 13) || (loopindex.index == 20) || (loopindex.index == 27)
+					|| (loopindex.index == 34) || (loopindex.index == 41) || (loopindex.index == 48)}">
 					<c:out value="</div>" escapeXml="false"/>
 				</c:if>
 			</c:forEach>

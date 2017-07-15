@@ -61,16 +61,31 @@ $(document).ready(function(){
 	}
 });
 
-function deleteRow(itemId){
-	// Find and remove item from an array
-	var i = eventItems.indexOf(""+itemId);
-	if(i != -1) {
-		eventItems.splice(i, 1);
-	}
-	$("#selectExistingItems option[value='"+itemId+"']").css("display","block");
+function addItemRow(){
+	var row = $("#itemRow"+(itemsCont-1)).clone();
+	$(row).prop("id","itemRow"+itemsCont);
+	var itemSelectElement = $(row).find('select');
+	var quantityElement = $(row).find('input')[0];
+	var pricePerUnitElement = $(row).find('input')[1];
+	var actionButton = $(row).find("button");
 	
-	$("#row"+itemId).remove();
-	calculateTotal()
+	$(itemSelectElement).prop("id", 	"items"+itemsCont+".item");
+	$(itemSelectElement).prop("name", 	"items["+itemsCont+"].item");
+	$(quantityElement).prop("id", 		"quantity"+itemsCont);
+	$(quantityElement).prop("name", 	"items["+itemsCont+"].quantity");
+	$(pricePerUnitElement).prop("id", 	"pricePerUnit"+itemsCont);
+	$(pricePerUnitElement).prop("name", "items["+itemsCont+"].pricePerUnit");
+	
+	$(actionButton).html("-");
+	$(actionButton).attr("onclick","deleteItemRow('itemRow"+(itemsCont)+"')");
+	$("#itemRow"+(itemsCont-1)).after(row);
+	itemsCont += 1;
+}
+
+function deleteItemRow(rowId){
+	$("#"+rowId).remove();
+	itemsCont -= 1;
+	calculateTotal();
 }
 
 function requestAttachmentList(){

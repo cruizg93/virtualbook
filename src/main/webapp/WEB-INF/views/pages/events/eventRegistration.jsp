@@ -1,9 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link
-	href="<c:url value='/static/js/datetimepicker/css/bootstrap-datetimepicker.min.css' />"
+<link href="<c:url value='/static/js/datetimepicker/css/bootstrap-datetimepicker.min.css' />"
 	rel="stylesheet">
 <link href="<c:url value='/static/css/selectize.bootstrap3.css' />"
+	rel="stylesheet">
+<link href="<c:url value='/static/css/event.css' />"
 	rel="stylesheet">
 <div class="container well">
 	<h3 class="text-center">Event Registration Form</h3>
@@ -170,38 +171,44 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
-			<div class="form-group input-group">
-				<span class="glyphicon glyphicon-tower input-group-addon"></span>
-				<form:select path="items[0].item" items="${existingMainItems}"
-					multiple="false" itemValue="id" itemLabel="description"
-					class="form-control input-lg" />
+		<c:forEach var="eventItem" items="${event.items}" varStatus="loopindex">
+			<div class="row" id="itemRow${loopindex.index}">
+				<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+					<div class="form-group input-group">
+						<span class="glyphicon glyphicon-tower input-group-addon"></span>
+						<form:select path="items[${loopindex.index}].item" items="${existingMainItems}"
+							multiple="false" itemValue="id" itemLabel="description"
+							class="form-control input-lg" />
+					</div>
+					<div class="has-error">
+						<form:errors path="items[${loopindex.index}].item" class="help-inline text-danger" />
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+					<div class="form-group input-group">
+						<span class="input-group-addon">#</span>
+						<form:input type="text" path="items[${loopindex.index}].quantity"
+							placeholder="Quantity" id="quantity${loopindex.index}"
+							class="form-control input-lg appNumber" onblur="calculateTotal()" />
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+					<div class="form-group input-group">
+						<span class="glyphicon glyphicon-usd input-group-addon"></span>
+						<form:input type="text" path="items[${loopindex.index}].pricePerUnit"
+							placeholder="Price Per Unit" id="pricePerUnit${loopindex.index}"
+							class="form-control input-lg appNumberDot"
+							onblur="calculateTotal()" style="z-index:0;"/>
+						<c:if test="${loopindex.index==0}">
+							<button type="button" class="addItemRowButton" onclick="addItemRow()">+</button>
+						</c:if>
+						<c:if test="${loopindex.index>0}">
+							<button type="button" class="addItemRowButton" onclick="deleteItemRow('itemRow${loopindex.index}')">-</button>
+						</c:if>
+					</div>
+				</div>
 			</div>
-			<div class="has-error">
-				<form:errors path="items[0].item" class="help-inline text-danger" />
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
-			<div class="form-group input-group">
-				<span class="input-group-addon">#</span>
-				<form:input type="text" path="items[0].quantity"
-					placeholder="Quantity" id="quantity0"
-					class="form-control input-lg appNumber" onblur="calculateTotal()" />
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
-			<div class="form-group input-group">
-				<span class="glyphicon glyphicon-usd input-group-addon"></span>
-				<form:input type="text" path="items[0].pricePerUnit"
-					placeholder="Price Per Unit" id="pricePerUnit0"
-					class="form-control input-lg appNumberDot"
-					onblur="calculateTotal()" />
-			</div>
-		</div>
-
-
-
-
+		</c:forEach>
 		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12 pull-right">
 			<div class="form-group input-group">
 				<span class="glyphicon glyphicon-usd input-group-addon">

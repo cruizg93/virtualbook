@@ -84,14 +84,7 @@ public class EventServiceImpl implements EventService{
 			entity.setEventName(event.getEventName());
 			entity.setLocation(event.getLocation());
 			entity.setTaxPercentage(event.getTaxPercentage());
-			for(int i=0;i<event.getItems().size();i++){
-				if(i>=entity.getItems().size()){
-					break;
-				}
-				entity.getItems().get(i).setPricePerUnit(event.getItems().get(i).getPricePerUnit());
-				entity.getItems().get(i).setQuantity(event.getItems().get(i).getQuantity());
-				entity.getItems().get(i).setItem(event.getItems().get(i).getItem());
-			}
+			entity.setItems(event.getItems());
 			System.out.println("");
 		}
 	}
