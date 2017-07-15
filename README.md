@@ -2,30 +2,30 @@
 
 # App purpose:
 
-Create and manage the scheduling of Black Tie Rental of Florida company.__
+Create and manage the scheduling of Black Tie Rental of Florida company.  
 
-Two main modules:__
+Two main modules:  
 
-*Settings (create, update, search and delete):_
-  -Users_
-  -Clients_
-  -Locations_
-  -Items__
+*Settings (create, update, search and delete):  
+  -Users  
+  -Clients  
+  -Locations  
+  -Items  
   
-*Events:_
-  -Creation Form_ 
-  -Calendar View by month__
+*Events:  
+  -Creation Form  
+  -Calendar View by month  
   
-Create by Cristian Ruiz Gonzalez @Cruizg93__
+Create by Cristian Ruiz Gonzalez @Cruizg93  
 
-# Used Technologies:__
+# Used Technologies:  
 
-*Java 8_
-*MySQL 5_
-*Spring Framework 4 (core, mvc, security, annotations)_
-*Tiles & JSTL_
-*Hibernate 5_
-*JQuery_
-*Bootstrap 3_
-*CSS 3_
-*IDE (Spring Suite Tool)_
+*Java 8  
+*MySQL 5  
+*Spring Framework 4 (core, mvc, security, annotations)  
+*Tiles & JSTL  
+*Hibernate 5  
+*JQuery  
+*Bootstrap 3  
+*CSS 3  
+*IDE (Spring Suite Tool)  
