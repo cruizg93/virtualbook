@@ -107,4 +107,12 @@ public class Location {
 		return "Location [id="+id+",location="+location+",BuildingName="+buildingName
 				+",phone="+phoneNumber+",state="+state+"]";
 	}
+	
+	/**
+	 * This will be call from client select element in event registration form
+	 * @return
+	 */
+	public String getSelectDescription(){
+		return buildingName;
+	}
 }

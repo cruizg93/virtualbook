@@ -13,5 +13,7 @@ public interface ItemService {
 	void deleteItemByDescription(String description);
 	
 	List<Item> findAllItems();
+	List<Item> findMainItems();
+	List<Item> findAttachedItems();
 	boolean isItemDescriptionUnique(Integer id,String description);
 }

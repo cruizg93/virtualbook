@@ -8,9 +8,9 @@
     <name>virtualbook</name>
  
     <properties>
-        <springframework.version>4.1.7.RELEASE</springframework.version>
-        <springsecurity.version>4.0.1.RELEASE</springsecurity.version>
-        <hibernate.version>4.3.10.Final</hibernate.version>
+        <springframework.version>4.3.9.RELEASE</springframework.version>
+        <springsecurity.version>4.2.3.RELEASE</springsecurity.version>
+        <hibernate.version>5.2.10.Final</hibernate.version>
         <mysql.connector.version>5.1.31</mysql.connector.version>
         <apachetiles.version>3.0.5</apachetiles.version>
     </properties>
@@ -89,6 +89,16 @@
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+ 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>javax.transaction</groupId>
+		  <artifactId>jta</artifactId>
+		  <version>1.1</version>
+		</dependency>
  
         <!-- jsr303 validation -->
         <dependency>
@@ -116,6 +126,14 @@
             <version>1.1.7</version>
         </dependency>
  
+ 		<!-- Junit -->
+ 		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.12</version>
+		    <scope>test</scope>
+		</dependency>
+ 		
         <!-- Servlet+JSP+JSTL -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -132,7 +150,19 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-         
+         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.0</version>
+		</dependency>
+	    <!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20160810</version>
+		</dependency>
+			     
     </dependencies>
  
     <build>

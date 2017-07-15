@@ -81,7 +81,7 @@ public class LocationController {
 
 		locationService.save(location);
 
-		model.addAttribute("success", "Location " + location.getLocation() + " registered successfully");
+		model.addAttribute("success", "LOCATION <strong>" + location.getLocation() + "</strong> REGISTERED SUCCESSFULLY");
 		// return "success";
 		return "redirect:/locationlist";
 	}
@@ -103,7 +103,7 @@ public class LocationController {
      * updating client in database. It also validates the user input
      */
     @RequestMapping(value = { "/edit-location-{location}" }, method = RequestMethod.POST)
-    public String updateUser(@Valid Location locationObj, BindingResult result,
+    public String updateLocation(@Valid Location locationObj, BindingResult result,
             ModelMap model, @PathVariable String location) {
  
         if (result.hasErrors()) {
@@ -119,7 +119,7 @@ public class LocationController {
         
         locationService.updateLocation(locationObj);
  
-        model.addAttribute("success", "Location " + locationObj.getLocation() + " updated successfully");
+        model.addAttribute("success", "LOCATION <strong>" + locationObj.getLocation() + "</strong> UPDATED SUCCESSFULLY");
         model.addAttribute("loggedinuser",getPrincipal());
         return "redirect:/locationlist";
     }
@@ -128,8 +128,9 @@ public class LocationController {
 	 * This method will delete a location by it's location value.
 	 */
 	@RequestMapping(value = { "/delete-location-{location}" }, method = RequestMethod.GET)
-	public String deleteClient(@PathVariable String location) {
+	public String deleteLocation(@PathVariable String location, ModelMap model) {
 		locationService.deleteByLocation(location);
+		model.addAttribute("success", "LOCATION <strong>" + location + "</strong> DELETED SUCCESSFULLY");
 		return "redirect:/locationlist";
 	}
 	

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.blacktierental.virtualbook.model.Item;
+import com.blacktierental.virtualbook.model.ItemTypeDescription;
 
 @Repository("itemDao")
 public class ItemDaoImpl extends AbstractDao<Integer,Item>implements ItemDao{
@@ -52,8 +53,31 @@ public class ItemDaoImpl extends AbstractDao<Integer,Item>implements ItemDao{
 
 	@Override
 	public List<Item> findAllItems() {
+		Criteria criteria = createEntityCriteria()
+					.createAlias("itemTypes", "types")
+					.addOrder(Order.desc("types.description"))
+					.addOrder(Order.asc("description"));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
+		@SuppressWarnings("unchecked")
+		List<Item> items = (List<Item>)criteria.list();
+		return items;
+	}
+
+	@Override
+	public List<Item> findMainItems() {
 		Criteria criteria = createEntityCriteria().addOrder(Order.asc("description"));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
+		criteria.add(Restrictions.eq("itemTypes.id",1));//Main
+		@SuppressWarnings("unchecked")
+		List<Item> items = (List<Item>)criteria.list();
+		return items;
+	}
+
+	@Override
+	public List<Item> findAttachedItems() {
+		Criteria criteria = createEntityCriteria().addOrder(Order.asc("description"));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
+		criteria.add(Restrictions.eq("itemTypes.id",2));//attachment
 		@SuppressWarnings("unchecked")
 		List<Item> items = (List<Item>)criteria.list();
 		return items;

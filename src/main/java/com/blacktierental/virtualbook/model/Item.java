@@ -1,26 +1,23 @@
 package com.blacktierental.virtualbook.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="tbl_item")
 public class Item {
-
+/*
+	@OneToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
+	@JoinColumn(name="item_id",referencedColumnName="id")
+	private List<EventItem> items;
+	*/
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
@@ -32,16 +29,12 @@ public class Item {
 	@Column(name="state")
 	private String state=State.ACTIVE.getState();
 	
-	@NotNull
 	@Column(name="quantity")
 	private Integer quantity;
 	
-	@NotEmpty
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tbl_item_item_type",
-			joinColumns={@JoinColumn(name="ITEM_ID")},
-			inverseJoinColumns = {@JoinColumn(name="ITEM_TYPE_ID")})
-	private Set<ItemType> itemTypes = new HashSet<ItemType>();
+	@ManyToOne
+	@JoinColumn(name="type_id")
+	private ItemType itemTypes;
 
 	public Integer getId() {
 		return id;
@@ -75,17 +68,26 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public Set<ItemType> getItemTypes() {
+		
+	public ItemType getItemTypes() {
 		return itemTypes;
 	}
 
-	public void setItemTypes(Set<ItemType> itemTypes) {
+	public void setItemTypes(ItemType itemTypes) {
 		this.itemTypes = itemTypes;
 	}
-	
+	/*
+	public List<EventItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<EventItem> items) {
+		this.items = items;
+	}*/
+
 	@Override
 	public int hashCode(){
-		final int prime =38;
+		final int prime =98;
 		int result =1;
 		result = prime * result + ((id==null)?0:id.hashCode());
 		result = prime * result + ((description==null)?0:description.hashCode());
@@ -116,6 +118,8 @@ public class Item {
 	
 	@Override
 	public String toString(){
-		return "Item [id="+id+",description="+description+",quantity="+quantity+",state="+state+"]";
+		return "Item[id="+id+",description="+description+",quantity="+quantity+",state="+state+"]";
 	}
+	
+	
 }

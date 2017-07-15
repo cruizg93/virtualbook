@@ -1,17 +1,10 @@
 package com.blacktierental.virtualbook.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
@@ -120,5 +113,18 @@ public class Client {
 	public String toString(){
 		return "Client [id="+id+",name="+name+",CompanyName="+companyName
 				+",PhoneNumber="+phoneNumber+",state="+state+"]";
+	}
+	/**
+	 * This will be call from client select element in event registration form
+	 * @return
+	 */
+	public String getSelectDescription(){
+		String splitedName =name;
+		if(name!=null && name.length()>0){
+			if(name.split(" ").length>1){
+				splitedName = name.split(" ")[0];
+			}
+		}
+		return splitedName+" - "+companyName;
 	}
 }

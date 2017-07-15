@@ -58,6 +58,16 @@ public class ItemServiceImpl implements ItemService{
 		Item item = findByDescription(description);
 		return (item == null || ((id!=null) && (item.getId()==id)));
 	}
+
+	@Override
+	public List<Item> findMainItems() {
+		return dao.findMainItems();
+	}
+
+	@Override
+	public List<Item> findAttachedItems() {
+		return dao.findAttachedItems();
+	}
 	
 	
 }

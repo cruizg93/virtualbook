@@ -1,0 +1,111 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    padding:15px 5px 5px 5px;
+    background-color:rgba(248,248,248,0.9);
+    margin-top:6px;
+    margin-bottom:6px;
+    cursor: pointer;
+}
+
+.card img{
+	width: 60%;
+}
+.wellMenu.well-dark{
+	background:rgba(0,0,0,0.5)!important;
+}
+.wellMenu.defaultMenu{
+	padding-top:0px;
+	padding-bottom:0px;/*
+	padding-left: 10px;
+	padding-right:10px;*/
+}
+.wellMenu>div.row>div{
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/*this span content the glyphicon*/
+.card span{
+	width: 100%; 
+	font-size: 5em;
+}
+
+h2{
+	margin-top:0px;
+}
+
+h3{
+	font-weight: bolder;
+}
+
+.defaultMenu span{
+	display:inherit;
+}
+.defaultMenu h2{
+	display: inherit;
+}
+
+
+/* xxs  like iphone*/
+@media screen and (max-width: 459px) {
+}
+
+/* xs < 768 */
+@media screen and (min-width:460px) and (max-width: 767px) {
+	.card span{
+		font-size: 10em;
+	}	
+}
+
+/* sm */
+@media screen and (min-width: 768px) {
+	.card span{
+		font-size: 8em;
+	}
+	.defaultMenu span{
+		font-size: 1.3em;
+	}
+	.defaultMenu h2{
+		font-size:1.5em;
+	}	
+}
+
+/* md */
+@media screen and (min-width: 992px) {
+	.card span{
+		font-size: 8em;
+	}
+	.defaultMenu span{
+		font-size: 2em;
+	}
+	.defaultMenu h2{
+		font-size:2.2em;
+	}
+}
+
+/* lg */
+@media screen and (min-width: 1200px) {
+    /*#site-content{background-color:gray;}*/
+    .card span{
+		font-size: 8em;
+	}
+	.defaultMenu span{
+		font-size: 2.5em;
+	}
+	.defaultMenu h2{
+		font-size:2.8em;
+	}
+}
+
+
+/* menu or dashboard to navigate through the app */
+.defaultMenu{
+	
+}

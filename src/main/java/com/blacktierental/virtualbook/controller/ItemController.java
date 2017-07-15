@@ -77,7 +77,7 @@ public class ItemController {
 	@RequestMapping(value = { "/newitem" }, method = RequestMethod.POST)
 	public String saveItem(@Valid Item item,BindingResult result, ModelMap model) {
 
-		if (result.hasErrors()) {
+		if (result.hasErrors() || (item==null || item.getDescription()==null)) {
 			return "itemRegistration";
 		}
 
@@ -91,7 +91,7 @@ public class ItemController {
 
 		itemService.saveItem(item);
 
-		model.addAttribute("success", "Item " + item.getDescription()+ " registered successfully");
+		model.addAttribute("success", "ITEM <strong>" + item.getDescription()+ "</strong> REGISTERED SUCCESSFULLY");
 		// return "success";
 		return "redirect:/itemList";
 	}
@@ -100,8 +100,9 @@ public class ItemController {
 	 * This method will delete an item by it's description value.
 	 */
 	@RequestMapping(value = { "/delete-item-{description}" }, method = RequestMethod.GET)
-	public String deleteItem(@PathVariable String description) {
+	public String deleteItem(@PathVariable String description, ModelMap model) {
 		itemService.deleteItemByDescription(description);
+		model.addAttribute("success", "ITEM <strong>" + description + "</strong> DELETED SUCCESSFULLY");
 		return "redirect:/itemList";
 	}
 
@@ -139,7 +140,7 @@ public class ItemController {
  
         itemService.updateItem(item);
  
-        model.addAttribute("success", "Item" + item.getDescription() + " updated successfully");
+        model.addAttribute("success", "ITEM <strong>" + item.getDescription() + "</strong> UPDATED SUCCESSFULLY");
         model.addAttribute("loggedinuser",getPrincipal());
         return "redirect:/itemList";
     }

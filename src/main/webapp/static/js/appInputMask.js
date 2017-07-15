@@ -1,3 +1,10 @@
+//Require [https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.3/jquery.mask.min.js]
+/**
+ * Created by: Cristian Ruiz Gonzalez
+ * Cruizg93
+ * crisruiz93@gmail.com
+ * FREE USE
+ */
 $(document).ready(function(){
 	/**
 	 * Only text with spaces
@@ -28,6 +35,20 @@ $(document).ready(function(){
     });
 	
 	/**
+	 * Only numbers and Dot (.)- no spaces
+	 */
+	$('.appNumberDot').keypress(function (e) {
+        var regex = new RegExp('^[0-9.]+$');
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        }else{
+	        e.preventDefault();
+	        return false;
+        }
+    });
+	
+	/**
 	 * Alphanumeric with spaces and symbols [& @ /]
 	 */
 	$('.appTextNumber').keypress(function (e) {
@@ -45,7 +66,7 @@ $(document).ready(function(){
 	 * Alphanumberic with symbol @ following Alphanumeric and next . with Alphanumberic again
 	 */
 	$('.appEmail').keypress(function (e) {
-        var regex = new RegExp('^[a-zA-Z0-9@a-zA-Z0-9.a-zA-Z]+$');
+        var regex = new RegExp('^[a-zA-Z0-9._+-@a-zA-Z0-9.-.a-zA-Z]+$');
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
         if (regex.test(str)) {
             return true;

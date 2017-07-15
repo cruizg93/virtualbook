@@ -1,5 +1,8 @@
 package com.blacktierental.virtualbook.dao;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import org.hibernate.Criteria;
@@ -26,7 +29,7 @@ public class HibernateTokenRepositoryImpl extends AbstractDao<String,PersistentL
 		persistentLogin.setUsername(token.getUsername());
 		persistentLogin.setSeries(token.getSeries());
 		persistentLogin.setToken(token.getTokenValue());
-		persistentLogin.setLast_used(token.getDate());
+		persistentLogin.setLast_used(token.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		persist(persistentLogin);
 	}
 	
@@ -36,8 +39,9 @@ public class HibernateTokenRepositoryImpl extends AbstractDao<String,PersistentL
 		try {
 			Criteria crit = createEntityCriteria();
 			crit.add(Restrictions.eq("series",seriesId));
-			PersistentLogin persistentLongin = (PersistentLogin)crit.uniqueResult();
-			return new PersistentRememberMeToken(persistentLongin.getUsername(), persistentLongin.getSeries(), persistentLongin.getToken(), persistentLongin.getLast_used());
+			PersistentLogin persistentLogin = (PersistentLogin)crit.uniqueResult();
+			Instant instant = persistentLogin.getLast_used().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+			return new PersistentRememberMeToken(persistentLogin.getUsername(), persistentLogin.getSeries(), persistentLogin.getToken(), Date.from(instant));
 		} catch (Exception e) {
 			logger.info("Token not found...");
 			return null;
@@ -62,7 +66,7 @@ public class HibernateTokenRepositoryImpl extends AbstractDao<String,PersistentL
 	        logger.info("Updating Token for seriesId : {}", seriesId);
 	        PersistentLogin persistentLogin = getByKey(seriesId);
 	        persistentLogin.setToken(tokenValue);
-	        persistentLogin.setLast_used(lastUsed);
+	        persistentLogin.setLast_used(lastUsed.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 	        update(persistentLogin);
 	    }
 }

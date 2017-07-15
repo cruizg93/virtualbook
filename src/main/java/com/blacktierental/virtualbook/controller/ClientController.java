@@ -28,8 +28,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.service.ClientService;
  
-
-
 @Controller
 public class ClientController {
 
@@ -83,7 +81,7 @@ public class ClientController {
 
 		clientService.saveClient(client);
 
-		model.addAttribute("success", "Client " + client.getName() + " registered successfully");
+		model.addAttribute("success", "CLIENT <strong>" + client.getName() + "<strong> REGISTERED SUCCESSFULLY");
 		// return "success";
 		return "redirect:/clientlist";
 	}
@@ -91,18 +89,19 @@ public class ClientController {
 	/**
 	 * This method will delete an client by it's name and company.
 	 */
-	@RequestMapping(value = { "/delete-client-{clientName}-{companyName}" }, method = RequestMethod.GET)
-	public String deleteClient(@PathVariable String clientName, @PathVariable String companyName) {
-		clientService.deleteByNameAndCompany(clientName, companyName);
+	@RequestMapping(value = { "/delete-client-{id}" }, method = RequestMethod.GET)
+	public String deleteClient(@PathVariable int id, ModelMap model) {
+		clientService.deleteById(id);
+		model.addAttribute("success", "CLIENT DELETED SUCCESSFULLY");
 		return "redirect:/clientlist";
 	}
 
 	/**
 	 * This method will provide the medium to update an existing client.
 	 */
-	@RequestMapping(value = { "/edit-client-{clientName}-{companyName}" }, method = RequestMethod.GET)
-	public String editUser(@PathVariable String clientName, @PathVariable String companyName, ModelMap model) {
-		Client client = clientService.findByNameAndCompany(clientName, companyName);
+	@RequestMapping(value = { "/edit-client-{id}" }, method = RequestMethod.GET)
+	public String editUser(@PathVariable int id, ModelMap model) {
+		Client client = clientService.findById(id);
 		model.addAttribute("client", client);
 		model.addAttribute("edit", true);
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -113,9 +112,9 @@ public class ClientController {
      * This method will be called on form submission, handling POST request for
      * updating client in database. It also validates the user input
      */
-    @RequestMapping(value = { "/edit-client-{clientName}-{companyName}" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/edit-client-{id}" }, method = RequestMethod.POST)
     public String updateUser(@Valid Client client, BindingResult result,
-            ModelMap model, @PathVariable String clientName, @PathVariable String companyName) {
+            ModelMap model, @PathVariable int id) {
  
         if (result.hasErrors()) {
             return "clientRegistration";
@@ -123,7 +122,7 @@ public class ClientController {
  
         clientService.updateClient(client);
  
-        model.addAttribute("success", "Client " + client.getName() + " updated successfully");
+        model.addAttribute("success", "CLIENT <strong>" + client.getName() + "</strong> UPDATED SUCCESSFULLY");
         model.addAttribute("loggedinuser",getPrincipal());
         return "redirect:/clientlist";
     }

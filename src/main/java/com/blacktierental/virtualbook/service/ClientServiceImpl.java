@@ -52,6 +52,11 @@ public class ClientServiceImpl implements ClientService{
 	public void deleteByNameAndCompany(String name, String companyName) {
 		dao.deleteByNameAndCompany(name, companyName);
 	}
+	
+	@Override
+	public void deleteById(int id) {
+		dao.deleteById(id);
+	}
 
 	@Override
 	public List<Client> findAllClients() {

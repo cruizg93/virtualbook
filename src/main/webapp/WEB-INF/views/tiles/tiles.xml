@@ -10,16 +10,18 @@
        <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />  
        <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />  
        <put-attribute name="body" value="" />  
-       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
+       <put-attribute name="footer" value="" />  
    </definition>  
   
    <definition name="welcome" extends="base-definition">  
-       <put-attribute name="title" value="Welcome" />  
+       <put-attribute name="title" value="Welcome" />
+       <put-attribute name="menu" value="" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/welcome.jsp" />  
    </definition>  
  
    <definition name="login" extends="base-definition">  
        <put-attribute name="title" value="login" />  
+       <put-attribute name="menu" value="" />
        <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />  
    </definition>  
        
@@ -29,7 +31,8 @@
    </definition>
    
    <definition name="logout" extends="base-definition">  
-       <put-attribute name="title" value="Bye-Bye" />  
+       <put-attribute name="title" value="Bye-Bye" />
+       <put-attribute name="menu" value="" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />  
    </definition>  
    
@@ -39,10 +42,11 @@
    </definition>  
    
    <definition name="accessDenied" extends="base-definition">  
-       <put-attribute name="title" value="Access Denied" />  
+       <put-attribute name="title" value="Access Denied" />
+       <put-attribute name="menu" value="" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/accessDenied.jsp" />  
    </definition>  
-   
+   <!-- MENU -->
    <definition name="settings" extends="base-definition">  
        <put-attribute name="title" value="settings" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/settings.jsp" />  
@@ -77,5 +81,15 @@
    <definition name="itemRegistration" extends="base-definition">  
        <put-attribute name="title" value="Item Form" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/settings/itemRegistration.jsp" />  
+   </definition>
+   
+   <!-- EVENTS -->
+	<definition name="eventlist" extends="base-definition">  
+       <put-attribute name="title" value="Events" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/events/events.jsp" />  
+   </definition>
+   <definition name="eventRegistration" extends="base-definition">  
+       <put-attribute name="title" value="Event Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/events/eventRegistration.jsp" />  
    </definition>
 </tiles-definitions>

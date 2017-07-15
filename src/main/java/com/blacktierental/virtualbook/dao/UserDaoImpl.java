@@ -25,7 +25,6 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 	}
 
 	public User findByUsername(String username) {
-		System.out.println("UserName:"+username);
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("username",username));
 		User user = (User)crit.uniqueResult();

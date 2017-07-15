@@ -17,7 +17,11 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
-
+import com.blacktierental.virtualbook.converter.ClientConverter;
+import com.blacktierental.virtualbook.converter.EventItemConverter;
+import com.blacktierental.virtualbook.converter.ItemConverter;
+import com.blacktierental.virtualbook.converter.LocalDateTimeConverter;
+import com.blacktierental.virtualbook.converter.LocationConverter;
 import com.blacktierental.virtualbook.converter.RoleToUserProfileConverter;
 import com.blacktierental.virtualbook.converter.TypeToItemTypeConverter;
 
@@ -34,6 +38,20 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	@Autowired
 	TypeToItemTypeConverter typeToItemTypeConverter;
 	
+	@Autowired
+	ClientConverter clientConverter;
+	
+	@Autowired
+	LocationConverter locationConverter;
+	
+	@Autowired
+	ItemConverter itemConverter;
+	
+	@Autowired
+	EventItemConverter eventItemConverter;
+	
+	@Autowired
+	LocalDateTimeConverter localDateTimeConverter;
 	/**
 	 * Configure TilesConfigurer.
 	 */
@@ -65,12 +83,16 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     
     /**
      * Configure Converter to be used.
-     * In our example, we need a converter to convert string values[Roles] to UserProfiles in newUser.jsp
      */
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(roleToUserProfileConverter);
         registry.addConverter(typeToItemTypeConverter);
+        registry.addConverter(clientConverter);
+        registry.addConverter(locationConverter);
+        registry.addConverter(itemConverter);
+        registry.addConverter(eventItemConverter);
+        registry.addConverter(locationConverter);
     }
 	
 

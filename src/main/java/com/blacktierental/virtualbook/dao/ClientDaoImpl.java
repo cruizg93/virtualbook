@@ -53,6 +53,14 @@ public class ClientDaoImpl extends AbstractDao<Integer, Client> implements Clien
 		Client client = (Client)criteria.uniqueResult();
 		delete(client);
 	}
+	
+	@Override
+	public void deleteById(int id){
+		Criteria criteria = createEntityCriteria();
+		criteria.add(Restrictions.eq("id", id));
+		Client client = (Client)criteria.uniqueResult();
+		delete(client);
+	}
 
 	@Override
 	public List<Client> findAllClients() {

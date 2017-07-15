@@ -11,7 +11,7 @@ public interface ClientService {
 	void saveClient(Client  client);
 	void updateClient(Client client);
 	void deleteByNameAndCompany(String name, String companyName);
-	
+	void deleteById(int id);
 	List<Client> findAllClients();
 	boolean isNameAndCompanyUnique(Integer id, String name, String companyName);
 }

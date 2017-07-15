@@ -1,150 +1,134 @@
+/*MOBILE FIRST*/
 *{
-	text-transform:uppercase;
-}
-
-html{
-	background-color:#2F2F2F;
+	text-transform: uppercase;
 }
 
 body{
-	height: 100%;
-	background-color:rgb(245, 245, 245);
+	position: relative;
+}
+
+body::before{
+  background: url("../img/login_background.jpg") no-repeat center center fixed; 
+  content: '';
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position:absolute; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+  }
+  
+h1{
+	margin-top:0px;
+	font-family: 'Kurale', serif;
+	font-weight: bolder;
+}
+
+.help-inline{
+	font-size: 10px !important;
+}
+
+.content{
+	min-height: 500px;
+}
+
+.clickable{
+	position: relative;
+}
+.clickable:active{
+	box-shadow: 0 3px 0 #00823F;
+  	top: 3px;
+}
+.heightfull{
+	height: 100% !important;
+}
+.height75{
+	height: 75% !important;
 }
 
 
-#mainWrapper {
-	height: 100%;
-	background-image: -webkit-gradient(
-	linear,
-	right bottom,
-	right top,
-	color-stop(0, #EDEDED),
-	color-stop(0.08, #EAEAEA),
-	color-stop(1, #2F2F2F),
-	color-stop(1, #AAAAAA)
-);
-background-image: -o-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
-background-image: -moz-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
-background-image: -webkit-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
-background-image: -ms-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
-background-image: linear-gradient(to top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+/* On list views align the buttons to the right where the pager is*/
+.footerListActionButton{
+	text-align:center;
 }
 
-.floatRight{
-	float:right;
-	margin-right: 18px;
+/*In user registration form this apply to the roles addon to style the vertical label */
+#addonRolesL>p{
+	margin-bottom:4px;
 }
 
-.has-error{
-	color:red;
+/* xxs  like iphone*/
+@media screen and (max-width: 459px) {
+	h1{
+    	font-size:3em;
+    }
+	h2{
+		font-size:1.3em;
+	}
+	h3{
+		font-size:1em;
+	}	
 }
 
-.formAddButtonIcon{
-	background-image:url("../img/icons/Button Add-01.png");
-	background-repeat:no-repeat;
-	background-position: left center;
-	background-size:25px;
-	background-position-x:5px;
-   	padding-left:35px; 
+/* xs < 768 */
+@media screen and (min-width:460px) and (max-width: 767px) {
+	h1{
+    	font-size:3em;
+    }
+	h2{
+		font-size:2em;
+	}
+	h3{
+		font-size:2em;
+	}	
 }
 
-.formEditButtonIcon{
-	background-image:url("../img/icons/Edit Document-01.png");
-	background-repeat:no-repeat;
-	background-position: left center;
-	background-size:25px;
-	background-position-x:5px;
-   	padding-left:35px; 
+/* sm */
+@media screen and (min-width: 768px) {
+ 	h1{
+    	font-size:4em;
+    }
+    h2{
+    	font-size:2em;
+    }
+    h3{
+		font-size:1.5em;
+	}
+	.footerListActionButton{
+		text-align:right;
+	}
 }
 
-.formSaveButtonIcon{
-	background-image:url("../img/icons/Save-01.png");
-	background-repeat:no-repeat;
-	background-position: left center;
-	background-size:25px;
-	background-position-x:5px;
-   	padding-left:35px; 
+/* md */
+@media screen and (min-width: 992px) {
+    h1{
+    	font-size:5em;
+    }
+    h2{
+    	font-size:3em;
+    }
+    h3{
+		font-size:2.3em;
+	}	
 }
 
-.formDeleteButtonIcon{
-	background-image:url("../img/icons/Button Delete-01.png");
-	background-repeat:no-repeat;
-	background-position: left center;
-	background-size:25px;
-	background-position-x:5px;
-   	padding-left:35px; 
-}
-
-.generic-container {
-  /*position:fixed;*/
-  width:100%;
-  /*margin: 0 auto;*/
-  /*margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;*/
-  /*padding: 20px;*/
-  background-color: #EAE7E7;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  /*box-shadow: 0 0 30px black;*/
-}
-
-.generic-container img{
-	width:80%;
-}
-
-.generic-container footer{
-	background-color:#428bca;
-	color: #FFFFFF;
-	width: 100%;
-}
-.generic-container footer h3{
-	margin:-1px;
-	margin-top:5px !important;
-}
-.generic-container.settings {
-	padding-top:10px;
-	cursor: pointer;
-	box-shadow: none;
-}
-.generic-container.settings:active {
-  transform: translateY(4px);
-}
-
-
-.custom-width {
-    width: 80px !important;
-}
-
-body, #mainWrapper, .form-control{
-	font-size:12px!important;
-}
-
-#mainWrapper {
-	/*height: 720px; Without explicit px values, % in children's does not work*/
-	height: 100%; /*with Viewport-Percentage, we can handles all devices screens  */
-	padding-left:10px;
-	padding-right:10px;
-	padding-bottom:10px;
-}
-
-.login-container {
-    margin-top: 100px;
-    background-color: floralwhite;
-    width: 40%;
-    left: 30%;
-    position: absolute;
-}
-
-.login-card {
-    width: 80%;
-    margin: auto;
-}
-
-.login-form {
-    padding: 10%;
-}
-
-.authbar{
-	margin-bottom:15px;
+/* lg */
+@media screen and (min-width: 1200px) {
+    h1{
+    	font-size:6em;
+    }
+    h2{
+    	font-size:3em;
+    }
+    h3{
+		font-size:2.5em;
+	}	
 }

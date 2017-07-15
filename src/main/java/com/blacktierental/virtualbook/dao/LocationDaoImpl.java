@@ -52,7 +52,7 @@ public class LocationDaoImpl extends AbstractDao<Integer, Location> implements L
 	}
 	@Override
 	public List<Location> findAllLocations() {
-		Criteria criteria = createEntityCriteria().addOrder(Order.asc("location"));
+		Criteria criteria = createEntityCriteria().addOrder(Order.asc("buildingName"));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
 		@SuppressWarnings("unchecked")
 		List<Location> locations = (List<Location>)criteria.list();

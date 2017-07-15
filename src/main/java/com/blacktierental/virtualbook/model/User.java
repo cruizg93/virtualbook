@@ -72,7 +72,7 @@ public class User {
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.username = username.toUpperCase();
 	}
 
 	public String getPassword() {
@@ -80,7 +80,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = password.toUpperCase();
 	}
 
 	public String getName() {

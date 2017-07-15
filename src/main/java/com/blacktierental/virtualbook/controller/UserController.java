@@ -107,7 +107,7 @@ public class UserController {
 
 		userService.saveUser(user);
 
-		model.addAttribute("success", "User " + user.getName() + " registered successfully");
+		model.addAttribute("success", "USER <strong>" + user.getName() + "-"+user.getUsername()+"</strong> REGISTERED SUCCESSFULLY");
 		// return "success";
 		return "redirect:/list";
 	}
@@ -116,8 +116,9 @@ public class UserController {
 	 * This method will delete an user by it's name value.
 	 */
 	@RequestMapping(value = { "/delete-user-{username}" }, method = RequestMethod.GET)
-	public String deleteUser(@PathVariable String username) {
+	public String deleteUser(@PathVariable String username, ModelMap model) {
 		userService.deleteUserByUsername(username);
+		model.addAttribute("success", "USER <strong>" + username + "</strong> DELETE SUCCESSFULLY");
 		return "redirect:/list";
 	}
 
@@ -156,7 +157,7 @@ String[]{user.getUsername()}, Locale.getDefault()));
  
         userService.updateUser(user);
  
-        model.addAttribute("success", "User " + user.getName() + " updated successfully");
+        model.addAttribute("success", "USER <strong>" + user.getName().toUpperCase() + "</strong> UPDATED SUCCESSFULLY");
         model.addAttribute("loggedinuser",getPrincipal());
         return "redirect:/list";
     }

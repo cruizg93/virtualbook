@@ -12,4 +12,5 @@ public interface ClientDao {
 	void save(Client client);
 	void deleteByNameAndCompany(String name, String companyName);
 	List<Client> findAllClients();
+	void deleteById(int id);
 }

@@ -1,0 +1,152 @@
+#divCurrentMonth{
+	margin-bottom:0px;
+	padding-bottom:0px;
+}
+
+.divBottomButton{
+	text-align:right;
+	padding-right: 0px;
+	padding-left: 0px;	
+}
+.divBottomButton>button{
+	border-radius: 0px 0px 0px 0px;
+	width:100%;
+}
+
+#divMonthTitle>div{
+	padding-left:0px;
+	padding-right:0px;
+}
+
+.formAddButtonIcon{
+	position:static;
+	width:100%;
+}
+
+.odd{
+	/*background-color:white;*/
+}
+.even{
+	background-color:white;
+}
+
+.row{
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.noMinHeight{
+	min-height: 0px !important;
+}
+
+.arrow{
+	vertical-align: bottom;
+	cursor: pointer;
+}
+.calendarDay:hover{
+	background-color:#a2c8e8;
+	border-bottom: 1px solid #337AB7
+}
+
+.calendarDay:hover> a:hover{
+	color:white;
+}
+
+.calendarDay{
+	position: relative;
+  	float:left;
+  	width:100%;	
+  	min-height: 100px;
+}
+
+.calendarDay > .dayLabel{
+	background-color:#337AB7;
+	margin:0px;
+	width:100%;
+	font-size:1.5em;
+	font-weight: bold;
+}
+
+.calendarDay > .dayNumber{
+	background-color:#89b7dd;
+	font-size:1.2em;
+	font-weight: 400;
+}
+
+/* xxs  like iphone*/
+@media screen and (max-width: 459px) {
+	.calendarDay{
+		width: 100%;
+	}
+	.formAddButtonIcon{
+		border-radius: 0px;
+		width:100% !important;
+	}
+}
+
+/* xs < 768 */
+@media screen and (min-width:460px) and (max-width: 767px) {
+	.calendarDay{
+		width:100%;
+	}
+	.formAddButtonIcon{
+		border-radius: 0px;
+		width:100% !important;
+	}
+}
+
+/* sm */
+@media screen and (min-width: 768px) {
+	.calendarDay{
+		width:14.285%;	
+	}
+	.formAddButtonIcon{
+		position:absolute;
+		bottom:0px;
+		right:0.5px;	
+		width: auto;
+		border-radius: 6px 6px 0px 0px;
+	}
+	.divBottomButton>button{
+		border-radius: 0px 0px 6px 6px;
+		width:100%;
+	}
+		
+}
+
+/* md */
+@media screen and (min-width: 992px) {
+	.calendarDay{
+		width:14.285%;	
+	}
+	.formAddButtonIcon{
+		position:absolute;
+		right:0.5px;
+		right:0px;
+		width: auto;
+		border-radius: 6px 6px 0px 0px;	
+	}
+	.divBottomButton>button{
+		border-radius: 0px 0px 6px 6px;
+		width:100%;
+	}
+	
+}
+
+/* lg */
+@media screen and (min-width: 1200px) {
+	.calendarDay{
+		width:14.285%;	
+	}
+	.formAddButtonIcon{
+		position:absolute;
+		bottom:0px;
+		right:0.5px;	
+		width: auto;
+		border-radius: 6px 6px 0px 0px;
+	}
+	.divBottomButton>button{
+		border-radius: 0px 0px 6px 6px;
+		width:100%;
+	}
+}
