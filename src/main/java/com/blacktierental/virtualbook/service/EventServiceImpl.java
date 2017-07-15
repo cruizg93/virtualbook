@@ -75,6 +75,7 @@ public class EventServiceImpl implements EventService{
 			entity.setAdvance(event.getAdvance());
 			entity.setClient(event.getClient());
 			entity.setComments(event.getComments());
+			entity.setContactSameAsClient(event.getContactSameAsClient());
 			entity.setContactPersonEmail(event.getContactPersonEmail());
 			entity.setContactPersonName(event.getContactPersonName());
 			entity.setContactPersonPhoneNumber(event.getContactPersonPhoneNumber());

@@ -20,6 +20,15 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
 				<div class="form-group input-group">
+					<label class="checkbox-inline"><input type="checkbox" value="1" id="sameAsContactControl">Client same as contact person</label>
+				</div>
+				<form:input type="hidden" path="contactSameAsClient" id="contactSameAsClient" />
+            </div>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+				<div class="form-group input-group">
 					<span class="glyphicon glyphicon-gift input-group-addon"
 						id="addongEventName"></span>
 					<form:input type="text" path="eventName" id="eventName"

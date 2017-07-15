@@ -29,6 +29,7 @@ public class Event {
 		pickUpTime= LocalDateTime.now();
 		items = new ArrayList<EventItem>();
 		items.add(new EventItem());
+		contactSameAsClient = 1;
 	}
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -50,6 +51,12 @@ public class Event {
 	@JoinColumn(name="client_id")
 	private Client client;
 
+	/**
+	 * values: [0: false | 1:true]
+	 */
+	@Column(name="client_same_as_client")
+	private int contactSameAsClient;
+	
 	@Column(name="contact_person_name")
 	private String contactPersonName;
 	
@@ -229,6 +236,14 @@ public class Event {
 
 	public void setPickUpTime(LocalDateTime pickUpTime) {
 		this.pickUpTime = pickUpTime;
+	}
+
+	public int getContactSameAsClient() {
+		return contactSameAsClient;
+	}
+
+	public void setContactSameAsClient(int contactSameAsClient) {
+		this.contactSameAsClient = contactSameAsClient;
 	}
 
 	@Override

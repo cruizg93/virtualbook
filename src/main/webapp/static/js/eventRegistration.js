@@ -3,19 +3,21 @@ var eventItems = [];//items have been add to event
 var itemsCont = 1;
 
 $(document).ready(function(){
+	if($("#contactSameAsClient").val()=="1"){
+		$("#sameAsContactControl").prop("checked", true);
+		sameAsContact(true);
+	}else{
+		$("#sameAsContactControl").prop("checked", false);
+		sameAsContact(false);
+	}
 	
-	$("#sameAsContact").change(function() {
+	$("#sameAsContactControl").change(function() {
 	    if(this.checked) {
-	    	$("#contactPersonName").prop("disabled", true);
-	    	$("#contactPersonName").val(" ");
-	    	$("#contactPersonEmail").prop("disabled", true);
-	    	$("#contactPersonEmail").val(" ");
-	    	$("#contactPersonPhoneNumber").prop("disabled", true);
-	    	$("#contactPersonPhoneNumber").val(" ");
+	    	sameAsContact(true);
+	    	$("#contactSameAsClient").val("1");
 	    }else{
-	    	$("#contactPersonName").prop("disabled", false);
-	    	$("#contactPersonEmail").prop("disabled", false);
-	    	$("#contactPersonPhoneNumber").prop("disabled", false);
+	    	sameAsContact(false);
+	    	$("#contactSameAsClient").val("0");
 	    }
 	});
 	$('#dtpDateAndHour').datetimepicker({
@@ -49,8 +51,7 @@ $(document).ready(function(){
 	});
 	
 	//editing is capture at the bottom of eventRegistration.jsp
-	if(editing=="True" || editing=="true"){ //Production
-	//if(editing){//for dev porpouse
+	if(editing=="True" || editing=="true"){
 		formatDatesInForm();
 		calculateTotal();
 	}else{
@@ -149,5 +150,20 @@ function formatDatesInForm(){
 	if(pickUp){
 		$("#pickUpTimeControl").val(moment(pickUp).format("YYYY-MM-DD HH:mm:ss"));
 		$("#pickUpTime").val(moment(pickUp).format("YYYY-MM-DD HH:mm:ss"));
+	}
+}
+
+function sameAsContact(booleanValue){
+	if(booleanValue){
+		$("#contactPersonName").prop("disabled", true);
+    	$("#contactPersonName").val("");
+    	$("#contactPersonEmail").prop("disabled", true);
+    	$("#contactPersonEmail").val("");
+    	$("#contactPersonPhoneNumber").prop("disabled", true);
+    	$("#contactPersonPhoneNumber").val("");
+	}else{
+		$("#contactPersonName").prop("disabled", false);
+    	$("#contactPersonEmail").prop("disabled", false);
+    	$("#contactPersonPhoneNumber").prop("disabled", false);
 	}
 }
