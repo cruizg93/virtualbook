@@ -12,7 +12,9 @@ public interface LocationService {
 	void save(Location location);
 	void updateLocation(Location location);
 	void deleteByLocation(String location);
+	void deleteById(int id);
 	List<Location> findAllLocations();
 	
 	boolean isLocationUnique(Integer id, String location);
+	
 }

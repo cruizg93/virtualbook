@@ -26,7 +26,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${locations}" var="location">
-						<tr>
+						<tr class="state_${location.state }">
 							<td class="hidden-xs">${location.location}</td>
 							<td>${location.buildingName}</td>
 							<td>${location.phoneNumber}</td>
@@ -39,7 +39,7 @@
 									</button>
 									<button type="button"
 										class="btn btn-danger formDeleteButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
-										onclick="window.location.href ='<c:url value="/delete-location-${location.location}" />'">
+										onclick="deleteLocation(${location.id},'${location.location}')">
 										<span class="glyphicon glyphicon-trash"></span><span class="hidden-ms hidden-xs"> Delete</span>	
 									</button>
 								</td>
@@ -79,4 +79,23 @@
 				{"width": "25%"}
 			]
     	});
+    	function deleteLocation(id, location){
+    		bootbox.confirm({
+        	    title: "Delete location?",
+        	    message: "Are you sure you want to delete the location "+location,
+        	    buttons: {
+        	        cancel: {
+        	            label: '<i class="fa fa-times"></i> Cancel'
+        	        },
+        	        confirm: {
+        	            label: '<i class="fa fa-check"></i> Confirm'
+        	        }
+        	    },
+        	    callback: function (result) {
+        	        if(result){
+        	        	window.location.href ='<c:url value="/delete-location-'+id+'"/>'; 
+        	        }
+        	    }
+        	})
+    	};
     </script>

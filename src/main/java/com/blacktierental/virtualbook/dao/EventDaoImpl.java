@@ -2,9 +2,11 @@ package com.blacktierental.virtualbook.dao;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
@@ -15,7 +17,10 @@ import org.springframework.stereotype.Repository;
 
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
+import com.blacktierental.virtualbook.model.EventItem;
+import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.model.Location;
+import com.blacktierental.virtualbook.model.State;
 import com.blacktierental.virtualbook.model.User;
 
 @Repository("eventDao")
@@ -33,12 +38,19 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 	}
 
 	@Override
+	public List<Event> findByItem(EventItem items) {
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("items",items));
+		return (List<Event>)crit.list();
+	}
+	
+	@Override
 	public List<Event> findByClient(Client client) {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("client",client));
 		List<Event> events = (List<Event>)crit.list();
 		if(events != null){
-			for(Event event : events){}
+			//for(Event event : events){}
 			//Hibernate.initialize(event.getItems());
 		}
 		return events;
@@ -50,7 +62,7 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 		crit.add(Restrictions.eq("location",location));
 		List<Event> events = (List<Event>)crit.list();
 		if(events != null){
-			for(Event event : events){}
+			//for(Event event : events){}
 			//Hibernate.initialize(event.getItems());
 		}
 		return events;
@@ -78,18 +90,15 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("id",id));
 		Event event = (Event)crit.uniqueResult();
-		// TODO: validate when delete or just update state of an event
-		/*if(true){
-			//update state to unactive
-		}else{
-			//delete physical
-		}*/
-		delete(event);
+		event.setState(State.DELETED.toString());
+		save(event);
+		//delete(event);
 	}
 
 	@Override
 	public List<Event> findAllEventsByDateRange(LocalDateTime initial, LocalDateTime end) {
 		Criteria criteria = createEntityCriteria().addOrder(Order.asc("dateAndHour"));
+		criteria.add(Restrictions.eq("state",State.ACTIVE.toString()));
 		criteria.add(Restrictions.between("dateAndHour", initial, end));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
 		@SuppressWarnings("unchecked")

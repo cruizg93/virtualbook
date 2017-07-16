@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
+import com.blacktierental.virtualbook.model.EventItem;
+import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.model.Location;
 
 public interface EventDao {
@@ -14,9 +16,11 @@ public interface EventDao {
 	Event findById(int id);
 	List<Event> findByClient(Client client);
 	List<Event> findByLocation(Location location);
+	List<Event> findByItem(EventItem items);
 	List<Event> findByDate(LocalDate date);
-	void save(Event event);
-	void deleteById(int id);
 	List<Event> findAllEventsByDateRange(LocalDateTime initial, LocalDateTime end);
 	List<Event> findAllUpComingEvent();
+	void save(Event event);
+	void deleteById(int id);
+	
 }

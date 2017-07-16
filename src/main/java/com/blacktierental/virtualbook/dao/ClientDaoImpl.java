@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.blacktierental.virtualbook.model.Client;
+import com.blacktierental.virtualbook.model.State;
 
 
 @Repository("clientDao")
@@ -54,17 +55,25 @@ public class ClientDaoImpl extends AbstractDao<Integer, Client> implements Clien
 		delete(client);
 	}
 	
+	/**
+	 * IF param client is null
+	 * look for a client id equals to param id
+	 */
 	@Override
-	public void deleteById(int id){
-		Criteria criteria = createEntityCriteria();
-		criteria.add(Restrictions.eq("id", id));
-		Client client = (Client)criteria.uniqueResult();
+	public void deleteById(int id, Client client){
+		if(client == null){
+			Criteria criteria = createEntityCriteria();
+			criteria.add(Restrictions.eq("id", id));
+			client = (Client)criteria.uniqueResult();
+		}
 		delete(client);
 	}
 
 	@Override
 	public List<Client> findAllClients() {
-		Criteria criteria = createEntityCriteria().addOrder(Order.asc("name"));
+		Criteria criteria = createEntityCriteria();
+		criteria.add(Restrictions.eq("state",State.ACTIVE.toString()));
+		criteria.addOrder(Order.asc("name"));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
 		@SuppressWarnings("unchecked")
 		List<Client> clients = (List<Client>)criteria.list();

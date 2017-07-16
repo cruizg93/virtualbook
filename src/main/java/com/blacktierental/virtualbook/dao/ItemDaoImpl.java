@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.model.ItemTypeDescription;
+import com.blacktierental.virtualbook.model.State;
 
 @Repository("itemDao")
 public class ItemDaoImpl extends AbstractDao<Integer,Item>implements ItemDao{
@@ -43,11 +44,17 @@ public class ItemDaoImpl extends AbstractDao<Integer,Item>implements ItemDao{
 		persist(item);
 	}
 
+	/**
+	 * IF param item is null
+	 * look for a item id equals to param id
+	 */
 	@Override
-	public void deleteByDescription(String description) {
-		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("description",description));
-		Item item = (Item)crit.uniqueResult();
+	public void deleteByDescription(String description, Item item) {
+		if(item==null){
+			Criteria crit = createEntityCriteria();
+			crit.add(Restrictions.eq("description",description));
+			item = (Item)crit.uniqueResult();
+		}
 		delete(item);
 	}
 
@@ -56,7 +63,8 @@ public class ItemDaoImpl extends AbstractDao<Integer,Item>implements ItemDao{
 		Criteria criteria = createEntityCriteria()
 					.createAlias("itemTypes", "types")
 					.addOrder(Order.desc("types.description"))
-					.addOrder(Order.asc("description"));
+					.addOrder(Order.asc("description"))
+					.add(Restrictions.eq("state",State.ACTIVE.toString()));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
 		@SuppressWarnings("unchecked")
 		List<Item> items = (List<Item>)criteria.list();
@@ -68,6 +76,7 @@ public class ItemDaoImpl extends AbstractDao<Integer,Item>implements ItemDao{
 		Criteria criteria = createEntityCriteria().addOrder(Order.asc("description"));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
 		criteria.add(Restrictions.eq("itemTypes.id",1));//Main
+		criteria.add(Restrictions.eq("state",State.ACTIVE.toString()));
 		@SuppressWarnings("unchecked")
 		List<Item> items = (List<Item>)criteria.list();
 		return items;

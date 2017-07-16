@@ -2,12 +2,17 @@ package com.blacktierental.virtualbook.service;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blacktierental.virtualbook.dao.ClientDao;
+import com.blacktierental.virtualbook.dao.EventDao;
 import com.blacktierental.virtualbook.model.Client;
+import com.blacktierental.virtualbook.model.Event;
+import com.blacktierental.virtualbook.model.State;
 
 
 @Service("clientService")
@@ -16,6 +21,9 @@ public class ClientServiceImpl implements ClientService{
 
 	@Autowired
 	private  ClientDao dao;
+	
+	@Autowired
+	private EventDao eventDao;
 	
 	@Override
 	public Client findById(int id) {
@@ -55,7 +63,15 @@ public class ClientServiceImpl implements ClientService{
 	
 	@Override
 	public void deleteById(int id) {
-		dao.deleteById(id);
+		Client client = dao.findById(id);
+		List<Event> events = eventDao.findByClient(client);
+		if(events!=null && !events.isEmpty()){
+			client.setState(State.DELETED.toString());
+			dao.save(client);
+		}else{
+			dao.deleteById(id,client);
+		}
+		
 	}
 
 	@Override

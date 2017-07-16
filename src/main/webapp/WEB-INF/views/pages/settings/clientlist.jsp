@@ -32,7 +32,7 @@
 	                    	<button type="button" class="btn btn-success formEditButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
 	                         	onclick="window.location.href ='<c:url value="/edit-client-${client.id}" />'"><span class="glyphicon glyphicon-pencil"></span><span class="hidden-ms hidden-xs"> Edit</span></button>
 	                        <button type="button" class="btn btn-danger formDeleteButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6" 
-	                    		onclick="window.location.href ='<c:url value="/delete-client-${client.id}" />'"><span class="glyphicon glyphicon-trash"></span><span class="hidden-ms hidden-xs"> Delete</span></button>
+	                    		onclick="deleteClient(${client.id},'${client.name}')"><span class="glyphicon glyphicon-trash"></span><span class="hidden-ms hidden-xs"> Delete</span></button>
 	                    </td>
 	                   	<!-- TODO: add confirm dialog to delete button -->
 	                    </sec:authorize>
@@ -51,7 +51,6 @@
 			<div class="col-lg-12 col-md-12 col-ms-12 col-xs-12 text-center">
 				<div class="alert alert-success">
 				  <%= request.getParameter("success") %>
-				  
 				</div>
 			</div>
 			</c:if>
@@ -62,4 +61,23 @@
 <script src="<c:url value='/static/js/dataTables.bootstrap.min.js' />" type="text/javascript"></script>
 <script type="text/javascript">
 	$("#clientTable").DataTable();
+	function deleteClient(id, client){
+		bootbox.confirm({
+    	    title: "Delete client?",
+    	    message: "Are you sure you want to delete the Client "+client,
+    	    buttons: {
+    	        cancel: {
+    	            label: '<i class="fa fa-times"></i> Cancel'
+    	        },
+    	        confirm: {
+    	            label: '<i class="fa fa-check"></i> Confirm'
+    	        }
+    	    },
+    	    callback: function (result) {
+    	        if(result){
+    	        	window.location.href ='<c:url value="/delete-client-'+id+'" />'
+    	        }
+    	    }
+    	})
+	};
 </script>

@@ -127,10 +127,10 @@ public class LocationController {
 	/**
 	 * This method will delete a location by it's location value.
 	 */
-	@RequestMapping(value = { "/delete-location-{location}" }, method = RequestMethod.GET)
-	public String deleteLocation(@PathVariable String location, ModelMap model) {
-		locationService.deleteByLocation(location);
-		model.addAttribute("success", "LOCATION <strong>" + location + "</strong> DELETED SUCCESSFULLY");
+	@RequestMapping(value = { "/delete-location-{id}" }, method = RequestMethod.GET)
+	public String deleteLocation(@PathVariable int id, ModelMap model) {
+		locationService.deleteById(id);
+		model.addAttribute("success", "LOCATION DELETED SUCCESSFULLY");
 		return "redirect:/locationlist";
 	}
 	

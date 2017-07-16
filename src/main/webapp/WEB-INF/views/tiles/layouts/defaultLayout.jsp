@@ -38,5 +38,6 @@
 	<script type="text/javascript" src="<c:url value='/static/js/app.js' />"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.3/jquery.mask.min.js"></script>
 	<script type="text/javascript" src="<c:url value='/static/js/appInputMask.js' />"></script>
+	<script type="text/javascript" src="<c:url value='/static/js/bootbox.min.js' />"></script>
 </body>
 </html>

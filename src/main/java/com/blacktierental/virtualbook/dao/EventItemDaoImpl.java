@@ -50,8 +50,9 @@ public class EventItemDaoImpl extends AbstractDao<Integer, EventItem> implements
 
 	@Override
 	public List<EventItem> findByItemId(Item item) {
-		// TODO Auto-generated method stub
-		return null;
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("item",item));
+		return (List<EventItem>)crit.list();
 	}
 
 	@Override

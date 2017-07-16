@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.blacktierental.virtualbook.dao.EventDao;
 import com.blacktierental.virtualbook.dao.LocationDao;
+import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.Location;
+import com.blacktierental.virtualbook.model.State;
 
 
 @Service("locationService")
@@ -17,6 +20,9 @@ public class LocationServiceImpl implements LocationService{
 	@Autowired
 	private LocationDao dao;
 
+	@Autowired
+	private EventDao eventDao;
+	
 	@Override
 	public Location findById(int id) {
 		return dao.findById(id);
@@ -50,6 +56,18 @@ public class LocationServiceImpl implements LocationService{
 	@Override
 	public void deleteByLocation(String location) {
 		dao.deleteByLocation(location);
+	}
+	
+	@Override
+	public void deleteById(int id) {
+		Location location = dao.findById(id);
+		List<Event> events = eventDao.findByLocation(location);
+		if(events != null && !events.isEmpty()){
+			location.setState(State.DELETED.toString());
+			dao.save(location);
+		}else{
+			dao.deleteById(id, location);
+		}
 	}
 
 	@Override

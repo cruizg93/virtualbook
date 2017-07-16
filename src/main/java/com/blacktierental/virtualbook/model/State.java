@@ -2,10 +2,10 @@ package com.blacktierental.virtualbook.model;
 
 public enum State {
 
-	ACTIVE("Active"),
-	INACTIVE("Inactive"),
-	DELETED("Deleted"),
-	LOCKED("Locked");
+	ACTIVE("ACTIVE"),
+	INACTIVE("INACTIVE"),
+	DELETED("DELETED"),
+	LOCKED("LOCKED");
 	
 	private String state;
 	

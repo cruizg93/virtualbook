@@ -6,15 +6,21 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.Location;
+import com.blacktierental.virtualbook.model.State;
 
 @Repository("locationDao")
 public class LocationDaoImpl extends AbstractDao<Integer, Location> implements LocationDao{
 
 	static final Logger logger = LoggerFactory.getLogger(LocationDaoImpl.class);
 
+	@Autowired
+	EventDao eventDao;
+	
 	@Override
 	public Location findById(int id) {
 		Location location = getByKey(id);
@@ -52,12 +58,26 @@ public class LocationDaoImpl extends AbstractDao<Integer, Location> implements L
 	}
 	@Override
 	public List<Location> findAllLocations() {
-		Criteria criteria = createEntityCriteria().addOrder(Order.asc("buildingName"));
+		Criteria criteria = createEntityCriteria();
+		criteria.add(Restrictions.eq("state",State.ACTIVE.toString()));
+		criteria.addOrder(Order.asc("buildingName"));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
 		@SuppressWarnings("unchecked")
 		List<Location> locations = (List<Location>)criteria.list();
 		return locations;
 	}
-	
-	
+
+	/**
+	 * IF param location is null
+	 * look for a location with id equals to param id
+	 */
+	@Override
+	public void deleteById(int id, Location location) {
+		if(location == null){
+			Criteria criteria = createEntityCriteria();
+			criteria.add(Restrictions.eq("id",id));
+			location = (Location) criteria.uniqueResult();
+		}
+		delete(location);
+	}
 }

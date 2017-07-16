@@ -9,7 +9,7 @@ public interface ItemDao {
 	Item findById(int id);
 	Item findByDescription(String description);
 	void save(Item item);
-	void deleteByDescription(String description);
+	void deleteByDescription(String description, Item item);
 	List<Item> findAllItems();
 	List<Item> findMainItems();
 	List<Item> findAttachedItems();

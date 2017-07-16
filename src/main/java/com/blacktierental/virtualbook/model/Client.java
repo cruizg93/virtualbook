@@ -76,7 +76,7 @@ public class Client {
 	}
 
 	public String getState() {
-		return state;
+		return state.toUpperCase();
 	}
 
 	public void setState(String state) {

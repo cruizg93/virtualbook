@@ -41,7 +41,7 @@ rel="stylesheet"></link>
 								</sec:authorize>
 								<sec:authorize access="hasRole('ADMIN')">
 									<button type="button" class="btn btn-danger formDeleteButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
-											onclick="window.location.href ='<c:url value="/delete-item-${item.description}" />'">
+											onclick="deleteItem(${item.id},'${item.description}')">
 											<span class="glyphicon glyphicon-trash"></span><span
 												class="hidden-ms hidden-xs"> Delete</span>
 										</button>
@@ -70,8 +70,29 @@ rel="stylesheet"></link>
 		</div>
 	</div>
 </div>
+
 <script src="<c:url value='/static/js/jquery.dataTables.min.js' />" type="text/javascript"></script>
 <script src="<c:url value='/static/js/dataTables.bootstrap.min.js' />" type="text/javascript"></script>
 <script type="text/javascript">
     	$("#itemsTable").DataTable();
+
+    	function deleteItem(id, description){
+    		bootbox.confirm({
+        	    title: "Delete Item?",
+        	    message: "Are you sure you want to delete the item "+description,
+        	    buttons: {
+        	        cancel: {
+        	            label: '<i class="fa fa-times"></i> Cancel'
+        	        },
+        	        confirm: {
+        	            label: '<i class="fa fa-check"></i> Confirm'
+        	        }
+        	    },
+        	    callback: function (result) {
+        	        if(result){
+        	        	window.location.href ='<c:url value="/delete-item-'+description+'" />';
+        	        }
+        	    }
+        	})
+    	};
     </script>

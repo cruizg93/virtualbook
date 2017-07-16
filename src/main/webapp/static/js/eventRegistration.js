@@ -1,8 +1,9 @@
 var attachmentItems = null;
 var eventItems = [];//items have been add to event
-var itemsCont = 1;
+var itemsCont = 0// itemContTotal is initialize at the bottom of eventRegistration.jsp
 
 $(document).ready(function(){
+	itemsCont = parseInt(itemContTotal);
 	if($("#contactSameAsClient").val()=="1"){
 		$("#sameAsContactControl").prop("checked", true);
 		sameAsContact(true);
@@ -116,18 +117,23 @@ function fillAttachmentOptions(id){
 }
 
 function calculateTotal(){
-    var unit_price = $("#pricePerUnit0").val();
-    var quantity = $("#quantity0").val();
     var delivery = $("#delivery").val();
     var subtotal;
-    var itemPrice = 0;
-    if(!isNaN(unit_price) && !isNaN(quantity)){
-        itemPrice = unit_price * quantity;
+    var itemsPrice = 0;
+    var items = $(".itemRow");
+    
+    for(var i=0;i<items.length;i++){
+    	unit_price = $("#pricePerUnit"+i).val();
+        quantity = $("#quantity"+i).val();
+        if(!isNaN(unit_price) && !isNaN(quantity)){
+        	itemsPrice += unit_price * quantity;
+        }
     }
+    
     if(isNaN(delivery)){
         delivery = 0;
     }
-    subtotal = parseFloat(itemPrice)+parseFloat(delivery);
+    subtotal = parseFloat(itemsPrice)+parseFloat(delivery);
     $("#subtotal").val(subtotal);
     /* END OF SUBTOTAL CALULATION*/
 

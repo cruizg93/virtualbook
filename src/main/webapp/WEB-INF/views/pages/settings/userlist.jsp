@@ -46,7 +46,7 @@
 								<sec:authorize access="hasRole('ADMIN')">
 									<button type="button"
 										class="btn btn-danger btn-sm formDeleteButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
-										onclick="window.location.href ='<c:url value="/delete-user-${user.username}" />'">
+										onclick="deleteUser(${user.id},'${user.username}')">
 										<span class="glyphicon glyphicon-trash"></span><span class="hidden-ms hidden-xs"> Delete</span>
 									</button>
 								</sec:authorize>
@@ -77,5 +77,24 @@
 <script src="<c:url value='/static/js/jquery.dataTables.min.js' />" type="text/javascript"></script>
 <script src="<c:url value='/static/js/dataTables.bootstrap.min.js' />" type="text/javascript"></script>
 <script type="text/javascript">
-    	$("#usersTable").dataTable();
-    </script>
+	$("#usersTable").dataTable();
+	function deleteUser(id, username){
+		bootbox.confirm({
+    	    title: "Delete User?",
+    	    message: "Are you sure you want to delete the user "+username,
+    	    buttons: {
+    	        cancel: {
+    	            label: '<i class="fa fa-times"></i> Cancel'
+    	        },
+    	        confirm: {
+    	            label: '<i class="fa fa-check"></i> Confirm'
+    	        }
+    	    },
+    	    callback: function (result) {
+    	        if(result){
+    	        	window.location.href ='<c:url value="/delete-user-'+username+'" />'
+    	        }
+    	    }
+    	})
+	};
+</script>

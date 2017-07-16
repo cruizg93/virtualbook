@@ -43,9 +43,13 @@
 				<div class="form-group input-group">
 					<span class="glyphicon glyphicon-user input-group-addon"
 						id="addongClient"></span>
-					<form:select path="client" id="client" items="${clients}"
-						multiple="false" itemValue="id" itemLabel="selectDescription"
-						class="form-control input-lg" />
+					<form:select path="client" id="client"
+						multiple="false" class="form-control input-lg" >
+						<c:if test="${(edit==true) && (event.client.state != 'ACTIVE')}">
+							<form:option value="${event.client.id}" label="${event.client.selectDescription}"/>						
+						</c:if>
+						<form:options items="${clients}" itemValue="id" itemLabel="selectDescription"/>
+					</form:select>
 				</div>
 				<div class="has-error">
 					<form:errors path="client" class="help-inline text-danger" />
@@ -55,9 +59,13 @@
 				<div class="form-group input-group">
 					<span class="glyphicon glyphicon-map-marker input-group-addon"
 						id="addongLocation"></span>
-					<form:select path="location" id="location" items="${locations}"
-						multiple="false" itemValue="id" itemLabel="selectDescription"
-						class="form-control input-lg" />
+					<form:select path="location" id="location" 
+						multiple="false" class="form-control input-lg" >
+						<c:if test="${(edit==true) && (event.location.state != 'ACTIVE')}">
+							<form:option value="${event.location.id}" label="${event.location.selectDescription}"/>
+						</c:if>
+						<form:options items="${locations}" itemValue="id"  itemLabel="selectDescription" />
+					</form:select>
 				</div>
 				<div class="has-error">
 					<form:errors path="location" class="help-inline text-danger" />
@@ -171,14 +179,21 @@
 				</div>
 			</div>
 		</div>
+		<c:set var="itemCount" value="0" />
 		<c:forEach var="eventItem" items="${event.items}" varStatus="loopindex">
-			<div class="row" id="itemRow${loopindex.index}">
+			<c:set var="itemCount" value="${loopindex.count}" />
+			<div class="row itemRow" id="itemRow${loopindex.index}">
 				<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
 					<div class="form-group input-group">
 						<span class="glyphicon glyphicon-tower input-group-addon"></span>
-						<form:select path="items[${loopindex.index}].item" items="${existingMainItems}"
-							multiple="false" itemValue="id" itemLabel="description"
-							class="form-control input-lg" />
+						<form:select path="items[${loopindex.index}].item" 
+							multiple="false"  class="form-control input-lg">
+							
+							<c:if test="${(edit==true) && (event.items[loopindex.index].item.state != 'ACTIVE')}">
+								<form:option value="${event.items[loopindex.index].item.id}" label="${event.items[loopindex.index].item.description}"/>
+							</c:if>
+							<form:options itemValue="id" itemLabel="description" items="${existingMainItems}"/>
+						</form:select>
 					</div>
 					<div class="has-error">
 						<form:errors path="items[${loopindex.index}].item" class="help-inline text-danger" />
@@ -307,7 +322,7 @@
 				 <c:if test = "${edit}">
 					<button type="button"
 						class="btn btn-danger btn-lg formDeleteButtonIcon"
-						onclick="window.location.href ='<c:url value="/delete-event-${id}" />'">
+						onclick="deleteEvent(${id})">
 						<span class="glyphicon glyphicon-trash"></span><span class="hidden-ms hidden-xs"> DELETE</span>	
 					</button> 	
 				 </c:if>
@@ -333,10 +348,31 @@
 </style>
 <script>
 	var editing = "${edit}";
+	var itemContTotal = "${itemCount}";
 	if(editing!=='true'){
 		$("#location").prepend("<option value='' selected='selected'>LOCATION</option>");
 		$("#client").prepend("<option value='' selected='selected'>CLIENT</option>");
 	}
 	$("#location").selectize();
 	$("#client").selectize();
+	
+	function deleteEvent(id){
+		bootbox.confirm({
+		    title: "Delete Event?",
+		    message: "Are you sure you want to delete the this event",
+		    buttons: {
+		        cancel: {
+		            label: '<i class="fa fa-times"></i> Cancel'
+		        },
+		        confirm: {
+		            label: '<i class="fa fa-check"></i> Confirm'
+		        }
+		    },
+		    callback: function (result) {
+		        if(result){
+		        	window.location.href ='<c:url value="/delete-event-'+id+'" />'
+		        }
+		    }
+		})
+	};
 </script>

@@ -1,5 +1,7 @@
 package com.blacktierental.virtualbook.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -105,9 +107,7 @@ public class EventItem {
 	@Override
 	public String toString(){
 		String result = "EventItem";
-		result += "[Event="+event!=null?event.getId():0;
-		result += ",Item="+item!=null?item.getId():0;
-		result += ",Quantity="+quantity;
+		result += ",[Quantity="+quantity;
 		result += ",Price per unit="+pricePerUnit;
 		result += "]";
 		return result;
