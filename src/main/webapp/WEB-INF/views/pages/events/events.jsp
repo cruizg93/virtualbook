@@ -33,6 +33,7 @@ var year = '${year}';
 				<div class="calendarDay noMinHeight hidden-xs"><p class="dayLabel">SUNDAY</p></div>
 			</div>
 			<c:set var="row" value="even" />
+			<c:set var="paid" value="notPaid" />
 			<div class="row ${row}">
 			<c:forEach var="dayEvents" items="${events}" varStatus="loopindex">
 				<c:set var="hiddenXS" value=" " />
@@ -54,7 +55,13 @@ var year = '${year}';
 							test="${(loopindex.count > emptySpotsAtBegin) && (loopindex.count < fn:length(events)-emptySpotsAtEnd)}">
 							<p class="dayNumber">${loopindex.count - emptySpotsAtBegin}</p>
 							<c:forEach var="event" items="${dayEvents}">
-								<a href='<c:url value="/edit-event-${event.id}"/>'><span>${fn:substring(event.client.companyName, 0, 15)}</span></a><br>
+								<c:if test="${event.isPaid()}">
+									<c:set var="paid" value="paid" />
+								</c:if>
+								<c:if test="${event.isPaid() eq false}">
+									<c:set var="paid" value="notPaid" />
+								</c:if>
+								<p class="eventLabel ${paid}"><a href='<c:url value="/edit-event-${event.id}"/>'><span>${fn:substring(event.client.companyName, 0, 15)}</span></a></p>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>

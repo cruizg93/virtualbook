@@ -62,5 +62,10 @@ public class EventItemServiceImpl implements EventItemService {
 	public void deleteById(int id) {
 		dao.deleteById(id);
 	}
+
+	@Override
+	public List<String[]> itemCountByYear(int year) {
+		return dao.findAllByYearGroupByItem(year);
+	}
 	
 }

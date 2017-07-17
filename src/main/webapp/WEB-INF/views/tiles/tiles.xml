@@ -92,4 +92,10 @@
        <put-attribute name="title" value="Event Form" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/events/eventRegistration.jsp" />  
    </definition>
+   
+   <!-- STATS -->
+   <definition name="dashboard" extends="base-definition">  
+       <put-attribute name="title" value="Event Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/stats/dashboard.jsp" />  
+   </definition>
 </tiles-definitions>

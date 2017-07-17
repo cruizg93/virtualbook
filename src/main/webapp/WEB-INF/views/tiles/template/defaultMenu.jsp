@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-6 hidden-xs">
-			<div class="card defaultMenu text-center clickable" onclick="window.location.href = '${pageContext.request.contextPath}/stats'">
+			<div class="card defaultMenu text-center clickable" onclick="window.location.href = '${pageContext.request.contextPath}/dashboard'">
 			    <a href="#" class=""><span class="glyphicon glyphicon-stats"></span><h2>Statistics</h2></a>
 			</div>
 		</div>

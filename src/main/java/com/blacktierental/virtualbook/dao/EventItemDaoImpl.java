@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -67,6 +68,16 @@ public class EventItemDaoImpl extends AbstractDao<Integer, EventItem> implements
 			//delete physical
 		}*/
 		delete(ei);
+	}
+
+	@Override
+	public List findAllByYearGroupByItem(int year) {
+		Query q = getSession().createQuery("SELECT i.description, count(ei.id)" 
+										+" FROM EventItem ei, Item i, Event e"
+										+" WHERE DATE_FORMAT(e.dateAndHour,'%Y')=? and ei.event = e.id and i.id=ei.item and i.itemTypes = 1"
+										+" GROUP BY ei.item");
+		q.setParameter(0, String.valueOf(year));
+		return q.getResultList();
 	}
 
 }

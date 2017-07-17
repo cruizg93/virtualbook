@@ -37,6 +37,16 @@
 	margin-left: 0px;
 }
 
+.paid{
+	background-color:#398439;
+	border-color: #255625;
+}
+
+.notPaid{
+	background-color:#d9534f;
+	border-color: #d43f3a;
+}
+
 .noMinHeight{
 	min-height: 0px !important;
 }
@@ -48,10 +58,6 @@
 .calendarDay:hover{
 	background-color:#a2c8e8;
 	border-bottom: 1px solid #337AB7
-}
-
-.calendarDay:hover> a:hover{
-	color:white;
 }
 
 .calendarDay{
@@ -74,6 +80,16 @@
 	font-size:1.2em;
 	font-weight: 400;
 }
+
+.eventLabel > a{
+	font-weight: bolder;
+	color: silver;
+}
+
+.eventLabel > a:hover{
+	color:white;
+}
+
 
 /* xxs  like iphone*/
 @media screen and (max-width: 459px) {

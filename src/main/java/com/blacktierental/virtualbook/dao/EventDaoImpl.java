@@ -11,6 +11,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -127,4 +128,47 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
         }*/
 		return events;
 	}
+
+	@Override
+	public List findAllByYearGroupByMonth(int year) {
+		Query q = getSession().createQuery("SELECT DATE_FORMAT(dateAndHour, '%M')as months, count(id) as count "
+									+" FROM Event "
+									+" WHERE DATE_FORMAT(dateAndHour,'%Y')=? "
+									+ "GROUP BY DATE_FORMAT(dateAndHour, '%M')"
+									+ " ORDER BY DATE_FORMAT(dateAndHour, '%M') DESC");
+		q.setParameter(0,String.valueOf(year));
+		List result = q.getResultList();
+		return result;
+
+	}
+	
+	@Override
+	public List findEventByYearGroupByClient(int year){
+		Query q = getSession().createQuery("SELECT c.name, count(e.id) " 
+									+"FROM Event e, Client c " 
+									+"WHERE DATE_FORMAT(e.dateAndHour,'%Y')=? AND e.client = c.id " 
+									+"GROUP BY e.client");
+		q.setParameter(0, String.valueOf(year));
+		return q.getResultList();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

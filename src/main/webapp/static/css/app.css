@@ -53,7 +53,9 @@ h1{
 .height75{
 	height: 75% !important;
 }
-
+.padding-zero{
+	padding:0px !important;
+}
 
 /* On list views align the buttons to the right where the pager is*/
 .footerListActionButton{

@@ -14,4 +14,5 @@ public interface EventItemDao {
 	List<EventItem> findAllEventItems();
 	void save(EventItem eventItem);
 	void deleteById(int id);
+	List findAllByYearGroupByItem(int year);
 }

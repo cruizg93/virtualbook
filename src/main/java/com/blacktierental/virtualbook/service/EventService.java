@@ -2,6 +2,7 @@ package com.blacktierental.virtualbook.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
@@ -18,5 +19,7 @@ public interface EventService {
 	void updateEvent(Event event);
 	void deleteById(int id);
 	List<Event> findAllEventsByDateRange(LocalDate initial, LocalDate end);
+	List monthlyCountByYear(int year);
 	List<Event> findAllUpComingEvent();
+	List<String[]> clientCountByYear(int year);
 }

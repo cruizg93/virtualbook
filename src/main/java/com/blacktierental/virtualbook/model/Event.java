@@ -277,4 +277,24 @@ public class Event {
 		return "Event [id="+id+",Client="+client!=null?client.getCompanyName():null+",Location="+location!=null?location.getBuildingName():null
 				+",Date="+dateAndHour+",Balance='N/A']";
 	}
+	
+	public boolean isPaid(){
+		if(advance >= getTotal()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public double getTotal(){
+		double total = 0.0;
+		if(items!=null && !items.isEmpty()){
+			for(EventItem eventItem: items){
+				total += eventItem.getPricePerUnit() * eventItem.getQuantity();
+			}
+		}
+		total += delivery;
+		total += (total*(taxPercentage>0?(taxPercentage/100):0));
+		return total;
+	}
 }

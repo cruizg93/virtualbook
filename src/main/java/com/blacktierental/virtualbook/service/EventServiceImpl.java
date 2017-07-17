@@ -2,9 +2,9 @@ package com.blacktierental.virtualbook.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.Month;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.blacktierental.virtualbook.dao.EventDao;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
-import com.blacktierental.virtualbook.model.EventItem;
 import com.blacktierental.virtualbook.model.Location;
 
 @Service("eventService")
@@ -63,6 +62,16 @@ public class EventServiceImpl implements EventService{
 		return dao.findAllEventsByDateRange(i, e);
 	}
 
+	@Override
+	public List monthlyCountByYear(int year){
+		return dao.findAllByYearGroupByMonth(year);
+	}
+	
+	@Override
+	public List clientCountByYear(int year){
+		return dao.findEventByYearGroupByClient(year);
+	}
+	
 	@Override
 	public List<Event> findAllUpComingEvent() {
 		return dao.findAllUpComingEvent();
