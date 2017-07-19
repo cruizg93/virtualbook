@@ -305,7 +305,6 @@
 							class="btn  btn-primary btn-lg formSaveButtonIcon">
 							<span class="glyphicon glyphicon-floppy-disk"></span><span class="hidden-ms hidden-xs"> SAVE</span>
 						</button>
-
 					</c:when>
 					<c:otherwise>
 						<button type="submit" value="Save"
@@ -324,6 +323,11 @@
 						class="btn btn-danger btn-lg formDeleteButtonIcon"
 						onclick="deleteEvent(${id})">
 						<span class="glyphicon glyphicon-trash"></span><span class="hidden-ms hidden-xs"> DELETE</span>	
+					</button>
+					<button type="button"
+						class="btn btn-primary btn-lg"
+						onclick="contract(${id})">
+						<span class="glyphicon glyphicon-download-alt"></span><span class="hidden-ms hidden-xs"> CONTRACT PDF</span>	
 					</button> 	
 				 </c:if>
 				
@@ -347,6 +351,7 @@
 }
 </style>
 <script>
+	var context = '${pageContext.request.contextPath}';
 	var editing = "${edit}";
 	var itemContTotal = "${itemCount}";
 	if(editing!=='true'){

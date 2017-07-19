@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.Location;
@@ -22,4 +24,5 @@ public interface EventService {
 	List monthlyCountByYear(int year);
 	List<Event> findAllUpComingEvent();
 	List<String[]> clientCountByYear(int year);
+	void downloadContract(String type, String token, HttpServletResponse response, int eventId);
 }

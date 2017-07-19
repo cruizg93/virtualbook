@@ -8,7 +8,7 @@
 		<div class="col-lg-6 col-md-6 col-ms-6 col-lg-offset-3 col-md-offset-3 col-ms-offset-3 col-xs-12">
 			<div class="form-group input-group">
 				<span class="glyphicon glyphicon-file input-group-addon" id="addongDescription"></span>
-				<form:input type="text" path="description" id="description" class="form-control input-sm appText" placeholder="Description"/>
+				<form:input type="text" path="description" id="description" class="form-control input-sm appTextNumber" placeholder="Description"/>
 			</div>
 			<div class="has-error">
 				<form:errors path="description" class="help-inline" />

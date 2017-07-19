@@ -115,4 +115,3 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         matcher.setUseRegisteredSuffixPatternMatch(true);
     }
 }
-

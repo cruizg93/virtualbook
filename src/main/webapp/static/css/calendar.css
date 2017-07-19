@@ -67,6 +67,10 @@
   	min-height: 100px;
 }
 
+.calendarDay p{
+	margin-bottom:0px;
+}
+
 .calendarDay > .dayLabel{
 	background-color:#337AB7;
 	margin:0px;

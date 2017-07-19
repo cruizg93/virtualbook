@@ -188,3 +188,13 @@ function sameAsContact(booleanValue){
     	$("#contactPersonPhoneNumber").prop("disabled", false);
 	}
 }
+
+function contract(id){
+	 $('<form>', {
+         "id": "imprimir",
+         "html": '',
+         "target":'_blank',
+         'method':'GET',
+         "action": context+'/contract-'+id
+     }).appendTo(document.body).submit();
+}

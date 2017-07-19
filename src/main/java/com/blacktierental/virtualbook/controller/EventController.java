@@ -10,6 +10,7 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.json.JSONArray;
@@ -36,6 +37,7 @@ import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.service.ClientService;
 import com.blacktierental.virtualbook.service.EventService;
+import com.blacktierental.virtualbook.service.ExporterServiceImpl;
 import com.blacktierental.virtualbook.service.ItemService;
 import com.blacktierental.virtualbook.service.LocationService;
 
@@ -245,9 +247,13 @@ public class EventController {
 	public @ResponseBody String getTime() {
 		JSONArray jsonArray = new JSONArray(itemService.findAttachedItems());
 		return jsonArray.toString();
-
 	}
 
+	@RequestMapping(value="/contract-{id}")
+	public void download(@PathVariable int id, HttpServletResponse response) {
+		eventService.downloadContract(ExporterServiceImpl.EXTENSION_TYPE_PDF, "", response, id);
+	}
+	
 	@ModelAttribute("clients")
 	public List<Client> initializeClients() {
 		return clientService.findAllClients();

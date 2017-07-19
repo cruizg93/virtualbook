@@ -2,7 +2,10 @@ package com.blacktierental.virtualbook.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,6 +26,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Event {
 
 	public Event() {
+		contactPersonEmail = "";
+		contactPersonName = "";
+		contactPersonPhoneNumber = "";
 		contact_date = LocalDate.now();
 		dateAndHour= LocalDateTime.now();
 		dropOffTime= LocalDateTime.now();
@@ -127,7 +133,7 @@ public class Event {
 	}
 
 	public String getContactPersonName() {
-		return contactPersonName;
+		return contactPersonName==null?" ":contactPersonName;
 	}
 
 	public void setContactPersonName(String contactPersonName) {
@@ -135,7 +141,7 @@ public class Event {
 	}
 
 	public String getContactPersonPhoneNumber() {
-		return contactPersonPhoneNumber;
+		return contactPersonPhoneNumber==null?" ":contactPersonPhoneNumber;
 	}
 
 	public void setContactPersonPhoneNumber(String contactPersonPhoneNumber) {
@@ -143,7 +149,7 @@ public class Event {
 	}
 
 	public String getContactPersonEmail() {
-		return contactPersonEmail;
+		return contactPersonEmail==null?" ":contactPersonEmail;
 	}
 
 	public void setContactPersonEmail(String contactPersonEmail) {
@@ -286,15 +292,69 @@ public class Event {
 		}
 	}
 	
-	public double getTotal(){
-		double total = 0.0;
+	public Double getTaxes(){
+		Double subTotal = getSubTotal();
+		if(taxPercentage>0){
+			DecimalFormatSymbols decimalSymbols = DecimalFormatSymbols.getInstance();
+	        decimalSymbols.setDecimalSeparator('.');
+	        DecimalFormat df = new DecimalFormat("#.##",decimalSymbols);
+			return Double.valueOf(df.format(subTotal * (taxPercentage/100)));
+		}else{
+			return 0.0d;
+		}
+	}
+	
+	public Double getSubTotal(){
+		Double subTotal= 0.0;
 		if(items!=null && !items.isEmpty()){
 			for(EventItem eventItem: items){
-				total += eventItem.getPricePerUnit() * eventItem.getQuantity();
+				subTotal += eventItem.getPricePerUnit() * eventItem.getQuantity();
 			}
 		}
-		total += delivery;
-		total += (total*(taxPercentage>0?(taxPercentage/100):0));
+		subTotal += delivery;
+		return subTotal;
+	}
+	
+	public Double getTotal(){
+		Double total = getSubTotal();
+		total += getTaxes();
 		return total;
+	}
+	
+	public String getFormatedDateAndHour(){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        if(dateAndHour!=null){
+        	String formatDateTime = dateAndHour.format(formatter);
+            return formatDateTime;
+        }else{
+        	return "";
+        }
+	}
+	public String getFormatedDropOff(){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        if(dropOffTime!=null){
+        	String formatDateTime = dropOffTime.format(formatter);
+            return formatDateTime;
+        }else{
+        	return "";
+        }
+	}
+	public String getFormatedPickUp(){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        if(pickUpTime!=null){
+        	String formatDateTime = pickUpTime.format(formatter);
+            return formatDateTime;
+        }else{
+        	return "";
+        }
+	}
+	public String getFormatedContactDate(){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        if(contact_date!=null){
+        	String formatDateTime = contact_date.format(formatter);
+            return formatDateTime;
+        }else{
+        	return "";
+        }
 	}
 }
