@@ -130,7 +130,7 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 	public List findAllByYearGroupByMonth(int year) {
 		Query q = getSession().createQuery("SELECT DATE_FORMAT(dateAndHour, '%M')as months, count(id) as count "
 									+" FROM Event "
-									+" WHERE DATE_FORMAT(dateAndHour,'%Y')=? "
+									+" WHERE DATE_FORMAT(dateAndHour,'%Y')=? AND state ='ACTIVE'"
 									+ "GROUP BY DATE_FORMAT(dateAndHour, '%M')"
 									+ " ORDER BY DATE_FORMAT(dateAndHour, '%M') DESC");
 		q.setParameter(0,String.valueOf(year));
@@ -143,7 +143,7 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 	public List findEventByYearGroupByClient(int year){
 		Query q = getSession().createQuery("SELECT c.name, count(e.id) " 
 									+"FROM Event e, Client c " 
-									+"WHERE DATE_FORMAT(e.dateAndHour,'%Y')=? AND e.client = c.id " 
+									+"WHERE DATE_FORMAT(e.dateAndHour,'%Y')=? AND e.client = c.id AND e.state ='ACTIVE' " 
 									+"GROUP BY e.client");
 		q.setParameter(0, String.valueOf(year));
 		return q.getResultList();

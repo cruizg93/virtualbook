@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="tbl_event_item")
@@ -25,9 +26,11 @@ public class EventItem {
 	@JoinColumn(name="item_id")
 	private Item item;
 	
+	@NotNull
 	@Column(name="quantity")
 	private Integer quantity;
 	
+	@NotNull
 	@Column(name="price")
 	private Double pricePerUnit;
 	

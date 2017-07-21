@@ -51,11 +51,7 @@ public class ItemServiceImpl implements ItemService{
 			entity.setDescription(item.getDescription());
 			entity.setState(item.getState());
 			entity.setQuantity(item.getQuantity());
-			for(Attachment a: item.getAttachments()){
-				if(!entity.getAttachments().contains(a)){
-					entity.getAttachments().add(a);
-				}
-			}
+			entity.setAttachments(item.getAttachments());
 		}
 	}
 

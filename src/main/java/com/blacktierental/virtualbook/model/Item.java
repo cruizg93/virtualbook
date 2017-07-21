@@ -1,6 +1,5 @@
 package com.blacktierental.virtualbook.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,10 +20,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Item {
 	
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
-	@JoinTable(name="tbl_attachment_item",
+	@JoinTable(name="tbl_item_attachment",
 				joinColumns = {@JoinColumn(name="item_id")},
 				inverseJoinColumns = {@JoinColumn(name="attachment_id")})
-	private Set<Attachment> attachments = new HashSet<Attachment>();
+	private Set<Attachment> attachments;
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -83,10 +82,10 @@ public class Item {
 	public String getStringAttachments(){
 		StringBuilder result = new StringBuilder();
 		for(Attachment a: attachments){
-			result.append(a.getDescription()+"\n");
+			result.append(a.getDescription()+"|");
 		}
 		if(result.length()>0){
-			return result.toString().substring(0,result.length()-2);
+			return result.toString().substring(0,result.length()-1);
 		}
 		return result.toString();
 	}

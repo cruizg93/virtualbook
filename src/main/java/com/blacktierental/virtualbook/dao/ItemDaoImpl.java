@@ -20,9 +20,9 @@ public class ItemDaoImpl extends AbstractDao<Integer,Item>implements ItemDao{
 	@Override
 	public Item findById(int id) {
 		Item item = getByKey(id);
-		if(item != null ){
+		/*if(item != null ){
 			Hibernate.initialize(item.getAttachments());
-		}
+		}*/
 		return item;
 	}
 

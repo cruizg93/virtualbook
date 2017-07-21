@@ -1,6 +1,6 @@
 package com.blacktierental.virtualbook.model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,11 +27,11 @@ public class Attachment {
 	@Column(name="description")
 	private String description;
 
-	@OneToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
-	@JoinTable(name="tbl_attachment_item",
+	@OneToMany(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@JoinTable(name="tbl_item_attachment",
 				joinColumns = {@JoinColumn(name="attachment_id")},
 				inverseJoinColumns = {@JoinColumn(name="item_id")})
-	private List<Item> items;
+	private Set<Item> items;
 
 	public Integer getId() {
 		return id;
@@ -49,12 +49,12 @@ public class Attachment {
 		this.description = description;
 	}
 
-	public List<Item> getItemAttachments() {
+	public Set<Item> getItems() {
 		return items;
 	}
 
-	public void setItemAttachments(List<Item> items) {
-		this.items= items;
+	public void setItems(Set<Item> items) {
+		this.items = items;
 	}
 
 	@Override

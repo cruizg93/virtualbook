@@ -74,7 +74,7 @@ public class EventItemDaoImpl extends AbstractDao<Integer, EventItem> implements
 	public List findAllByYearGroupByItem(int year) {
 		Query q = getSession().createQuery("SELECT i.description, count(ei.id)" 
 										+" FROM EventItem ei, Item i, Event e"
-										+" WHERE DATE_FORMAT(e.dateAndHour,'%Y')=? and ei.event = e.id and i.id=ei.item"
+										+" WHERE DATE_FORMAT(e.dateAndHour,'%Y')=? and ei.event = e.id and i.id=ei.item AND e.state ='ACTIVE'"
 										+" GROUP BY ei.item");
 		q.setParameter(0, String.valueOf(year));
 		return q.getResultList();

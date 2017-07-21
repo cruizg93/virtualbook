@@ -41,6 +41,7 @@ public class Event {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotEmpty
 	@OneToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinColumn(name="event_id",referencedColumnName="id")
 	private List<EventItem> items;
