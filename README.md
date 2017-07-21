@@ -2,7 +2,7 @@
 
 # App purpose:
 
-Create and manage the scheduling of Black Tie Rental of Florida company.  
+Create and manage the scheduling of Events for Black Tie Rental of Florida company.  
 
 Main modules:  
 
