@@ -1,20 +1,15 @@
 package com.blacktierental.virtualbook.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.security.authentication.AuthenticationTrustResolver;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,13 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.blacktierental.virtualbook.model.Attachment;
 import com.blacktierental.virtualbook.model.Item;
-import com.blacktierental.virtualbook.model.ItemType;
 import com.blacktierental.virtualbook.model.Location;
-import com.blacktierental.virtualbook.model.User;
-import com.blacktierental.virtualbook.model.UserProfile;
+import com.blacktierental.virtualbook.service.AttachmentService;
 import com.blacktierental.virtualbook.service.ItemService;
-import com.blacktierental.virtualbook.service.ItemTypeService;
 
 
 @Controller
@@ -42,15 +35,17 @@ public class ItemController {
 	ItemService itemService;
 	
 	@Autowired
-    MessageSource messageSource;
+	AttachmentService attachmentService;
 	
 	@Autowired
-	ItemTypeService itemTypeService;
+    MessageSource messageSource;
 	
 	@RequestMapping(value={"/Item","itemList"},method=RequestMethod.GET)
 	public String homePage(ModelMap model){
 		List<Item> items = itemService.findAllItems();
+		List<Attachment> attachment = attachmentService.findAllItemAttachment();
 		model.addAttribute("items",items);
+		model.addAttribute("attachments",attachment);
 		model.addAttribute("loggedinuser",getPrincipal());
 		return "itemlist";
 	}
@@ -156,11 +151,13 @@ public class ItemController {
 	   return username;
 	}
 	
-	/**
-     * This method will provide UserProfile list to views
-     */
-    @ModelAttribute("types")
-    public List<ItemType> initializeItemTypes() {
-        return itemTypeService.findAll();
-    }
+	@ModelAttribute("attachmentsList")
+	public List<Attachment> initializeAttachments() {
+		List<Attachment> list = attachmentService.findAllItemAttachment();
+		if(list != null){
+			return list;
+		}else{
+			return new ArrayList<Attachment>();
+		}
+	}
 }

@@ -239,14 +239,8 @@ public class EventController {
 	}
 
 	@ModelAttribute("existingMainItems")
-	public List<Item> initializeMainItems() {
-		return itemService.findMainItems();
-	}
-
-	@RequestMapping(value = "/existingAttachmentItems", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody String getTime() {
-		JSONArray jsonArray = new JSONArray(itemService.findAttachedItems());
-		return jsonArray.toString();
+	public List<Item> initializeItems() {
+		return itemService.findAllItems();
 	}
 
 	@RequestMapping(value="/contract-{id}")

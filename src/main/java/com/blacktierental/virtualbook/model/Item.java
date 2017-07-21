@@ -1,23 +1,31 @@
 package com.blacktierental.virtualbook.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="tbl_item")
 public class Item {
-/*
-	@OneToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
-	@JoinColumn(name="item_id",referencedColumnName="id")
-	private List<EventItem> items;
-	*/
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@JoinTable(name="tbl_attachment_item",
+				joinColumns = {@JoinColumn(name="item_id")},
+				inverseJoinColumns = {@JoinColumn(name="attachment_id")})
+	private Set<Attachment> attachments = new HashSet<Attachment>();
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
@@ -31,10 +39,6 @@ public class Item {
 	
 	@Column(name="quantity")
 	private Integer quantity;
-	
-	@ManyToOne
-	@JoinColumn(name="type_id")
-	private ItemType itemTypes;
 
 	public Integer getId() {
 		return id;
@@ -68,23 +72,25 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-		
-	public ItemType getItemTypes() {
-		return itemTypes;
+	public Set<Attachment> getAttachments() {
+		return attachments;
 	}
 
-	public void setItemTypes(ItemType itemTypes) {
-		this.itemTypes = itemTypes;
-	}
-	/*
-	public List<EventItem> getItems() {
-		return items;
+	public void setAttachments(Set<Attachment> attachments) {
+		this.attachments = attachments;
 	}
 
-	public void setItems(List<EventItem> items) {
-		this.items = items;
-	}*/
-
+	public String getStringAttachments(){
+		StringBuilder result = new StringBuilder();
+		for(Attachment a: attachments){
+			result.append(a.getDescription()+"\n");
+		}
+		if(result.length()>0){
+			return result.toString().substring(0,result.length()-2);
+		}
+		return result.toString();
+	}
+	
 	@Override
 	public int hashCode(){
 		final int prime =98;

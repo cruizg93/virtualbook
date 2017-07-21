@@ -17,14 +17,13 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import com.blacktierental.virtualbook.converter.AttachmentConverter;
 import com.blacktierental.virtualbook.converter.ClientConverter;
 import com.blacktierental.virtualbook.converter.EventItemConverter;
 import com.blacktierental.virtualbook.converter.ItemConverter;
 import com.blacktierental.virtualbook.converter.LocalDateTimeConverter;
 import com.blacktierental.virtualbook.converter.LocationConverter;
 import com.blacktierental.virtualbook.converter.RoleToUserProfileConverter;
-import com.blacktierental.virtualbook.converter.TypeToItemTypeConverter;
-
 
 @Configuration
 @EnableWebMvc
@@ -34,9 +33,6 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
-	
-	@Autowired
-	TypeToItemTypeConverter typeToItemTypeConverter;
 	
 	@Autowired
 	ClientConverter clientConverter;
@@ -52,6 +48,11 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	
 	@Autowired
 	LocalDateTimeConverter localDateTimeConverter;
+	
+	@Autowired
+	AttachmentConverter attachmentConverter;
+	
+	
 	/**
 	 * Configure TilesConfigurer.
 	 */
@@ -87,14 +88,13 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(roleToUserProfileConverter);
-        registry.addConverter(typeToItemTypeConverter);
         registry.addConverter(clientConverter);
         registry.addConverter(locationConverter);
         registry.addConverter(itemConverter);
         registry.addConverter(eventItemConverter);
         registry.addConverter(locationConverter);
+        registry.addConverter(attachmentConverter);
     }
-	
 
     /**
      * Configure MessageSource to lookup any validation/error message in internationalized property files

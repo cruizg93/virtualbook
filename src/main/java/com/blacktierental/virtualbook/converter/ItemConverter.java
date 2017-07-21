@@ -12,7 +12,7 @@ import com.blacktierental.virtualbook.service.ItemService;
 @Component
 public class ItemConverter implements Converter<Object, Item>  {
 	
-	static final Logger logger = LoggerFactory.getLogger(TypeToItemTypeConverter.class);
+	static final Logger logger = LoggerFactory.getLogger(ItemConverter.class);
 	
 	@Autowired
 	ItemService itemService;
@@ -23,7 +23,7 @@ public class ItemConverter implements Converter<Object, Item>  {
      */
 	public Item convert(Object element){
 		if(element instanceof Item){
-			if( ((Item)element).getId()==null && ((Item)element).getDescription()==null && ((Item)element).getItemTypes()==null){
+			if( ((Item)element).getId()==null && ((Item)element).getDescription()==null){
 				return new Item();
 			}else{
 				return (Item)element;

@@ -1,12 +1,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container well lead">
-		<h3 class="text-center">Item Registration Form</h3>
-		<c:set var="action" value="newitem" />
+		<h3 class="text-center">Attachment Registration Form</h3>
+		<c:set var="action" value="newattachment" />
 		<c:if test="${edit}">
-			<c:set var="action" value="edit-item-${item.description}" />
+			<c:set var="action" value="edit-attachment-${attachment.id}" />
 		</c:if>
-		<form:form method="POST" modelAttribute="item" class="form-horizontal"
+		<form:form method="POST" modelAttribute="attachment" class="form-horizontal"
 			action="${pageContext.request.contextPath}/${action}">
 			<form:input type="hidden" path="id" id="id" />
 
@@ -16,40 +16,14 @@
 					<span class="glyphicon glyphicon-file input-group-addon"
 						id="addongDescription"></span>
 					<form:input type="text" path="description" id="description"
-						class="form-control input-lg appTextNumber"
+						class="form-control input-sm appTextNumber"
 						placeholder="Description" />
 				</div>
 				<div class="has-error">
 					<form:errors path="description" class="help-inline" />
 				</div>
 			</div>
-			<div
-				class="col-lg-6 col-md-6 col-ms-6 col-lg-offset-3 col-md-offset-3 col-ms-offset-3 col-xs-12">
-				<div class="form-group input-group">
-					<span class="glyphicon glyphicon-asterisk input-group-addon"
-						id="addongQuantity"></span>
-					<form:input type="text" path="quantity" id="quantity"
-						class="form-control input-lg appNumber" placeholder="Quantity" />
-				</div>
-				<div class="has-error">
-					<form:errors path="quantity" class="help-inline" />
-				</div>
-			</div>
 			
-			<div class="col-lg-6 col-md-6 col-ms-6 col-lg-offset-3 col-md-offset-3 col-ms-offset-3 col-xs-12">
-	            <div class="form-group input-group">
-	            	<span class="input-group-addon" id="addonAttachments"></span>
-	                  	<form:select path="attachments" items="${attachmentsList}" 
-	                  		multiple="true" itemValue="id" itemLabel="description"
-	                  		class="form-control input-lg" />
-	                  		
-	            </div>
-	            <div class="has-error">
-	                   <form:errors path="attachments" class="help-inline text-danger"/>
-	               </div>
-	        </div>
-			
-
 			<div class="col-lg-12 col-md-12 col-ms-12 col-xs-12">
 				<div class="form-actions" style="text-align: center;">
 					<c:choose>

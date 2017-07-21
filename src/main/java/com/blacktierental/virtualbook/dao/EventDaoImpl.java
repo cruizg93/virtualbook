@@ -32,9 +32,6 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 	@Override
 	public Event findById(int id) {
 		Event event = getByKey(id);
-		if(event !=null){
-			//Hibernate.initialize(event.getItems());
-		}
 		return event;
 	}
 

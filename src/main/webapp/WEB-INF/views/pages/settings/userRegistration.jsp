@@ -70,7 +70,8 @@
         <div class="col-lg-12 col-md-12 col-ms-12 col-xs-12">
             <div class="form-group input-group">
             	<span class="input-group-addon" id="addonRolesL"><p>R</p><p>O</p><p>L</p><p>E</p><p>S</p></span>
-                  	<form:select path="userProfiles" items="${roles}" multiple="true" itemValue="id" itemLabel="type" class="form-control input-lg" />
+                  	<form:select path="userProfiles" items="${roles}" multiple="true" 
+                  				itemValue="id" itemLabel="type" class="form-control input-lg" />
             </div>
             <div class="has-error">
                    <form:errors path="userProfiles" class="help-inline text-danger"/>

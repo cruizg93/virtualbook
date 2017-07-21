@@ -82,6 +82,10 @@
        <put-attribute name="title" value="Item Form" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/settings/itemRegistration.jsp" />  
    </definition>
+   <definition name="attachmentRegistration" extends="base-definition">  
+       <put-attribute name="title" value="Attachment Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/settings/attachmentRegistration.jsp" />  
+   </definition>
    
    <!-- EVENTS -->
 	<definition name="eventlist" extends="base-definition">  

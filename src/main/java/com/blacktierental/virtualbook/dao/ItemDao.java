@@ -11,6 +11,4 @@ public interface ItemDao {
 	void save(Item item);
 	void deleteByDescription(String description, Item item);
 	List<Item> findAllItems();
-	List<Item> findMainItems();
-	List<Item> findAttachedItems();
 }

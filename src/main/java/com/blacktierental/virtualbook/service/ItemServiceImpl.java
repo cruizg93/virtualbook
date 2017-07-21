@@ -1,17 +1,16 @@
 package com.blacktierental.virtualbook.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blacktierental.virtualbook.dao.EventDao;
 import com.blacktierental.virtualbook.dao.EventItemDao;
 import com.blacktierental.virtualbook.dao.ItemDao;
-import com.blacktierental.virtualbook.model.Event;
+import com.blacktierental.virtualbook.model.Attachment;
 import com.blacktierental.virtualbook.model.EventItem;
 import com.blacktierental.virtualbook.model.Item;
 
@@ -50,9 +49,13 @@ public class ItemServiceImpl implements ItemService{
 		Item entity = dao.findById(item.getId());
 		if(item!=null){
 			entity.setDescription(item.getDescription());
-			entity.setItemTypes(item.getItemTypes());
 			entity.setState(item.getState());
 			entity.setQuantity(item.getQuantity());
+			for(Attachment a: item.getAttachments()){
+				if(!entity.getAttachments().contains(a)){
+					entity.getAttachments().add(a);
+				}
+			}
 		}
 	}
 
@@ -78,16 +81,4 @@ public class ItemServiceImpl implements ItemService{
 		Item item = findByDescription(description);
 		return (item == null || ((id!=null) && (item.getId()==id)));
 	}
-
-	@Override
-	public List<Item> findMainItems() {
-		return dao.findMainItems();
-	}
-
-	@Override
-	public List<Item> findAttachedItems() {
-		return dao.findAttachedItems();
-	}
-	
-	
 }

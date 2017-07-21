@@ -55,6 +55,7 @@
 		<field name="item.description" class="java.lang.String"/>
 		<field name="quantity" class="java.lang.Integer"/>
 		<field name="pricePerUnit" class="java.lang.Double"/>
+		<field name="item.stringAttachments" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="ItemsDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="ItemsJRB" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
@@ -399,7 +400,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["Due date on 30 days prior to event - NO EXCEPTIONS. Balance of: $"+($F{total}.doubleValue()-$F{advance}.doubleValue())]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="5" y="280" width="362" height="62" uuid="9f0edcb1-354f-4620-8f72-5c93b3f0f750">
+				<reportElement x="5" y="280" width="362" height="50" uuid="9f0edcb1-354f-4620-8f72-5c93b3f0f750">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -420,11 +421,11 @@ For questions please e-mail:]]></text>
 								<text><![CDATA[DESCRIPTION]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="20">
-							<textField>
-								<reportElement x="0" y="0" width="130" height="20" uuid="ff732ad2-b93e-4885-996e-3197b69c881e"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="130" height="30" isPrintWhenDetailOverflows="true" uuid="ff732ad2-b93e-4885-996e-3197b69c881e"/>
 								<box topPadding="2" leftPadding="2"/>
-								<textFieldExpression><![CDATA[$F{item.description}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{item.description} + "\n"+ $F{item.stringAttachments}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -437,9 +438,9 @@ For questions please e-mail:]]></text>
 								<text><![CDATA[QUANTITY]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="20">
+						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="80" height="20" uuid="c7262cb4-9c70-4428-a81c-83d930e2b9d8"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="c7262cb4-9c70-4428-a81c-83d930e2b9d8"/>
 								<box topPadding="2" leftPadding="2"/>
 								<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
 							</textField>
@@ -454,9 +455,9 @@ For questions please e-mail:]]></text>
 								<text><![CDATA[PRICE PER UNIT]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="20">
+						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="20" uuid="c3681817-8778-42fa-88b1-01c46c44e6be"/>
+								<reportElement x="0" y="0" width="90" height="30" uuid="c3681817-8778-42fa-88b1-01c46c44e6be"/>
 								<box topPadding="2" leftPadding="2"/>
 								<textFieldExpression><![CDATA["$"+$F{pricePerUnit}]]></textFieldExpression>
 							</textField>
@@ -471,9 +472,9 @@ For questions please e-mail:]]></text>
 								<text><![CDATA[TOTAL]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="Table_TD" height="20">
+						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="60" height="20" uuid="52f9f149-344f-4586-908f-315382996968"/>
+								<reportElement x="0" y="0" width="60" height="30" uuid="52f9f149-344f-4586-908f-315382996968"/>
 								<box topPadding="2" leftPadding="2"/>
 								<textFieldExpression><![CDATA["$"+($F{quantity}*$F{pricePerUnit})]]></textFieldExpression>
 							</textField>
