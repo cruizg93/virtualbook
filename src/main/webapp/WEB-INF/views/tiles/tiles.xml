@@ -102,4 +102,23 @@
        <put-attribute name="title" value="Event Form" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/stats/dashboard.jsp" />  
    </definition>
+   
+   <!-- ERROR -->
+   <definition name="400" extends="base-definition">  
+       <put-attribute name="title" value="Event Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/stats/400.jsp" />  
+   </definition>
+   <definition name="401" extends="base-definition">  
+       <put-attribute name="title" value="Event Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/stats/401.jsp" />  
+   </definition>
+   <definition name="404" extends="base-definition">  
+       <put-attribute name="title" value="Event Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/stats/404.jsp" />  
+   </definition>
+   <definition name="500" extends="base-definition">  
+       <put-attribute name="title" value="Event Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/stats/500.jsp" />  
+   </definition>
+   
 </tiles-definitions>

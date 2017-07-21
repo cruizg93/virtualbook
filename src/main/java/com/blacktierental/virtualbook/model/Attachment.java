@@ -27,7 +27,7 @@ public class Attachment {
 	@Column(name="description")
 	private String description;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@OneToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="tbl_item_attachment",
 				joinColumns = {@JoinColumn(name="attachment_id")},
 				inverseJoinColumns = {@JoinColumn(name="item_id")})

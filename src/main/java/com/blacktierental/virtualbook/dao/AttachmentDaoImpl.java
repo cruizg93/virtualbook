@@ -3,6 +3,7 @@ package com.blacktierental.virtualbook.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ public class AttachmentDaoImpl extends AbstractDao<Integer, Attachment> implemen
 	@Override
 	public List<Attachment> findAllItemAttachment() {
 		Criteria criteria = createEntityCriteria();
+		criteria.addOrder(Order.asc("description"));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
 		return (List<Attachment>)criteria.list();
 	}

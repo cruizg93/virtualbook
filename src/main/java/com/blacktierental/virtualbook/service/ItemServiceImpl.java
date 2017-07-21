@@ -13,8 +13,7 @@ import com.blacktierental.virtualbook.dao.ItemDao;
 import com.blacktierental.virtualbook.model.Attachment;
 import com.blacktierental.virtualbook.model.EventItem;
 import com.blacktierental.virtualbook.model.Item;
-
-import sun.net.ProgressSource.State;
+import com.blacktierental.virtualbook.model.State;
 
 @Service("itemService")
 @Transactional
@@ -41,7 +40,14 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public void saveItem(Item item) {
-		dao.save(item);
+		Item resultOfSearch = findByDescription(item.getDescription());
+		if(resultOfSearch != null){
+			resultOfSearch.setState(State.ACTIVE.toString());
+			resultOfSearch.setQuantity(item.getQuantity());
+			updateItem(resultOfSearch);
+		}else{
+			dao.save(item);
+		}
 	}
 
 	@Override
@@ -60,7 +66,7 @@ public class ItemServiceImpl implements ItemService{
 		Item item = dao.findByDescription(description);
 		List<EventItem> eventItems = eventItemDao.findByItemId(item);
 		if(eventItems != null && !eventItems.isEmpty()){
-			item.setState(State.DELETE.toString());
+			item.setState(State.DELETED.toString());
 			dao.save(item);
 		}else{
 			dao.deleteByDescription(description, item);
@@ -75,6 +81,10 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public boolean isItemDescriptionUnique(Integer id, String description) {
 		Item item = findByDescription(description);
-		return (item == null || ((id!=null) && (item.getId()==id)));
+		//if item exist but the state is deleted. it allowed to recreate the item
+		if(item != null && item.getState().equals(State.DELETED.toString())){
+			return true;
+		}
+		return (item == null || ((id!=null) && (item.getId()==id) ));
 	}
 }

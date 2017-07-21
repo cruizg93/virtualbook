@@ -100,14 +100,14 @@ rel="stylesheet"></link>
 													<span class="glyphicon glyphicon-pencil"></span><span
 														class="hidden-ms hidden-xs"> Edit</span>
 											</button>
-										</sec:authorize><!--
+										</sec:authorize>
 										<sec:authorize access="hasRole('ADMIN')">
 											<button type="button" class="btn btn-danger formDeleteButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
 													onclick="deleteAttachment(${attachment.id}, '${attachment.description }')">
 													<span class="glyphicon glyphicon-trash"></span><span
 														class="hidden-ms hidden-xs"> Delete</span>
 												</button>
-										</sec:authorize>-->
+										</sec:authorize>
 									</td>
 								</tr>
 							</c:forEach>

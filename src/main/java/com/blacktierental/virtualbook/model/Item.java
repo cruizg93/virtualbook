@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="tbl_item")
 public class Item {
 	
-	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.ALL})
+	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="tbl_item_attachment",
 				joinColumns = {@JoinColumn(name="item_id")},
 				inverseJoinColumns = {@JoinColumn(name="attachment_id")})
