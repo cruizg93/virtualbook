@@ -4,7 +4,7 @@
 
 Create and manage the scheduling of Black Tie Rental of Florida company.  
 
-Two main modules:  
+Main modules:  
 
 *Settings (create, update, search and delete):  
   -Users  
@@ -15,7 +15,12 @@ Two main modules:
 *Events:  
   -Creation Form  
   -Calendar View by month  
-  
+ 
+*Statistics:  
+  -By year
+  -By month
+  -By item    
+ 
 Create by Cristian Ruiz Gonzalez @Cruizg93  
 
 # Used Technologies:  
@@ -29,3 +34,5 @@ Create by Cristian Ruiz Gonzalez @Cruizg93
 *Bootstrap 3  
 *CSS 3  
 *IDE (Spring Suite Tool)  
+
+Deployed in apache tomcat 9
