@@ -17,9 +17,9 @@ Main modules:
   -Calendar View by month  
  
 *Statistics:  
-  -By year
-  -By month
-  -By item    
+  -By year  
+  -By month  
+  -By item     
  
 Create by Cristian Ruiz Gonzalez @Cruizg93  
 
