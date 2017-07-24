@@ -119,7 +119,7 @@
 					class="form-group input-group col-lg-12 col-md-12 col-ms-12 col-xs-12">
 					<div id="dtpDateAndHour"
 						class="input-group date form_datetime col-md-12 "
-						data-date-format="yyyy-mm-dd hh:mm:ss"
+						data-date-format="yyyy-mm-dd hh:ii"
 						data-link-field="dtpDateAndHour">
 						<input id="dateAndHourControl" class="form-control input-lg"
 							size="22" type="text" value="" placeholder="Event Date/Hour"
@@ -141,7 +141,7 @@
 					class="form-group input-group col-lg-12 col-md-12 col-ms-12 col-xs-12">
 					<div id="dtpDropOff"
 						class="input-group date form_datetime col-md-12 "
-						data-date-format="yyyy-mm-dd hh:mm:ss"
+						data-date-format="yyyy-mm-dd hh:ii"
 						data-link-field="dtpDropOff">
 						<input id="dropOffTimeControl" class="form-control input-lg"
 							size="22" type="text" value="" placeholder="DropOff Date/Hour"
@@ -162,7 +162,7 @@
 				<div
 					class="form-group input-group col-lg-12 col-md-12 col-ms-12 col-xs-12">
 					<div id="dtpPickUp" class="input-group date form_datetime "
-						data-date-format="yyyy-mm-dd hh:mm:ss" data-link-field="dtpPickUp">
+						data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtpPickUp">
 						<input id="pickUpTimeControl" class="form-control input-lg "
 							type="text" value="" placeholder="PickUp Date/Hour"
 							onchange="formatDatesInForm()" onblur="formatDatesInForm()"
@@ -179,9 +179,7 @@
 				</div>
 			</div>
 		</div>
-		<c:set var="itemCount" value="0" />
 		<c:forEach var="eventItem" items="${event.items}" varStatus="loopindex">
-			<c:set var="itemCount" value="${loopindex.count}" />
 			<div class="row itemRow" id="itemRow${loopindex.index}">
 				<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
 					<div class="form-group input-group">
@@ -204,7 +202,7 @@
 						<span class="input-group-addon">#</span>
 						<form:input type="text" path="items[${loopindex.index}].quantity"
 							placeholder="Quantity" id="quantity${loopindex.index}"
-							class="form-control input-lg appNumber" onblur="calculateTotal()" />
+							class="form-control input-lg appNumber quantity" onblur="calculateTotal()" />
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
@@ -212,7 +210,7 @@
 						<span class="glyphicon glyphicon-usd input-group-addon"></span>
 						<form:input type="text" path="items[${loopindex.index}].pricePerUnit"
 							placeholder="Price Per Unit" id="pricePerUnit${loopindex.index}"
-							class="form-control input-lg appNumberDot"
+							class="form-control input-lg appNumberDot pricePerUnit"
 							onblur="calculateTotal()" style="z-index:0;"/>
 						<c:if test="${loopindex.index==0}">
 							<button type="button" class="addItemRowButton" onclick="addItemRow()">+</button>
@@ -353,7 +351,6 @@
 <script>
 	var context = '${pageContext.request.contextPath}';
 	var editing = "${edit}";
-	var itemContTotal = "${itemCount}";
 	if(editing!=='true'){
 		$("#location").prepend("<option value='' selected='selected'>LOCATION</option>");
 		$("#client").prepend("<option value='' selected='selected'>CLIENT</option>");

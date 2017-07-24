@@ -66,12 +66,12 @@ public class EventController {
 		binder.registerCustomEditor(LocalDateTime.class, new PropertyEditorSupport() {
 			@Override
 			public void setAsText(String text) throws IllegalArgumentException {
-				setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+				setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
 			}
 
 			@Override
 			public String getAsText() throws IllegalArgumentException {
-				return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format((LocalDateTime) getValue());
+				return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format((LocalDateTime) getValue());
 			}
 		});
 		binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
@@ -188,9 +188,17 @@ public class EventController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("event", event);
-			model.addAttribute("edit", true);
 			return "eventRegistration";
 		}
+		if (!eventService.isEventUnique(event)) {
+			FieldError clientUniqueError = new FieldError("event", "dateAndHour",
+					messageSource.getMessage("non.unique.event.clientNLocation", new
+					String[] { event.getClient().getName(),event.getLocation().getBuildingName(),event.getDateAndHour().toString()}, Locale.getDefault()));
+			result.addError(clientUniqueError);
+			model.addAttribute("event", event);
+			return "eventRegistration";
+		}
+		
 		eventService.save(event);
 		// TODO: Validate unique event by client & location & item
 		model.addAttribute("success", "Event " + event.getEventName() + " registered successfully");
@@ -217,13 +225,14 @@ public class EventController {
 	public String updateEvent(@Valid Event eventObj, BindingResult result, ModelMap model, @PathVariable String id) {
 
 		if (result.hasErrors()) {
-			// model.addAttribute("event", eventObj);
+			model.addAttribute("event", eventObj);
 			return "eventRegistration";
 		}
 		if (!eventService.isEventUnique(eventObj)) {
 			FieldError clientUniqueError = new FieldError("location", "location", messageSource
 					.getMessage("non.unique.location", new String[] { eventObj.getEventName() }, Locale.getDefault()));
 			result.addError(clientUniqueError);
+			model.addAttribute("event", eventObj);
 			return "eventRegistration";
 		}
 		eventService.updateEvent(eventObj);

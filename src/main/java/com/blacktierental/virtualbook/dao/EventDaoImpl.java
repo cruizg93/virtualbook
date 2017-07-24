@@ -88,9 +88,9 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("id",id));
 		Event event = (Event)crit.uniqueResult();
-		event.setState(State.DELETED.toString());
-		save(event);
-		//delete(event);
+		/*event.setState(State.DELETED.toString());
+		save(event);*/
+		delete(event);
 	}
 
 	@Override
@@ -147,6 +147,19 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 									+"GROUP BY e.client");
 		q.setParameter(0, String.valueOf(year));
 		return q.getResultList();
+	}
+
+	@Override
+	public Event findByDateNClientNLocation(Event event) {
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("dateAndHour",event.getDateAndHour()));
+		crit.add(Restrictions.eq("client",event.getClient()));
+		crit.add(Restrictions.eq("location",event.getLocation()));
+		List<Event> events = (List<Event>)crit.list();
+		if(events != null && !events.isEmpty()){
+			return events.get(0);
+		}
+		return null;
 	}
 	
 	

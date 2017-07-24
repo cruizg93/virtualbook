@@ -22,5 +22,6 @@ public interface EventDao {
 	void save(Event event);
 	void deleteById(int id);
 	List findEventByYearGroupByClient(int year);
+	Event findByDateNClientNLocation(Event event);
 	
 }

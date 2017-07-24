@@ -3,7 +3,7 @@ var eventItems = [];//items have been add to event
 var itemsCont = 0// itemContTotal is initialize at the bottom of eventRegistration.jsp
 
 $(document).ready(function(){
-	itemsCont = parseInt(itemContTotal);
+	itemsCont = $(".itemRow").length;
 	if($("#contactSameAsClient").val()=="1"){
 		$("#sameAsContactControl").prop("checked", true);
 		sameAsContact(true);
@@ -27,8 +27,7 @@ $(document).ready(function(){
 	    todayBtn:  1,
 		autoclose: 1,
 		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0
+		startView: 2
 	});
 	
 	$('#dtpDropOff').datetimepicker({
@@ -37,8 +36,7 @@ $(document).ready(function(){
 	    todayBtn:  1,
 		autoclose: 1,
 		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0
+		startView: 2
 	});
 	
 	$('#dtpPickUp').datetimepicker({
@@ -47,8 +45,7 @@ $(document).ready(function(){
 	    todayBtn:  1,
 		autoclose: 1,
 		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0
+		startView: 2
 	});
 	
 	//editing is capture at the bottom of eventRegistration.jsp
@@ -85,7 +82,26 @@ function addItemRow(){
 
 function deleteItemRow(rowId){
 	$("#"+rowId).remove();
-	itemsCont -= 1;
+	itemsCont = $(".itemRow").length;
+	var items = $(".itemRow");
+	var selects = items.find("select");
+	var quantity = items.find(".quantity");
+	var pricePerUnit = items.find(".pricePerUnit");
+	/**
+	 * re-index the elements
+	 */
+	$(selects).each(function(index,val){
+		$(val).prop("id","items"+index+".item");
+		$(val).prop("name","items["+index+"].item");
+	});
+	$(quantity).each(function(index,val){
+		$(val).prop("id","quantity"+index);
+		$(val).prop("name","items["+index+"].quantity");
+	});
+	$(pricePerUnit).each(function(index,val){
+		$(val).prop("id","pricePerUnit"+index);
+		$(val).prop("name","items["+index+"].pricePerUnit");
+	});
 	calculateTotal();
 }
 
@@ -157,20 +173,24 @@ function formatDatesInForm(){
 		$("#lblcontact_date").html("CONTACT DATE: "+contact);
 		$("#contact_date").val(contact);
 	}
+	
 	dateAndHour = $("#dateAndHourControl").val()?$("#dateAndHourControl").val():$("#dateAndHour").val();
-	if(dateAndHour){
-		$("#dateAndHourControl").val(moment(dateAndHour).format("YYYY-MM-DD HH:mm:ss"));
-		$("#dateAndHour").val(moment(dateAndHour).format("YYYY-MM-DD HH:mm:ss"));
-	}
 	dropOff = $("#dropOffTimeControl").val()?$("#dropOffTimeControl").val():$("#dropOffTime").val();
-	if(dropOff){
-		$("#dropOffTimeControl").val(moment(dropOff).format("YYYY-MM-DD HH:mm:ss"));
-		$("#dropOffTime").val(moment(dropOff).format("YYYY-MM-DD HH:mm:ss"));
-	}
 	pickUp = $("#pickUpTimeControl").val()?$("#pickUpTimeControl").val():$("#pickUpTime").val();
+	
+	if(dateAndHour){
+		$("#dateAndHourControl").val(moment(dateAndHour).format("YYYY-MM-DD HH:mm"));
+		$("#dateAndHour").val(moment(dateAndHour).format("YYYY-MM-DD HH:mm"));
+	}
+	
+	if(dropOff){
+		$("#dropOffTimeControl").val(moment(dropOff).format("YYYY-MM-DD HH:mm"));
+		$("#dropOffTime").val(moment(dropOff).format("YYYY-MM-DD HH:mm"));
+	}
+	
 	if(pickUp){
-		$("#pickUpTimeControl").val(moment(pickUp).format("YYYY-MM-DD HH:mm:ss"));
-		$("#pickUpTime").val(moment(pickUp).format("YYYY-MM-DD HH:mm:ss"));
+		$("#pickUpTimeControl").val(moment(pickUp).format("YYYY-MM-DD HH:mm"));
+		$("#pickUpTime").val(moment(pickUp).format("YYYY-MM-DD HH:mm"));
 	}
 }
 

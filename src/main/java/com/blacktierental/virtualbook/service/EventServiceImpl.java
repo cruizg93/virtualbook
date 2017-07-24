@@ -122,7 +122,11 @@ public class EventServiceImpl implements EventService{
 
 	@Override
 	public boolean isEventUnique(Event event) {
-		return true;
+		Event result = dao.findByDateNClientNLocation(event);
+		if(result.equals(event)){
+			return true;
+		}
+		return result==null?true:false;
 	}
 	
 	@Override

@@ -321,7 +321,7 @@ public class Event {
 	}
 	
 	public String getFormatedDateAndHour(){
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         if(dateAndHour!=null){
         	String formatDateTime = dateAndHour.format(formatter);
             return formatDateTime;
@@ -330,7 +330,7 @@ public class Event {
         }
 	}
 	public String getFormatedDropOff(){
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         if(dropOffTime!=null){
         	String formatDateTime = dropOffTime.format(formatter);
             return formatDateTime;
@@ -339,7 +339,7 @@ public class Event {
         }
 	}
 	public String getFormatedPickUp(){
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         if(pickUpTime!=null){
         	String formatDateTime = pickUpTime.format(formatter);
             return formatDateTime;
