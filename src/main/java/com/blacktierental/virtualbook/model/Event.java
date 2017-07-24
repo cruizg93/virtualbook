@@ -132,7 +132,7 @@ public class Event {
 	}
 
 	public String getContactPersonName() {
-		return contactPersonName==null?" ":contactPersonName;
+		return contactSameAsClient==1?client.getName():contactPersonName;
 	}
 
 	public void setContactPersonName(String contactPersonName) {
@@ -140,7 +140,7 @@ public class Event {
 	}
 
 	public String getContactPersonPhoneNumber() {
-		return contactPersonPhoneNumber==null?" ":contactPersonPhoneNumber;
+		return contactSameAsClient==1?client.getPhoneNumber():contactPersonPhoneNumber;
 	}
 
 	public void setContactPersonPhoneNumber(String contactPersonPhoneNumber) {
@@ -148,7 +148,7 @@ public class Event {
 	}
 
 	public String getContactPersonEmail() {
-		return contactPersonEmail==null?" ":contactPersonEmail;
+		return contactSameAsClient==1?client.getEmail():contactPersonPhoneNumber;
 	}
 
 	public void setContactPersonEmail(String contactPersonEmail) {
