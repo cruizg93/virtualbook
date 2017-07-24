@@ -36,6 +36,7 @@ import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.service.ClientService;
+import com.blacktierental.virtualbook.service.EventItemService;
 import com.blacktierental.virtualbook.service.EventService;
 import com.blacktierental.virtualbook.service.ExporterServiceImpl;
 import com.blacktierental.virtualbook.service.ItemService;
@@ -50,6 +51,9 @@ public class EventController {
 	@Autowired
 	EventService eventService;
 
+	@Autowired
+	EventItemService eventItemService;
+	
 	@Autowired
 	ItemService itemService;
 	@Autowired
@@ -166,7 +170,9 @@ public class EventController {
 
 	@RequestMapping(value = { "/newEvent" }, method = RequestMethod.GET)
 	public String newEvent(ModelMap model) {
-		model.addAttribute("event", new Event());
+		Event event = new Event();
+		event.setItems(eventItemService.onePerItem());
+		model.addAttribute("event", event);
 		model.addAttribute("edit", false);
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "eventRegistration";

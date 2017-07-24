@@ -57,6 +57,12 @@
 		<field name="pricePerUnit" class="java.lang.Double"/>
 		<field name="item.stringAttachments" class="java.lang.String"/>
 	</subDataset>
+	<subDataset name="attachments" uuid="b0ea2e9e-e9f2-4a0b-a047-7122a9f61efe">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="attachment.description" class="java.lang.String"/>
+	</subDataset>
 	<parameter name="ItemsDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="ItemsJRB" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<queryString language="SQL">
@@ -284,7 +290,7 @@ $F{client.email}]]></textFieldExpression>
 					<pen lineWidth="1.0"/>
 				</box>
 				<componentElement>
-					<reportElement x="5" y="10" width="362" height="83" uuid="9f0edcb1-354f-4620-8f72-5c93b3f0f750">
+					<reportElement x="5" y="10" width="395" height="49" uuid="9f0edcb1-354f-4620-8f72-5c93b3f0f750">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -295,72 +301,80 @@ $F{client.email}]]></textFieldExpression>
 						<datasetRun subDataset="dsItems" uuid="a58c98e4-08cf-47be-b5c3-542a02952f8d">
 							<dataSourceExpression><![CDATA[$P{ItemsJRB}]]></dataSourceExpression>
 						</datasetRun>
-						<jr:column width="160" uuid="7c16178b-5c3d-45c0-8b32-2081d4e5d3de">
+						<jr:column width="240" uuid="7c16178b-5c3d-45c0-8b32-2081d4e5d3de">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
-							<jr:columnHeader style="Table_CH" height="20" rowSpan="1">
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="Labels" x="0" y="0" width="160" height="20" uuid="98aa5c02-3f2f-4005-926d-60f3f4c676cb">
+									<reportElement style="Labels" x="0" y="0" width="240" height="30" uuid="98aa5c02-3f2f-4005-926d-60f3f4c676cb">
 										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 									</reportElement>
 									<box topPadding="2" leftPadding="2" rightPadding="0"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<text><![CDATA[DESCRIPTION]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="Table_TD" height="30">
+							<jr:detailCell style="Table_TD" height="20">
 								<textField isStretchWithOverflow="true">
-									<reportElement x="0" y="0" width="160" height="30" isPrintWhenDetailOverflows="true" uuid="ff732ad2-b93e-4885-996e-3197b69c881e"/>
-									<box topPadding="2" leftPadding="2"/>
+									<reportElement x="0" y="0" width="240" height="20" uuid="0879d1e7-2155-4393-bfc4-e7de1d73789e"/>
+									<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{item.description} + "\n"+ $F{item.stringAttachments}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
 						<jr:column width="60" uuid="e5f57d63-de49-48b0-98a0-222a0823ea2e">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
-							<jr:columnHeader style="Table_CH" height="20" rowSpan="1">
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="Labels" x="0" y="0" width="60" height="20" uuid="a8a1dfd3-7e8f-4803-899b-1fb09e692efd"/>
+									<reportElement style="Labels" x="0" y="0" width="60" height="30" uuid="a8a1dfd3-7e8f-4803-899b-1fb09e692efd"/>
 									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<text><![CDATA[QUANTITY]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="Table_TD" height="30">
+							<jr:detailCell style="Table_TD" height="20">
 								<textField>
-									<reportElement x="0" y="0" width="60" height="30" uuid="c7262cb4-9c70-4428-a81c-83d930e2b9d8"/>
+									<reportElement x="0" y="0" width="60" height="20" uuid="c7262cb4-9c70-4428-a81c-83d930e2b9d8"/>
 									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="90" uuid="445cbc8e-2bc3-4305-9155-29b03f2094d8">
+						<jr:column width="50" uuid="445cbc8e-2bc3-4305-9155-29b03f2094d8">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
-							<jr:columnHeader style="Table_CH" height="20" rowSpan="1">
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="Labels" x="0" y="0" width="90" height="20" uuid="de64331c-f6ce-452f-9583-3bf497fb7c6e"/>
+									<reportElement style="Labels" x="0" y="0" width="50" height="30" uuid="de64331c-f6ce-452f-9583-3bf497fb7c6e"/>
 									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center"/>
 									<text><![CDATA[PRICE PER UNIT]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="Table_TD" height="30">
+							<jr:detailCell style="Table_TD" height="20">
 								<textField>
-									<reportElement x="0" y="0" width="90" height="30" uuid="c3681817-8778-42fa-88b1-01c46c44e6be"/>
+									<reportElement x="0" y="0" width="50" height="20" uuid="c3681817-8778-42fa-88b1-01c46c44e6be"/>
 									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA["$"+$F{pricePerUnit}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="52" uuid="e4065e90-32b0-4a8d-9adb-da3b67708f7d">
+						<jr:column width="45" uuid="e4065e90-32b0-4a8d-9adb-da3b67708f7d">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
-							<jr:columnHeader style="Table_CH" height="20" rowSpan="1">
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
 								<staticText>
-									<reportElement style="Labels" x="0" y="0" width="52" height="20" uuid="16b28f25-ad8d-463d-9010-1f23d9e1018d"/>
+									<reportElement style="Labels" x="0" y="0" width="45" height="30" uuid="16b28f25-ad8d-463d-9010-1f23d9e1018d"/>
 									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<text><![CDATA[TOTAL]]></text>
 								</staticText>
 							</jr:columnHeader>
-							<jr:detailCell style="Table_TD" height="30">
+							<jr:detailCell style="Table_TD" height="20">
 								<textField>
-									<reportElement x="0" y="0" width="52" height="30" uuid="52f9f149-344f-4586-908f-315382996968"/>
+									<reportElement x="0" y="0" width="45" height="20" uuid="52f9f149-344f-4586-908f-315382996968"/>
 									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA["$"+($F{quantity}*$F{pricePerUnit})]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
@@ -368,7 +382,7 @@ $F{client.email}]]></textFieldExpression>
 					</jr:table>
 				</componentElement>
 				<staticText>
-					<reportElement style="labelMoney" x="375" y="10" width="105" height="20" uuid="04ec5793-d893-41f9-aaed-26db4e5bd0e1">
+					<reportElement style="labelMoney" x="400" y="10" width="80" height="20" uuid="04ec5793-d893-41f9-aaed-26db4e5bd0e1">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
@@ -384,7 +398,7 @@ $F{client.email}]]></textFieldExpression>
 					<textFieldExpression><![CDATA["$"+$F{delivery}.toString()]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement style="labelMoney" x="375" y="31" width="105" height="20" uuid="09bda046-a9f3-45b0-b5e6-c7399449781d">
+					<reportElement style="labelMoney" x="400" y="31" width="80" height="20" uuid="09bda046-a9f3-45b0-b5e6-c7399449781d">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
 					<text><![CDATA[SUBTOTAL:]]></text>
@@ -396,7 +410,7 @@ $F{client.email}]]></textFieldExpression>
 					<textFieldExpression><![CDATA["$"+$F{subTotal}.toString()]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement style="labelMoney" x="375" y="52" width="105" height="20" uuid="a4aabe5b-536c-4ec8-b660-f3a85850e3fc">
+					<reportElement style="labelMoney" x="400" y="52" width="80" height="20" uuid="a4aabe5b-536c-4ec8-b660-f3a85850e3fc">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>
@@ -412,7 +426,7 @@ $F{client.email}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[$F{taxPercentage}.toString()+"%: $"+$F{taxes}.toString()]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement style="labelMoney" x="375" y="73" width="105" height="20" uuid="d9a172dd-d369-48f6-9447-4692ccca4eb5">
+					<reportElement style="labelMoney" x="400" y="73" width="80" height="20" uuid="d9a172dd-d369-48f6-9447-4692ccca4eb5">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					</reportElement>

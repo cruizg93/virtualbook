@@ -15,6 +15,17 @@ import javax.validation.constraints.NotNull;
 @Table(name="tbl_event_item")
 public class EventItem {
 
+	public EventItem(){
+		
+	}
+	
+	public EventItem(Item item, Integer quantity, Double pricePerUnit) {
+		super();
+		this.item = item;
+		this.quantity = quantity;
+		this.pricePerUnit = pricePerUnit;
+	}
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	

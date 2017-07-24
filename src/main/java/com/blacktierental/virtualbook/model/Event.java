@@ -33,8 +33,6 @@ public class Event {
 		dateAndHour= LocalDateTime.now();
 		dropOffTime= LocalDateTime.now();
 		pickUpTime= LocalDateTime.now();
-		items = new ArrayList<EventItem>();
-		items.add(new EventItem());
 		contactSameAsClient = 1;
 	}
 	

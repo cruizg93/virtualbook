@@ -1,5 +1,6 @@
 package com.blacktierental.virtualbook.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class EventItemServiceImpl implements EventItemService {
 
 	@Autowired
 	private EventItemDao dao;
+	
+	@Autowired
+	private ItemService itemService;
 	
 	@Override
 	public EventItem findById(int id) {
@@ -54,11 +58,9 @@ public class EventItemServiceImpl implements EventItemService {
 
 	@Override
 	public List<EventItem> findAllEventItems() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+		return dao.findAllEventItems();
+	}	
+		
 	public void deleteById(int id) {
 		dao.deleteById(id);
 	}
@@ -67,5 +69,17 @@ public class EventItemServiceImpl implements EventItemService {
 	public List<String[]> itemCountByYear(int year) {
 		return dao.findAllByYearGroupByItem(year);
 	}
+
+	@Override
+	public List<EventItem> onePerItem() {
+		List<Item> items = itemService.findAllItems();
+		List<EventItem> eventItems = new ArrayList<EventItem>();
+		for(Item i: items){
+			eventItems.add(new EventItem(i,0,0.0));
+		}
+		return eventItems;
+	}
+	
+	
 	
 }

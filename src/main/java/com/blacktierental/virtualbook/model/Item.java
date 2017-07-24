@@ -82,10 +82,10 @@ public class Item {
 	public String getStringAttachments(){
 		StringBuilder result = new StringBuilder();
 		for(Attachment a: attachments){
-			result.append(a.getDescription()+"|");
+			result.append("__"+a.getDescription()+"  ");
 		}
 		if(result.length()>0){
-			return result.toString().substring(0,result.length()-1);
+			return result.toString();
 		}
 		return result.toString();
 	}

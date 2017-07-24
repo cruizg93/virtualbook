@@ -15,4 +15,5 @@ public interface EventItemService {
 	void deleteById(int id);
 	List<EventItem> findAllEventItems();
 	List<String[]> itemCountByYear(int year);
+	List<EventItem> onePerItem();
 }
