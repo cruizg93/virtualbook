@@ -1,6 +1,5 @@
 package com.blacktierental.virtualbook.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -132,7 +131,10 @@ public class Event {
 	}
 
 	public String getContactPersonName() {
-		return contactSameAsClient==1?client.getName():contactPersonName;
+		if(client!=null){
+			return contactSameAsClient==1?client.getName():contactPersonName;
+		}
+		return contactPersonName;
 	}
 
 	public void setContactPersonName(String contactPersonName) {
@@ -140,7 +142,10 @@ public class Event {
 	}
 
 	public String getContactPersonPhoneNumber() {
-		return contactSameAsClient==1?client.getPhoneNumber():contactPersonPhoneNumber;
+		if(client !=null){
+			return contactSameAsClient==1?client.getPhoneNumber():contactPersonPhoneNumber;
+		}
+		return contactPersonPhoneNumber;
 	}
 
 	public void setContactPersonPhoneNumber(String contactPersonPhoneNumber) {
@@ -148,7 +153,10 @@ public class Event {
 	}
 
 	public String getContactPersonEmail() {
-		return contactSameAsClient==1?client.getEmail():contactPersonPhoneNumber;
+		if(client!=null){
+			return contactSameAsClient==1?client.getEmail():contactPersonPhoneNumber;
+		}
+		return contactPersonEmail;
 	}
 
 	public void setContactPersonEmail(String contactPersonEmail) {

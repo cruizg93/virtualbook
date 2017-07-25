@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.blacktierental.virtualbook.model.Attachment;
 import com.blacktierental.virtualbook.model.Item;
-import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.service.AttachmentService;
 import com.blacktierental.virtualbook.service.ItemService;
 

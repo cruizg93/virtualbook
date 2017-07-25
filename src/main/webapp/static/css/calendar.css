@@ -1,3 +1,12 @@
+.views li{
+	padding-left: 0% !important;
+	padding-right: 0% !important;
+	margin-left: 0% !important;
+	margin-right: 0% !important;
+	width: 50%;
+	float:left;
+}
+
 #divCurrentMonth{
 	padding-left: 0px;
 	padding-right:0px;
@@ -11,6 +20,16 @@
 	padding-left: 0px;	
 }
 .divBottomButton>button{
+	border-radius: 0px 0px 0px 0px;
+	width:100%;
+}
+
+.divTopButton{
+	text-align:right;
+	padding-right: 0px;
+	padding-left: 0px;	
+}
+.divTopButton>button{
 	border-radius: 0px 0px 0px 0px;
 	width:100%;
 }
@@ -35,6 +54,15 @@
 .row{
 	margin-right: 0px;
 	margin-left: 0px;
+}
+
+span.paid, span.notPaid{
+	color:white;
+	font-weight: bolder;
+	padding:2px;
+	font-size:12px;
+	max-width: 57px;
+	min-width: 57px;
 }
 
 .paid{

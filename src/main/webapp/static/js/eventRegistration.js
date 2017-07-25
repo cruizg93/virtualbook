@@ -1,7 +1,7 @@
 var attachmentItems = null;
 var eventItems = [];//items have been add to event
-var itemsCont = 0// itemContTotal is initialize at the bottom of eventRegistration.jsp
-
+var itemsCont = 0;// itemContTotal is initialize at the bottom of eventRegistration.jsp
+var dataHasChange = false;//Only use when try to download a contract PDF
 $(document).ready(function(){
 	itemsCont = $(".itemRow").length;
 	if($("#contactSameAsClient").val()=="1"){
@@ -57,6 +57,13 @@ $(document).ready(function(){
 		$("#delivery").val("0.0");
 		$("#advance").val("0.0");
 	}
+	
+	$("input").change(function(){
+		dataHasChange = true;
+	});
+	$("select").change(function(){
+		dataHasChange = true;
+	});
 });
 
 function addItemRow(){
@@ -78,6 +85,7 @@ function addItemRow(){
 	$(actionButton).attr("onclick","deleteItemRow('itemRow"+(itemsCont)+"')");
 	$("#itemRow"+(itemsCont-1)).after(row);
 	itemsCont += 1;
+	dataHasChange = true;
 }
 
 function deleteItemRow(rowId){
@@ -103,6 +111,7 @@ function deleteItemRow(rowId){
 		$(val).prop("name","items["+index+"].pricePerUnit");
 	});
 	calculateTotal();
+	dataHasChange = true;
 }
 
 function requestAttachmentList(){
@@ -210,11 +219,16 @@ function sameAsContact(booleanValue){
 }
 
 function contract(id){
-	 $('<form>', {
-         "id": "imprimir",
-         "html": '',
-         "target":'_blank',
-         'method':'GET',
-         "action": context+'/contract-'+id
-     }).appendTo(document.body).submit();
+	if(dataHasChange===true){
+		alert("Please make sure to save your changes before donwload the new Contract");
+	}else{
+		$('<form>', {
+	         "id": "imprimir",
+	         "html": '',
+	         "target":'_blank',
+	         'method':'GET',
+	         "action": context+'/contract-'+id
+	     }).appendTo(document.body).submit();
+	}
+	
 }

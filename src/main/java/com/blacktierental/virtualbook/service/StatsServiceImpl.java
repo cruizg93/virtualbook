@@ -1,18 +1,11 @@
 package com.blacktierental.virtualbook.service;
 
-import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.blacktierental.virtualbook.dao.EventDao;
-import com.blacktierental.virtualbook.model.Event;
 
 @Service("statsService")
 @Transactional

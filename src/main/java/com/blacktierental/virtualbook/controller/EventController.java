@@ -13,10 +13,8 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -30,7 +28,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.Item;
@@ -162,6 +159,7 @@ public class EventController {
 
 		model.addAttribute("emptySpotsAtBegin", emptySpotsAtBegin);
 		model.addAttribute("emptySpotsAtEnd", emptySpotsAtEnd);
+		model.addAttribute("eventsList", events);
 		model.addAttribute("events", eventList);
 		model.addAttribute("month", initial.getMonth().getValue());
 		model.addAttribute("year", initial.getYear());

@@ -37,12 +37,6 @@ public class EventServiceImpl implements EventService{
 	private ExporterService exporter;
 	
 	@Autowired
-	private EventItemService eventItemServiceImpl;
-	
-	@Autowired
-	private ItemService itemService;
-	
-	@Autowired
 	private EventDao dao;
 	
 	@Override

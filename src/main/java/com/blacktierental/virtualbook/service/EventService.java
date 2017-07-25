@@ -2,8 +2,6 @@ package com.blacktierental.virtualbook.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
 
 import com.blacktierental.virtualbook.model.Client;

@@ -11,9 +11,9 @@ public class LocalDateTimeParser {
 	public static void main(String[] args) {
 		String fecha = "2017-07-1308:07:21";
 		System.out.println(fecha.split(" ").length);
-		DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formatDateTime = LocalDateTime.now().format(formatter);
+        LocalDateTime.now().format(formatter);
         //System.out.println(formatDateTime);
         DecimalFormatSymbols decimalSymbols = DecimalFormatSymbols.getInstance();
         decimalSymbols.setDecimalSeparator('.');

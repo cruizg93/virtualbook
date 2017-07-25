@@ -1,8 +1,6 @@
 package com.blacktierental.virtualbook.service;
 
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.blacktierental.virtualbook.dao.EventDao;
 import com.blacktierental.virtualbook.dao.EventItemDao;
 import com.blacktierental.virtualbook.dao.ItemDao;
-import com.blacktierental.virtualbook.model.Attachment;
 import com.blacktierental.virtualbook.model.EventItem;
 import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.model.State;
@@ -22,9 +19,6 @@ public class ItemServiceImpl implements ItemService{
 	@Autowired
 	private ItemDao dao;
 
-	@Autowired
-	private EventDao eventDao;
-	
 	@Autowired
 	private EventItemDao eventItemDao;
 	

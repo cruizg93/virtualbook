@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.model.State;
 

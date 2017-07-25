@@ -163,15 +163,17 @@ $F{client.companyName}]]></textFieldExpression>
 				<text><![CDATA[CONTACT PERSON:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Labels" x="187" y="134" width="180" height="15" uuid="a9802f11-80e0-4582-8690-205b1a8f2cec">
+				<reportElement style="Labels" x="375" y="134" width="180" height="15" uuid="a9802f11-80e0-4582-8690-205b1a8f2cec">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<text><![CDATA[CONTACT PHONE NUMBER:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Labels" x="375" y="134" width="175" height="15" isRemoveLineWhenBlank="true" uuid="7076486a-73c7-4ca9-8a6b-5f3730c714e7">
+				<reportElement style="Labels" x="187" y="134" width="175" height="15" isRemoveLineWhenBlank="true" uuid="7076486a-73c7-4ca9-8a6b-5f3730c714e7">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<text><![CDATA[CONTACT E-MAIL:]]></text>
 			</staticText>
@@ -183,11 +185,11 @@ $F{client.companyName}]]></textFieldExpression>
 				<textFieldExpression><![CDATA[$F{contactPersonName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Field" x="187" y="149" width="180" height="30" uuid="81b9099c-08e6-4ec0-9847-8cf4bc1eab1a"/>
+				<reportElement style="Field" x="375" y="149" width="180" height="30" uuid="81b9099c-08e6-4ec0-9847-8cf4bc1eab1a"/>
 				<textFieldExpression><![CDATA[$F{contactPersonPhoneNumber}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Field" x="375" y="149" width="175" height="30" uuid="cb852736-9691-441d-a77f-bdf1f9850113">
+				<reportElement style="Field" x="187" y="149" width="175" height="30" uuid="cb852736-9691-441d-a77f-bdf1f9850113">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{contactPersonEmail}]]></textFieldExpression>

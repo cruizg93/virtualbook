@@ -2,13 +2,9 @@ package com.blacktierental.virtualbook.dao;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
@@ -19,10 +15,8 @@ import org.springframework.stereotype.Repository;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.EventItem;
-import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.model.State;
-import com.blacktierental.virtualbook.model.User;
 
 @Repository("eventDao")
 public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDao {
