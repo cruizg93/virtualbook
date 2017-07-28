@@ -18,28 +18,13 @@ USE `virtualbook`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_user_user_profile`
+-- Dumping data for table `tbl_attachment`
 --
 
-DROP TABLE IF EXISTS `tbl_user_user_profile`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_user_user_profile` (
-  `USER_ID` int(11) NOT NULL,
-  `USER_PROFILE_ID` int(11) NOT NULL,
-  PRIMARY KEY (`USER_ID`,`USER_PROFILE_ID`),
-  KEY `FK97ttnmugxwqm7y8fr5y1n08ij` (`USER_PROFILE_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_user_user_profile`
---
-
-LOCK TABLES `tbl_user_user_profile` WRITE;
-/*!40000 ALTER TABLE `tbl_user_user_profile` DISABLE KEYS */;
-INSERT INTO `tbl_user_user_profile` (`USER_ID`, `USER_PROFILE_ID`) VALUES (1,1);
-/*!40000 ALTER TABLE `tbl_user_user_profile` ENABLE KEYS */;
+LOCK TABLES `tbl_attachment` WRITE;
+/*!40000 ALTER TABLE `tbl_attachment` DISABLE KEYS */;
+INSERT INTO `tbl_attachment` (`id`, `description`) VALUES (10,'IVORY'),(11,'WHITE'),(12,'BLACK'),(13,'GOLD'),(14,'SILVER'),(15,'MAHOGANY'),(16,'ROUND 6'),(17,'ROUND 8'),(18,'RECTANGLE 6');
+/*!40000 ALTER TABLE `tbl_attachment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-16 17:49:10
+-- Dump completed on 2017-07-27 23:58:49

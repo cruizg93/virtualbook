@@ -18,32 +18,25 @@ USE `virtualbook`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_persistent_logins`
+-- Table structure for table `tbl_event_item`
 --
 
-DROP TABLE IF EXISTS `tbl_persistent_logins`;
+DROP TABLE IF EXISTS `tbl_event_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_persistent_logins` (
-  `series` varchar(255) NOT NULL,
-  `last_used` date DEFAULT NULL,
-  `token` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  PRIMARY KEY (`series`),
-  UNIQUE KEY `UK_8dlys87bpx4yctdom6dh0w6ld` (`token`),
-  UNIQUE KEY `UK_nujhxui9fdmnvfk91xe0lil2q` (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE `tbl_event_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment` varchar(255) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `event_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_EVENT_EVENT_ID` (`event_id`),
+  KEY `FK_ITEM_ITEM_ID_idx` (`item_id`),
+  CONSTRAINT `FK_EVENT_EVENT_ID` FOREIGN KEY (`event_id`) REFERENCES `tbl_event` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_persistent_logins`
---
-
-LOCK TABLES `tbl_persistent_logins` WRITE;
-/*!40000 ALTER TABLE `tbl_persistent_logins` DISABLE KEYS */;
-INSERT INTO `tbl_persistent_logins` (`series`, `last_used`, `token`, `username`) VALUES ('56SlM2fkNDC4H60n5MIusw==','2017-07-16','Yl47iA1YVpKQw9Vdxe2fGA==','ADMIN');
-/*!40000 ALTER TABLE `tbl_persistent_logins` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -54,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-16 17:49:10
+-- Dump completed on 2017-07-27 23:58:37

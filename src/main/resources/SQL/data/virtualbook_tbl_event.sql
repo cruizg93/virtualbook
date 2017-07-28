@@ -18,33 +18,13 @@ USE `virtualbook`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_user`
+-- Dumping data for table `tbl_event`
 --
 
-DROP TABLE IF EXISTS `tbl_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `address` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
-  `state` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_user`
---
-
-LOCK TABLES `tbl_user` WRITE;
-/*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
-INSERT INTO `tbl_user` (`id`, `address`, `email`, `name`, `password`, `phone_number`, `state`, `username`) VALUES (1,'ADMIN','ADMIN@T.COM','ADMIN','ADMIN','(222) 222-2222','Active','ADMIN');
-/*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
+LOCK TABLES `tbl_event` WRITE;
+/*!40000 ALTER TABLE `tbl_event` DISABLE KEYS */;
+INSERT INTO `tbl_event` (`id`, `comments`, `forward_payment`, `client_same_as_client`, `contact_person_email`, `contact_person_name`, `contact_person_number`, `contact_date`, `event_date`, `drop_off_time`, `pick_up_time`, `delivery`, `event_name`, `state`, `taxPercentage`, `client_id`, `location_id`) VALUES (44,'',0,0,'','','','2017-07-27','2017-07-27 22:34:00',NULL,NULL,50,'TEST NULL','ACTIVE',7,10,NULL),(45,'',0,0,'','','','2017-07-27',NULL,NULL,NULL,0,'TEST NULL 2','ACTIVE',0,15,NULL),(46,'',0,1,'','','','2017-07-27',NULL,NULL,NULL,0,'TEST NULL3','ACTIVE',0,7,NULL),(47,'',0,0,'','','','2017-07-27',NULL,NULL,NULL,0,'TEST NULL 4','ACTIVE',0,9,NULL),(48,'',0,1,'','','','2017-07-27',NULL,NULL,NULL,0,'TEST 5','ACTIVE',0,5,NULL);
+/*!40000 ALTER TABLE `tbl_event` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-16 17:49:10
+-- Dump completed on 2017-07-27 23:58:50

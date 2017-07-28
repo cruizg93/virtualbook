@@ -18,29 +18,13 @@ USE `virtualbook`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_attachments_items`
+-- Dumping data for table `tbl_item_attachment`
 --
 
-DROP TABLE IF EXISTS `tbl_attachments_items`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_attachments_items` (
-  `id_item` int(11) NOT NULL,
-  `id_attachment` int(11) NOT NULL,
-  PRIMARY KEY (`id_item`,`id_attachment`),
-  KEY `fk_attachmentitem_attachment_idx` (`id_attachment`),
-  CONSTRAINT `fk_attachmentitem_attachment` FOREIGN KEY (`id_attachment`) REFERENCES `tbl_attachments` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_attachmentitem_item` FOREIGN KEY (`id_item`) REFERENCES `tbl_item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_attachments_items`
---
-
-LOCK TABLES `tbl_attachments_items` WRITE;
-/*!40000 ALTER TABLE `tbl_attachments_items` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_attachments_items` ENABLE KEYS */;
+LOCK TABLES `tbl_item_attachment` WRITE;
+/*!40000 ALTER TABLE `tbl_item_attachment` DISABLE KEYS */;
+INSERT INTO `tbl_item_attachment` (`item_id`, `attachment_id`) VALUES (37,10),(32,11),(32,12),(37,12),(32,13),(32,15),(35,16),(35,17),(35,18);
+/*!40000 ALTER TABLE `tbl_item_attachment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-16 17:49:10
+-- Dump completed on 2017-07-27 23:58:48

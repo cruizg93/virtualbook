@@ -18,35 +18,18 @@ USE `virtualbook`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_item`
+-- Table structure for table `tbl_attachment`
 --
 
-DROP TABLE IF EXISTS `tbl_item`;
+DROP TABLE IF EXISTS `tbl_attachment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_item` (
+CREATE TABLE `tbl_attachment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(100) NOT NULL,
-  `state` varchar(45) NOT NULL DEFAULT 'ACTIVE',
-  `quantity` int(11) NOT NULL,
-  `type_id` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `description_UNIQUE` (`description`),
-  KEY `FK_ITEM_TYPE_idx` (`type_id`),
-  CONSTRAINT `FK1a3a6c4clgoh2vtmbakln77gt` FOREIGN KEY (`type_id`) REFERENCES `tbl_item_type` (`id`),
-  CONSTRAINT `FK_ITEM_TYPE` FOREIGN KEY (`type_id`) REFERENCES `tbl_item_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  `description` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_item`
---
-
-LOCK TABLES `tbl_item` WRITE;
-/*!40000 ALTER TABLE `tbl_item` DISABLE KEYS */;
-INSERT INTO `tbl_item` (`id`, `description`, `state`, `quantity`, `type_id`) VALUES (3,'CHIAVARI - Gold','Active',500,1),(4,'CUSHION - Ivory','Active',500,2),(8,'CUSHION - white','Active',600,2),(9,'CUSHION - black','Active',300,2),(11,'CHARGERS - silver','Active',300,2),(12,'CHIAVARI - SILVER','Active',200,1),(13,'CHIAVARI - MAHOGANY','Active',400,1),(14,'TO DELETE','DELETE',2,1);
-/*!40000 ALTER TABLE `tbl_item` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -57,4 +40,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-16 17:49:10
+-- Dump completed on 2017-07-27 23:58:38

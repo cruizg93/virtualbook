@@ -18,28 +18,13 @@ USE `virtualbook`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_item_type`
+-- Dumping data for table `tbl_item`
 --
 
-DROP TABLE IF EXISTS `tbl_item_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_item_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_mmpeae6n3yqy0995qxgy6kx0k` (`description`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_item_type`
---
-
-LOCK TABLES `tbl_item_type` WRITE;
-/*!40000 ALTER TABLE `tbl_item_type` DISABLE KEYS */;
-INSERT INTO `tbl_item_type` (`id`, `description`) VALUES (2,'ATTACHMENT'),(1,'MAIN');
-/*!40000 ALTER TABLE `tbl_item_type` ENABLE KEYS */;
+LOCK TABLES `tbl_item` WRITE;
+/*!40000 ALTER TABLE `tbl_item` DISABLE KEYS */;
+INSERT INTO `tbl_item` (`id`, `description`, `state`, `quantity`) VALUES (3,'CHIAVARI - GOLD','DELETED',500),(12,'CHIAVARI - SILVER','DELETED',200),(13,'CHIAVARI - MAHOGANY','DELETED',400),(14,'TO DELETE','DELETED',2),(16,'ROUND TABLE 6','DELETED',10),(31,'CHIAVARI - BLACK','DELETED',222),(32,'CHIAVARI CHAIR','ACTIVE',1000),(35,'TABLE','ACTIVE',10),(36,'FOLDING WHITE WOOD CHAIRS','ACTIVE',200),(37,'CUSHION','ACTIVE',500),(38,'TEST','ACTIVE',44);
+/*!40000 ALTER TABLE `tbl_item` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-16 17:49:10
+-- Dump completed on 2017-07-27 23:58:49

@@ -18,28 +18,13 @@ USE `virtualbook`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_user_profile`
+-- Dumping data for table `tbl_event_item`
 --
 
-DROP TABLE IF EXISTS `tbl_user_profile`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbl_user_profile` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(15) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_isam0ovp2o8rysoiflk6j0thi` (`type`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tbl_user_profile`
---
-
-LOCK TABLES `tbl_user_profile` WRITE;
-/*!40000 ALTER TABLE `tbl_user_profile` DISABLE KEYS */;
-INSERT INTO `tbl_user_profile` (`id`, `type`) VALUES (1,'ADMIN'),(2,'SUPERVISOR'),(3,'DBA'),(4,'USER');
-/*!40000 ALTER TABLE `tbl_user_profile` ENABLE KEYS */;
+LOCK TABLES `tbl_event_item` WRITE;
+/*!40000 ALTER TABLE `tbl_event_item` DISABLE KEYS */;
+INSERT INTO `tbl_event_item` (`id`, `comment`, `price`, `quantity`, `event_id`, `item_id`) VALUES (212,NULL,0,0,NULL,32),(213,NULL,0,0,NULL,37),(214,NULL,0,0,NULL,36),(215,NULL,0,0,NULL,35),(216,NULL,0,0,NULL,38),(217,NULL,5,150,NULL,32),(218,NULL,0,0,NULL,37),(219,NULL,0,0,NULL,36),(220,NULL,0,0,NULL,35),(221,NULL,0,0,NULL,38),(222,NULL,0,0,NULL,32),(223,NULL,0,0,NULL,37),(224,NULL,0,0,NULL,36),(225,NULL,0,0,NULL,35),(226,NULL,0,0,NULL,38),(227,NULL,5,232,45,32),(228,NULL,0,0,45,37),(229,NULL,0,0,45,36),(230,NULL,0,0,45,35),(231,NULL,0,0,45,38),(232,NULL,3,333,46,32),(233,NULL,0,0,46,37),(234,NULL,0,0,46,36),(235,NULL,0,0,46,35),(236,NULL,0,0,46,38),(237,NULL,4,444,47,32),(238,NULL,0,0,47,37),(239,NULL,0,0,47,36),(240,NULL,0,0,47,35),(241,NULL,0,0,47,38),(242,NULL,5,500,48,32),(243,NULL,0,0,48,37),(244,NULL,0,0,48,36),(245,NULL,0,0,48,35),(246,NULL,0,0,48,38),(247,NULL,5,150,44,32),(248,NULL,0,0,44,37),(249,NULL,0,0,44,36),(250,NULL,0,0,44,35),(251,NULL,0,0,44,38);
+/*!40000 ALTER TABLE `tbl_event_item` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-16 17:49:11
+-- Dump completed on 2017-07-27 23:58:49

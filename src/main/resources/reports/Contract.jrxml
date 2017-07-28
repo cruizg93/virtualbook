@@ -6,7 +6,7 @@
 	<style name="Labels" isBold="true">
 		<box leftPadding="0"/>
 	</style>
-	<style name="Field" forecolor="#555555" radius="5" isBold="false" isUnderline="false">
+	<style name="Field" forecolor="#555555" radius="5" fontSize="8" isBold="false" isUnderline="false">
 		<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
 			<pen lineWidth="1.0" lineColor="#CCCCCC"/>
 		</box>
@@ -245,11 +245,11 @@ $F{client.companyName}]]></textFieldExpression>
 				</reportElement>
 				<text><![CDATA[CLIENT PHONE NUMBER/ E-MAIL:]]></text>
 			</staticText>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement style="Field" x="375" y="106" width="175" height="30" uuid="35b4191a-de2b-475d-8c8d-f2531af8335e">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{client.phoneNumber} + "\n" + 
+				<textFieldExpression><![CDATA[$F{client.phoneNumber} + " / " + 
 $F{client.email}]]></textFieldExpression>
 			</textField>
 			<staticText>
