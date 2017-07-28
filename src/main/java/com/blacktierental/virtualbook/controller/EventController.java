@@ -58,27 +58,44 @@ public class EventController {
 	@Autowired
 	LocationService locationService;
 
+	//This variable is use to catch when the localDateTime fields are empty or null
+	//Check only when newEvent[POST] is called and assign null
+	private final String DATE_TO_NULL_FORMAT = "1999-01-01 00:00";
+	private final String DATE_TO_NULL = "1999-01-01T00:00";
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(LocalDateTime.class, new PropertyEditorSupport() {
 			@Override
 			public void setAsText(String text) throws IllegalArgumentException {
-				setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+				if(text==null || text.trim().equals("") ){
+					setValue(LocalDateTime.parse(DATE_TO_NULL_FORMAT, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+				}else{
+					setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+				}
 			}
 
 			@Override
 			public String getAsText() throws IllegalArgumentException {
+				if(getValue()==null ){
+					return "";
+				}
 				return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format((LocalDateTime) getValue());
 			}
 		});
 		binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
 			@Override
 			public void setAsText(String text) throws IllegalArgumentException {
+				if(text==null || text.isEmpty()){
+					setValue("");
+				}
 				setValue(LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 			}
 
 			@Override
 			public String getAsText() throws IllegalArgumentException {
+				if(getValue()==null){
+					return "";
+				}
 				return DateTimeFormatter.ofPattern("yyyy-MM-dd").format((LocalDate) getValue());
 			}
 		});
@@ -103,6 +120,15 @@ public class EventController {
 		return "eventlist";
 	}
 
+	/**
+	 * incomplete event is those event with dateAndHour equals to null
+	 * @param model
+	 */
+	private void getIncompleteEvents(ModelMap model){
+		List<Event> events = eventService.findIncompleteEvents();
+		model.addAttribute("incompleteEvents",events);
+	}
+	
 	@RequestMapping(value = { "/previousMonth" }, method = RequestMethod.GET, params = { "m" })
 	public String previousMonth(@RequestParam(value = "m", required = true) int currentMonth,
 			@RequestParam(value = "y", required = true) int currentYear, ModelMap model) {
@@ -121,10 +147,7 @@ public class EventController {
 		return "eventlist";
 	}
 
-	/*
-	 * You receive the month that you want to load
-	 */
-	public void loadMonth(ModelMap model, LocalDate monthToLoad) {
+	private void loadMonth(ModelMap model, LocalDate monthToLoad) {
 		int emptySpotsAtBegin = 0;
 		int emptySpotsAtEnd = 0;
 		int numDays = monthToLoad.getMonth().maxLength();
@@ -196,9 +219,17 @@ public class EventController {
 			model.addAttribute("event", event);
 			return "eventRegistration";
 		}
-		
+		String hora = event.getDateAndHour().toString();
+		if(event.getDateAndHour()!=null && event.getDateAndHour().toString().equals(DATE_TO_NULL)){
+			event.setDateAndHour(null);
+		}
+		if(event.getDropOffTime()!=null && event.getDropOffTime().toString().equals(DATE_TO_NULL)){
+			event.setDropOffTime(null);
+		}
+		if(event.getPickUpTime()!=null && event.getPickUpTime().toString().equals(DATE_TO_NULL)){
+			event.setPickUpTime(null);
+		}
 		eventService.save(event);
-		// TODO: Validate unique event by client & location & item
 		model.addAttribute("success", "Event " + event.getEventName() + " registered successfully");
 		return "redirect:/eventlist";
 	}
@@ -232,6 +263,15 @@ public class EventController {
 			result.addError(clientUniqueError);
 			model.addAttribute("event", eventObj);
 			return "eventRegistration";
+		}
+		if(eventObj.getDateAndHour()!=null && eventObj.getDateAndHour().toString().equals(DATE_TO_NULL)){
+			eventObj.setDateAndHour(null);
+		}
+		if(eventObj.getDropOffTime()!=null && eventObj.getDropOffTime().toString().equals(DATE_TO_NULL)){
+			eventObj.setDropOffTime(null);
+		}
+		if(eventObj.getPickUpTime()!=null && eventObj.getPickUpTime().toString().equals(DATE_TO_NULL)){
+			eventObj.setPickUpTime(null);
 		}
 		eventService.updateEvent(eventObj);
 

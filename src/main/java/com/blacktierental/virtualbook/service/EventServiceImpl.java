@@ -140,7 +140,7 @@ public class EventServiceImpl implements EventService{
 			params.put("ItemsJRB",itemsJRB);
 			
 			// 2.  Retrieve template
-			InputStream reportStream = this.getClass().getResourceAsStream("/Contract.jrxml"); 
+			InputStream reportStream = this.getClass().getResourceAsStream("/reports/Contract.jrxml"); 
 			 
 			// 3. Convert template to JasperDesign
 			JasperDesign jd = JRXmlLoader.load(reportStream);
@@ -186,5 +186,11 @@ public class EventServiceImpl implements EventService{
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public List<Event> findIncompleteEvents() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

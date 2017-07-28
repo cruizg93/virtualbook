@@ -29,6 +29,7 @@
 		
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+				<label for="eventName">EVENT NAME</label>
 				<div class="form-group input-group">
 					<span class="glyphicon glyphicon-gift input-group-addon"
 						id="addongEventName"></span>
@@ -40,6 +41,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+				<label for="client">CLIENT</label>
 				<div class="form-group input-group">
 					<span class="glyphicon glyphicon-user input-group-addon"
 						id="addongClient"></span>
@@ -56,6 +58,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+				<label for="location">LOCATION</label>
 				<div class="form-group input-group">
 					<span class="glyphicon glyphicon-map-marker input-group-addon"
 						id="addongLocation"></span>
@@ -75,6 +78,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+				<label for="contactPersonName">CONTACT PERSON NAME</label>
 				<div class="form-group input-group">
 					<span class="glyphicon glyphicon-time input-group-addon"
 						id="addongContactName"></span>
@@ -88,6 +92,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+				<label for="contactPersonEmail">CONTACT PERSON E-MAILS</label>
 				<div class="form-group input-group">
 					<span class="input-group-addon" id="addongContactEmail">@</span>
 					<form:input type="text" path="contactPersonEmail"
@@ -100,6 +105,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
+				<label for="contactPersonPhoneNumber">CONTACT PERSON PHONE NUMBER</label>
 				<div class="form-group input-group">
 					<span class="glyphicon glyphicon-earphone input-group-addon"
 						id="addongContactPhone"></span>
@@ -115,8 +121,8 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
-				<div
-					class="form-group input-group col-lg-12 col-md-12 col-ms-12 col-xs-12">
+				<div class="form-group input-group col-lg-12 col-md-12 col-ms-12 col-xs-12">
+					<label for="dateAndHour">EVENT DATE AND HOUR</label>
 					<div id="dtpDateAndHour"
 						class="input-group date form_datetime col-md-12 "
 						data-date-format="yyyy-mm-dd hh:ii"
@@ -137,10 +143,9 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
-				<div
-					class="form-group input-group col-lg-12 col-md-12 col-ms-12 col-xs-12">
-					<div id="dtpDropOff"
-						class="input-group date form_datetime col-md-12 "
+				<label for="dropOffTime">DROP OFF DATE AND HOUR</label>
+				<div class="form-group input-group col-lg-12 col-md-12 col-ms-12 col-xs-12">
+					<div id="dtpDropOff" class="input-group date form_datetime col-md-12 "
 						data-date-format="yyyy-mm-dd hh:ii"
 						data-link-field="dtpDropOff">
 						<input id="dropOffTimeControl" class="form-control input-lg"
@@ -159,8 +164,8 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
-				<div
-					class="form-group input-group col-lg-12 col-md-12 col-ms-12 col-xs-12">
+				<label for="pickUpTime">PICK UP DATE AND HOUR</label>
+				<div class="form-group input-group col-lg-12 col-md-12 col-ms-12 col-xs-12">
 					<div id="dtpPickUp" class="input-group date form_datetime "
 						data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtpPickUp">
 						<input id="pickUpTimeControl" class="form-control input-lg "
@@ -178,6 +183,11 @@
 					<form:errors path="pickUpTime" class="help-inline text-danger" />
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12"><label for="">DESCRIPTION</label></div>
+			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12"><label for="">QUANTITY</label></div>
+			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12"><label for="">PRICE PER UNIT</label></div>
 		</div>
 		<c:forEach var="eventItem" items="${event.items}" varStatus="loopindex">
 			<div class="row itemRow" id="itemRow${loopindex.index}">
@@ -223,9 +233,9 @@
 			</div>
 		</c:forEach>
 		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12 pull-right">
+			<label for="subtotal">SUBTOTAL</label>
 			<div class="form-group input-group">
-				<span class="glyphicon glyphicon-usd input-group-addon">
-					SUBTOTAL</span>
+				<span class="glyphicon glyphicon-usd input-group-addon"></span>
 				<form:input type="text" path="" id="subtotal"
 					class="form-control input-lg appNumber" disabled="true" value="0.0" />
 			</div>
@@ -234,9 +244,9 @@
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12 pull-right">
+			<label for="delivery">DELIVERY</label>
 			<div class="form-group input-group">
-				<span class="glyphicon glyphicon-road input-group-addon">
-					DELIVERY</span>
+				<span class="glyphicon glyphicon-road input-group-addon"></span>
 				<form:input type="text" path="delivery" id="delivery"
 					class="form-control input-lg appNumber" onblur="calculateTotal()" />
 			</div>
@@ -245,13 +255,14 @@
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12 pull-left">
-			<form:textarea path="comments" class="form-control input-lg" rows="6"
+			<label for="comments">COMMENTS</label>
+			<form:textarea path="comments" id="comments" class="form-control input-lg" rows="8"
 				placeholder="comments" />
 		</div>
 		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12 pull-right">
+			<label for="tax">TAXES VALUE</label>
 			<div class="form-group input-group">
-				<span class="glyphicon glyphicon-usd input-group-addon">
-					TAXES</span>
+				<span class="glyphicon glyphicon-usd input-group-addon"></span>
 				<form:input type="text" path="" id="tax"
 					class="form-control input-lg appNumber col-md-9"
 					placeholder="tax value" value="0.0" disabled="true" />
@@ -261,8 +272,9 @@
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12 pull-right">
+			<label for="taxPercentage">TAXES %</label>
 			<div class="form-group input-group">
-				<span class="input-group-addon">% TAX</span>
+				<span class="input-group-addon">%</span>
 				<form:input type="text" path="taxPercentage" id="taxPercentage"
 					class="form-control input-lg appNumberDot col-md-3" value=""
 					placeholder="%" onblur="calculateTotal()" />
@@ -273,9 +285,9 @@
 		</div>
 
 		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12 pull-right">
+			<label for="total">BALACE</label>
 			<div class="form-group input-group">
-				<span class="glyphicon glyphicon-usd input-group-addon">
-					BALANCE</span>
+				<span class="glyphicon glyphicon-usd input-group-addon"></span>
 				<form:input type="text" path="" id="total"
 					class="form-control input-lg appNumber" disabled="true" value="0.0" />
 			</div>
@@ -284,9 +296,9 @@
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12 pull-right">
+			<label for="advance">PAID</label>
 			<div class="form-group input-group">
-				<span class="glyphicon glyphicon-transfer input-group-addon">
-					PAID</span>
+				<span class="glyphicon glyphicon-transfer input-group-addon"></span>
 				<form:input type="text" path="advance" id="advance"
 					class="form-control input-lg appNumberDot"
 					onblur="calculateTotal()" value="" />

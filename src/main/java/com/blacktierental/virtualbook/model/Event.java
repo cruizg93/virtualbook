@@ -28,11 +28,8 @@ public class Event {
 		contactPersonEmail = "";
 		contactPersonName = "";
 		contactPersonPhoneNumber = "";
-		contact_date = LocalDate.now();
-		dateAndHour= LocalDateTime.now();
-		dropOffTime= LocalDateTime.now();
-		pickUpTime= LocalDateTime.now();
 		contactSameAsClient = 1;
+		contact_date = LocalDate.now();
 	}
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -91,19 +88,15 @@ public class Event {
 	
 	
 	@Column(name="event_date")
-	//@MyLocalDateTime
 	private LocalDateTime dateAndHour;
 	
 	@Column(name="contact_date")
-	//@MyLocalDateTime
 	private LocalDate contact_date;
 	
 	@Column(name="drop_off_time")
-	//@MyLocalDateTime
 	private LocalDateTime dropOffTime;
 	
 	@Column(name="pick_up_time")
-	//@MyLocalDateTime
 	private LocalDateTime pickUpTime;
 	
 	@NotEmpty

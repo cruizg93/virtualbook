@@ -19,6 +19,7 @@ public interface EventService {
 	void updateEvent(Event event);
 	void deleteById(int id);
 	List<Event> findAllEventsByDateRange(LocalDate initial, LocalDate end);
+	List<Event> findIncompleteEvents();
 	List monthlyCountByYear(int year);
 	List<Event> findAllUpComingEvent();
 	List<String[]> clientCountByYear(int year);

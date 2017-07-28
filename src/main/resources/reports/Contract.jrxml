@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Contract" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2382807b-1efb-4997-aea9-5d8a3452f8f3">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Labels" isBold="true">
+		<box leftPadding="0"/>
+	</style>
+	<style name="Field" forecolor="#555555" radius="5" isBold="false" isUnderline="false">
+		<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+			<pen lineWidth="1.0" lineColor="#CCCCCC"/>
+		</box>
+	</style>
+	<style name="labelMoney" forecolor="#000000" radius="5" hTextAlign="Right" isBold="false" isUnderline="false">
+		<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+			<pen lineWidth="1.0" lineColor="#CCCCCC"/>
+			<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="yellow" mode="Opaque" backcolor="#F7FF00" markup="none" isBold="true"/>
+	<subDataset name="dsItems" uuid="51406a63-d567-4177-85c6-c2644a310238">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="item.description" class="java.lang.String"/>
+		<field name="quantity" class="java.lang.Integer"/>
+		<field name="pricePerUnit" class="java.lang.Double"/>
+		<field name="item.stringAttachments" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="attachments" uuid="b0ea2e9e-e9f2-4a0b-a047-7122a9f61efe">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="attachment.description" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="ItemsDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="ItemsJRB" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString language="SQL">
+		<![CDATA[select e.*, c.name, c.company_name, l.building_name, l.location
+from  virtualbook.tbl_event e, virtualbook.tbl_client c,  virtualbook.tbl_location l
+where c.id = e.client_id and l.id=e.location_id]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="advance" class="java.lang.Double"/>
+	<field name="contactPersonEmail" class="java.lang.String"/>
+	<field name="contactPersonName" class="java.lang.String"/>
+	<field name="contactPersonPhoneNumber" class="java.lang.String"/>
+	<field name="delivery" class="java.lang.Double"/>
+	<field name="eventName" class="java.lang.String"/>
+	<field name="taxPercentage" class="java.lang.Double"/>
+	<field name="client.id" class="java.lang.Integer"/>
+	<field name="location.id" class="java.lang.Integer"/>
+	<field name="client.name" class="java.lang.String"/>
+	<field name="client.companyName" class="java.lang.String"/>
+	<field name="location.buildingName" class="java.lang.String"/>
+	<field name="location.location" class="java.lang.String"/>
+	<field name="formatedDateAndHour" class="java.lang.String"/>
+	<field name="formatedDropOff" class="java.lang.String"/>
+	<field name="formatedPickUp" class="java.lang.String"/>
+	<field name="location.phoneNumber" class="java.lang.String"/>
+	<field name="client.phoneNumber" class="java.lang.String"/>
+	<field name="client.email" class="java.lang.String"/>
+	<field name="formatedContactDate" class="java.lang.String"/>
+	<field name="subTotal" class="java.lang.Double"/>
+	<field name="total" class="java.lang.Double"/>
+	<field name="taxes" class="java.lang.Double"/>
+	<field name="items" class="java.util.List"/>
+	<detail>
+		<band height="708" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<image isUsingCache="true">
+				<reportElement x="0" y="0" width="139" height="70" uuid="697aa840-6aeb-45bf-9629-4c9e1fb635eb"/>
+				<imageExpression><![CDATA["https://s-media-cache-ak0.pinimg.com/564x/20/9d/72/209d724d9fcf057581e19bd779f473d6.jpg"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="0" y="73" width="555" height="222" uuid="d5f4782b-c6a0-4187-bdcd-55093561b634">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement style="Field" x="5" y="106" width="175" height="30" uuid="89b7fcf9-28d6-415b-8f28-f4d9150691ff"/>
+				<box bottomPadding="0"/>
+				<textFieldExpression><![CDATA[$F{eventName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Field" x="187" y="106" width="180" height="30" uuid="3a707677-7c2a-4f29-858e-06ba717119d6">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{client.name} + "\n"+ 
+$F{client.companyName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Field" x="5" y="157" width="362" height="45" uuid="5fbe6039-7d4d-4b56-abef-f189be164ad9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[($F{location.buildingName}.equals(null)?" ":$F{location.buildingName}+",") + ($F{location.location}.equals(null)?" ":$F{location.location})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="" style="Labels" x="5" y="90" width="175" height="15" uuid="2d865ed2-7512-401d-9e4a-0491b209c9d1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[EVENT NAME:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Labels" x="187" y="90" width="180" height="15" uuid="fcfd3966-cac7-4b1e-a4ad-80ffa1743f50">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[CLIENT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Labels" x="5" y="141" width="362" height="15" uuid="b6f907ed-693c-4b5a-8d7d-61cd9c029f1b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[LOCATION (BUILDING NAME, ADRESS, CITY, STATE, ZIPCODE):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Labels" x="5" y="205" width="175" height="15" uuid="33972e06-4500-4eb4-b664-7658bfc23304">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[CONTACT PERSON:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Labels" x="375" y="205" width="175" height="15" uuid="a9802f11-80e0-4582-8690-205b1a8f2cec">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[CONTACT PHONE NUMBER:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Labels" x="187" y="205" width="180" height="15" isRemoveLineWhenBlank="true" uuid="7076486a-73c7-4ca9-8a6b-5f3730c714e7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[CONTACT E-MAIL:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Field" x="5" y="220" width="175" height="30" uuid="edf86a64-0dd3-490e-a4a7-5871b1aacebd">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{contactPersonName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Field" x="375" y="220" width="175" height="30" uuid="81b9099c-08e6-4ec0-9847-8cf4bc1eab1a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{contactPersonPhoneNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Field" x="187" y="220" width="180" height="30" uuid="cb852736-9691-441d-a77f-bdf1f9850113">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{contactPersonEmail}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Labels" x="5" y="255" width="175" height="15" uuid="8bb11703-ad0d-4109-a2e0-7814833410a1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[EVENT DATE AND START TIME:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Field" x="5" y="270" width="175" height="20" uuid="9c0df279-896f-47df-a5d5-c1916f18927c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{formatedDateAndHour}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Labels" x="187" y="255" width="180" height="15" uuid="f24f26c4-21bc-4e1b-975a-4f87a9cf99e8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[DROP OFF DATE AND TIME:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Labels" x="375" y="255" width="175" height="15" uuid="b3cc7516-7709-4167-afa6-c224eba6d803">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[PICK UP DATE AND TIME:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Field" x="187" y="270" width="180" height="20" uuid="b63c9367-d7db-41a4-8260-2f86f05a42c4"/>
+				<textFieldExpression><![CDATA[$F{formatedDropOff}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Field" x="375" y="270" width="175" height="20" uuid="76070966-f84d-43a4-ac43-0706b1ea9595">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{formatedPickUp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Labels" x="5" y="74" width="550" height="15" uuid="d6ae7682-8796-47e9-8662-14160190eb6e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[EQUIPMENT RENTAL AGREEMENT - must be completed in its entirity by lessee]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Labels" x="375" y="90" width="175" height="15" uuid="650c4dc5-5c78-425a-8145-0c0f5346ebe9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[CLIENT PHONE NUMBER/ E-MAIL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Field" x="375" y="106" width="175" height="30" uuid="35b4191a-de2b-475d-8c8d-f2531af8335e">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{client.phoneNumber} + "\n" + 
+$F{client.email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Labels" x="375" y="141" width="175" height="15" uuid="1f9b9c02-30bf-424b-87ee-abfdfacf38cc">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[LOCATION PHONE NUMBER:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Field" x="375" y="157" width="175" height="45" uuid="1dfc6282-4bdb-4c57-8f97-c3003674ef03">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{location.phoneNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Labels" x="380" y="59" width="174" height="15" uuid="0bccccda-cec5-477a-80f0-1c159bdb7c35">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONTACT DATE: "+$F{formatedContactDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="299" width="555" height="30" backcolor="#F2FF00" uuid="190ed33c-7cfd-47fa-a2c0-ecddb82accc6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[THIS CONTRACT PRICE/AGREEMENT IS BASED ON THE QUANTITY INDICATED AT ORIGINAL SIGNING. A DECREASE IN CHAIR AMOUNTS WILL/MAY AFFECT THE RENTAL PRICE PER CHAIR]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="333" width="555" height="135" uuid="963f57da-0201-46a5-bba2-8ff109c02689">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.0"/>
+				</box>
+				<componentElement>
+					<reportElement x="5" y="18" width="395" height="83" uuid="9f0edcb1-354f-4620-8f72-5c93b3f0f750">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="dsItems" uuid="a58c98e4-08cf-47be-b5c3-542a02952f8d">
+							<dataSourceExpression><![CDATA[$P{ItemsJRB}]]></dataSourceExpression>
+						</datasetRun>
+						<jr:column width="240" uuid="7c16178b-5c3d-45c0-8b32-2081d4e5d3de">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Labels" x="0" y="0" width="240" height="30" uuid="98aa5c02-3f2f-4005-926d-60f3f4c676cb">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+									</reportElement>
+									<box topPadding="2" leftPadding="2" rightPadding="0"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<text><![CDATA[DESCRIPTION]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="20">
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="240" height="20" uuid="0879d1e7-2155-4393-bfc4-e7de1d73789e"/>
+									<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{item.description} + "\n"+ $F{item.stringAttachments}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="60" uuid="e5f57d63-de49-48b0-98a0-222a0823ea2e">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Labels" x="0" y="0" width="60" height="30" uuid="a8a1dfd3-7e8f-4803-899b-1fb09e692efd"/>
+									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<text><![CDATA[QUANTITY]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="20">
+								<textField>
+									<reportElement x="0" y="0" width="60" height="20" uuid="c7262cb4-9c70-4428-a81c-83d930e2b9d8"/>
+									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="50" uuid="445cbc8e-2bc3-4305-9155-29b03f2094d8">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Labels" x="0" y="0" width="50" height="30" uuid="de64331c-f6ce-452f-9583-3bf497fb7c6e"/>
+									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center"/>
+									<text><![CDATA[PRICE PER UNIT]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="20">
+								<textField>
+									<reportElement x="0" y="0" width="50" height="20" uuid="c3681817-8778-42fa-88b1-01c46c44e6be"/>
+									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA["$"+$F{pricePerUnit}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="45" uuid="e4065e90-32b0-4a8d-9adb-da3b67708f7d">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<staticText>
+									<reportElement style="Labels" x="0" y="0" width="45" height="30" uuid="16b28f25-ad8d-463d-9010-1f23d9e1018d"/>
+									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<text><![CDATA[TOTAL]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="20">
+								<textField>
+									<reportElement x="0" y="0" width="45" height="20" uuid="52f9f149-344f-4586-908f-315382996968"/>
+									<box topPadding="2" leftPadding="2"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA["$"+($F{quantity}*$F{pricePerUnit})]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:table>
+				</componentElement>
+				<staticText>
+					<reportElement style="labelMoney" x="400" y="18" width="80" height="20" uuid="04ec5793-d893-41f9-aaed-26db4e5bd0e1">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[DELIVERY:]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="Field" x="480" y="18" width="70" height="20" uuid="e22a4a2c-954b-430c-a571-32c34e413721">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA["$"+$F{delivery}.toString()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="labelMoney" x="400" y="39" width="80" height="20" uuid="09bda046-a9f3-45b0-b5e6-c7399449781d">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<text><![CDATA[SUBTOTAL:]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="Field" x="480" y="39" width="70" height="20" uuid="06f51c26-acc7-4fe5-b9f0-d04e26c902b2">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA["$"+$F{subTotal}.toString()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="labelMoney" x="400" y="60" width="80" height="20" uuid="a4aabe5b-536c-4ec8-b660-f3a85850e3fc">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<text><![CDATA[SALES TAX]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="Field" x="480" y="60" width="70" height="20" uuid="8d89b6a3-c664-4cff-b299-6d3948f4c091">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{taxPercentage}.toString()+"%: $"+$F{taxes}.toString()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="labelMoney" x="400" y="81" width="80" height="20" uuid="d9a172dd-d369-48f6-9447-4692ccca4eb5">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<text><![CDATA[GRAND TOTAL:]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="Field" x="480" y="81" width="70" height="20" uuid="38f92c06-3139-45a9-8736-5e1e5cbe78c5">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA["$"+$F{total}.toString()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="" style="Labels" positionType="FixRelativeToBottom" x="5" y="103" width="545" height="11" backcolor="#FBFF00" uuid="90781f02-085b-45ec-ab23-38a11d3b9271">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font size="8" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Make Checks Payable to Black Tie Rentals of Florida: (We do accept credit card. Thru PAY PAL). deposit nonrefundable retainer: $"+$F{advance}.toString()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="FixRelativeToBottom" x="6" y="116" width="545" height="16" backcolor="#FBFF00" uuid="de34601f-af41-4adf-8fe5-6022611c8537">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.0" lineStyle="Solid"/>
+						<topPen lineWidth="0.0" lineStyle="Solid"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Due date on 30 days prior to event - NO EXCEPTIONS. Balance of: $"+($F{total}.doubleValue()-$F{advance}.doubleValue())]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="6" y="4" width="394" height="14" uuid="5eace474-bf9e-4798-97aa-4e7ddf0ef6c9"/>
+					<textElement verticalAlignment="Bottom"/>
+					<text><![CDATA[Mark with an X please ]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="470" width="555" height="49" uuid="9798c81f-6502-4043-a9d7-736f38e2a091">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MAIL this entire agreement, deposits and final payments to:
+P.O. BOX 7448, WESLEY CHAPEL, FL, 33545
+For questions please e-mail:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="519" width="555" height="20" forecolor="#001EFF" uuid="c50a9abf-75ca-4b9c-aa82-8e9fdff203a3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Eddie@BlackTieRental.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="539" width="555" height="20" uuid="a8b2403d-f6a0-48f0-9e6e-4620950d3e7b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[OR CALL: (727) 409 1979]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="559" width="555" height="10" uuid="444c3f64-5b02-4f9a-8288-f8503aa2e1af">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">A Black Tie Enterprises LLC Company \nBOOKING FEE AND DEPOSITS: Booking Fee DEPOSIT of $ 100.00 is required with every rental agreement. <style backcolor=\"yellow\">Dates will not be held without a deposit.</style>\n\nTERMS AND CONDITIONS SECTION 1. TERM</style> The term of this rental is for <style backcolor=\"yellow\">_______________________ (date of event).</style> Black Tie Rentals shall determine the date and times of delivery in relation to their event schedules.\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="569" width="555" height="10" uuid="6f6de7c4-0aff-4f0c-941b-7509e7f212b1">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 2.  RENTAL/BOOKING FEE.</style> Lessee shall pay the rental payments shown on invoice, upon signing. Booking Fee is due to HOLD the date. Black Tie Rentals does not hold dates unless booking fee deposits are received. <style backcolor=\"yellow\">The balance is due 30 days prior to the event date.  Rental payments shall be due whether or not lessee has received any notice that such payments are due.</style>\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="579" width="555" height="10" uuid="8294abc5-db1a-4b12-825b-45c12c6202ff">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 3. CHAIR AMOUNTS: INCREASE OF CHAIRS:</style> If the Lessee’s number of chairs increases after the final payment is made, and more chairs are required, the Lessee shall sign an amendment to the contract, with added sales taxes, and appropriate delivery fees. This payment must be received via money order or cashier’s check before the event date, or Black Tie will not deliver the add-on chairs. DECREASE OF CHAIRS: If the Lessee’s number of chairs decreases after the signing of the contract but before the 30 day due date, an adjustment can be made. If the decrease occurs after the 30 day due date, the original chair agreement will be upheld. After the final payment has been made,  REFUNDS OR ADJUSTMENTS will be made or given; unless other written arrangements have been made. All verbal and oral agreements are null and void.\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="589" width="555" height="10" uuid="4086bbb5-271a-43ae-8d75-2c1871a5ba16">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 4. INDEMNITY.</style> Lessee shall indemnify Black Tie Rentals of Florida against, and hold Black Tie Rentals of Florida harmless from, any and all claims, actions, suits, proceedings, costs, expenses, damages, and liabilities, including reasonable attorney fees arising out of, connected with, or resulting from the property subject to this rental, including, but not limited to the manufacture, selection, delivery, use, operation, or return of such property.\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="599" width="555" height="10" uuid="234da6be-2b5e-4c4b-978b-c866ed3598c1">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 5. SALES TAXES.</style> Lessee shall PAY Black Tie Rentals of Florida for (or pay directly if instructed by Black Tie Rentals of Florida) all charges and taxes (local, state, and federal) that may now or hereafter be imposed or levied on the sale, purchase, ownership, leasing, or use of the equipment. Sales Tax Exception - If Lessee can provide a legal, current Business Sales Tax Certificate attached to the signed contract.\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="609" width="555" height="10" uuid="8b3e7a5f-1225-4c91-b5d4-8b37bd81cc39">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 6. LOSS OR DAMAGE.</style> Lessee assumes and shall bear the entire risk of loss, theft, destruction, or damage of or to any part of the equipment (“loss or damage”) from any cause whatsoever, whether or not covered by insurance, and no such loss shall release lessee of its obligation under this agreement in the event of loss or damage. Lessee, at the sole option of Black Tie Rentals of Florida, shall (a) at lessee’s expense, repair the equipment to the satisfaction of Black Tie Rentals of Florida; or (b) at lessee’s expense, and to the satisfaction of Black Tie Rentals of Florida, replace the equipment with similar or like equipment in good condition and repair and of comparable value, with clear title thereto in Black Tie Rentals of Florida; or (c) make payment to Black Tie Rentals of Florida the total of the REPLACEMENT VALUE PER CHAIR EQUALS $75.00.  REPLACEMENT VALUE PER CUSHION EQUALS $4.00. <style backcolor=\"yellow\">The chairs have a maximum weight limit of 300 pounds. The Lessee agrees that no such person weighing over 300 will be using these chairs.</style> Upon pick up of the rentals, Black Tie will inspect the condition of the chairs, cushions, etc. If such damage or loss has occurred, the LESSEE will be notified, and all required monies shall be due within 20 days of certified letter. If monies are not collected, The Lessee shall assume all legal costs, in effort for Black Tie to collect these fees.\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="619" width="555" height="10" uuid="ce010d86-5af6-42f4-985a-0a424c31b128">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 7: CHARGER RENTAL.</style> Lessee agrees that when chargers are rented, they will not be used in conjunction with a buffet (Plated Dinner Charger or décor only). That all chargers will be cleaned and placed back into the containers they were delivered in, and returned in the same condition they were rented. The Lessee will assume additional fees if the chargers require excessive cleaning, if any are broken or cracked, or missing. The Lessee agrees to pay $4 for each charger that needs replacement. This shall be invoiced after the event.\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="629" width="555" height="10" uuid="bfa540b7-6988-4668-a76f-d3a963c82821">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 8. ASSIGNABILITY.</style> Without Black Tie Rentals of Florida’s prior written consent, lessee shall not (a) assign, transfer, pledge, or otherwise dispose of this rental, the equipment, or any interest therein or (b) sublet or lend the equipment or permit it to be used by anyone other than lessee or lessee’s employees.  Black Tie Rentals of Florida may assign this rental or grant a subsidiary interest in the equipment in whole or part without notice to lessee, and Black Tie Rentals of Florida’s assignee or secured party may then assign this rental or the security agreement without notice to lessee. Each such assignee or secured party shall have all the rights, but none of the obligations, of Black Tie Rentals of Florida under this rental. Lessee shall recognize such assignments or security agreements and shall not assert against the assignees or the secured parties any defense counterclaim or offset lessee may have against Black Tie Rentals of Florida. In spite of any such assignment, Black Tie Rentals of Florida warrants that lessee shall quietly enjoy use of the equipment, subject to the terms and conditions of this rental. Subject to the foregoing, the rental inures to the benefit of and is binding on the respective heirs, legatees, personal representatives, successors, and assigns of Black Tie Rentals of Florida and lessee.\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="639" width="555" height="10" uuid="ad0810cc-2271-405c-b8b3-9995e0187c4b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 9. LOCATION AND MAINTENANCE.</style> At lessee’s own risk, lessee shall use or permit the use of the equipment solely at the location specified in this rental, or if none is specified, at lessee’s billing address set forth above and such equipment shall not be moved without Black Tie Rentals of Florida’s prior written consent. Lessee, at lessee’s expense, shall maintain the equipment in good repair, condition, and functional order, shall not use the equipment unlawfully, and shall not alter the equipment without Black Tie Rentals of Florida’s prior written consent. Black Tie Rentals of Florida shall not be liable for loss of profit or other consequential damages resulting from the theft, destruction, or disrepair of the equipment, and there shall be no abatement of rental payments on account of any such theft, destruction, or disrepair.\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="649" width="555" height="10" uuid="9e2c9d44-0c18-479f-bef2-085a7ab4da09">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 10. WARRANTIES.</style> Black Tie Rentals of Florida does not warrant the fitness, merchantability, design, condition, capacity, suitability, or performance of the property rented. Black Tie Rentals of Florida makes no express or implied warranties and rentals the property “as is” and “with all faults.” Warranties made by the seller and/or manufacturer of the rental equipment are assigned by Black Tie Rentals of Florida to lessee. In event of any claim concerning the location, installation, repair, or use of the property rented or any other claim concerning the property, regardless of cause or consequence, lessee’s only remedy, if any, is against the seller or manufacturer of the property. No defect regardless the cause or consequence shall relieve lessee from performance under this rental, including rental payments.\n"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="659" width="555" height="10" uuid="d0b43017-3a06-4ebe-8593-ff90134fa78d">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 11. MISCELLANEOUS.</style> This instrument constitutes the entire agreement between Black Tie Rentals of Florida and lessee and is irrevocable for its term and for the aggregate Rentals reserved above, and it shall not be amended, altered, or changed except by a written agreement signed by the parties.\n\n<style fontName=\"SansSerif\" isBold=\"true\">SECTION 12. ACTS OF GOD.</style> On wedding/event day, Black Tie Rentals of Florida will not be held responsible for any uncontrollable delays or mishaps that are beyond control; such as: Any acts of God, bad weather, structural problems, other hired professionals, other vendor or outside hired props or displays, or any such occurrences having to do with the property at the above venues.  HURRICANE: In the event of a hurricane, when the event needs to be rescheduled to an alternate date and time, a new deposit may be required. The availability of our services may also be altered if the NEW date interferes with a previously contracted event.\n\n<style fontName=\"SansSerif\" isBold=\"true\">SECTION 13. CANCELLATION POLICY:</style> If this event is canceled or postponed for any reason, within any amount of time after the contract and deposit is received, the Lessee forfeits the booking fee deposit. <style backcolor=\"yellow\">If the Lessee fails to pay the required balance when due (30 days prior), Black Tie Rentals of Florida reserves the right to consider the rental agreement null and void. No refunds are given for any reason, and no rental items shall be delivered.</style>\n\n<style fontName=\"SansSerif\" isBold=\"true\">SECTION 14. RETURNED CHECKS:</style> There will be a returned/bounced check fee of $35 payable to Black Tie in the form of cashier’s check/money order or cash.  If the lessee’s check is returned - no other payment besides cashier’s check, money order, or cash will be accepted. Black Tie reserves the right to refuse service, delivery, rental of chairs upon notice of returned check, if no prior arrangements are made in writing.\n\n<style fontName=\"SansSerif\" isBold=\"true\">SECTION 15. SURCHARGES:</style> Under some circumstances, Black Tie will impose a gas surcharge, even after the above contract has been signed and agreed. This will be imposed based on a large increase in fuel. Lessee will be notified in writing if this is imposed.In witness whereof, each party has caused this agreement to be executed on the date indicated below. Signing of this agreement indicates Lessee’s agreeance with ALL of above sections and ALL pricing listed on page one of this contract."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="678" width="555" height="30" uuid="7f1b9213-a84e-41a7-9dbe-4c003bd41449">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["___________________________DATE _________________________________________(LESSEE)\nEddie Marroquin _______________________________________ President of Black Tie Rental"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="41">
+			<textField>
+				<reportElement x="390" y="0" width="110" height="30" uuid="2732c99e-5590-46af-a822-ac059d030f5a"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="500" y="0" width="54" height="30" uuid="9509dc9c-1e72-4d23-a72e-9eed7593de6a"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[" "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
