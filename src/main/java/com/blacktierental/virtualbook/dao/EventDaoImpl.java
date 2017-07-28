@@ -130,8 +130,19 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 		q.setParameter(0,String.valueOf(year));
 		List result = q.getResultList();
 		return result;
-
 	}
+	
+	@Override
+	public List<Event> findIncompleteEvents() {
+		Criteria criteria = createEntityCriteria();
+		criteria.add(Restrictions.isNull("dateAndHour"));
+		criteria.addOrder(Order.asc("contact_date"));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
+		@SuppressWarnings("unchecked")
+		List<Event> events= (List<Event>)criteria.list();
+		return events;
+	}
+	
 	
 	@Override
 	public List findEventByYearGroupByClient(int year){
@@ -155,6 +166,7 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 		}
 		return null;
 	}
+
 	
 	
 	

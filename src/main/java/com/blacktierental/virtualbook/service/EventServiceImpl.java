@@ -190,7 +190,6 @@ public class EventServiceImpl implements EventService{
 
 	@Override
 	public List<Event> findIncompleteEvents() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.findIncompleteEvents();
 	}
 }

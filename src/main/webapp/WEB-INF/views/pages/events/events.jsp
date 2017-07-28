@@ -150,6 +150,20 @@ var year = '${year}';
 		onclick="window.location.href ='<c:url value="/newEvent" />'">
 	<span class="glyphicon glyphicon-plus"></span>New Event</button>
 </div>
+<c:if test="${not empty incompleteEvents}">
+<div class="container well incompleteContainer">
+	<c:forEach items="${incompleteEvents}" var="event" varStatus="loopindex">
+		<div class="incompleteCards" onclick="location.href = '<c:url value="/edit-event-${event.id}"/>'">
+			<p class="client">${event.client.name}</p>
+			<p class="event_name">${event.eventName}</p>
+			<span class="contactDateLabel">Contact Date: </span><span class="contactDate">${event.contact_date}</span>
+			<c:if test="${not empty event.items}">
+				<p class="item"><span>${event.items[0].item.description}</span><span> ${event.items[0].quantity}</span></p>
+			</c:if>
+		</div>
+	</c:forEach>
+</div>
+</c:if>
 <script type="text/javascript" src="<c:url value='/static/js/event.js' />"></script>
 
 <script src="<c:url value='/static/js/jquery.dataTables.min.js' />" type="text/javascript"></script>

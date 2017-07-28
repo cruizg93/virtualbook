@@ -1,3 +1,25 @@
+.incompleteContainer{
+	height:160px;
+	overflow-x:scroll;
+	overflow-y:hidden;
+	white-space: nowrap;
+	border-radius: 0 0 4px 4px;
+	padding:1%;
+}
+.incompleteCards{
+	display: inline-block;
+	cursor:pointer;
+	max-width:360px;
+	width:20%;
+	background-color: #a2c8e8;
+	padding:10px;
+	margin:1%;
+}
+.incompleteCards>p.client{
+	text-align: center;
+	font-weight: bolder;	
+}
+
 .views li{
 	padding-left: 0% !important;
 	padding-right: 0% !important;
@@ -20,7 +42,7 @@
 	padding-left: 0px;	
 }
 .divBottomButton>button{
-	border-radius: 0px 0px 0px 0px;
+	border-radius: 0px 0px 0px 0px !important;
 	width:100%;
 }
 
@@ -30,7 +52,7 @@
 	padding-left: 0px;	
 }
 .divTopButton>button{
-	border-radius: 0px 0px 0px 0px;
+	border-radius: 0px 0px 0px 0px !important;
 	width:100%;
 }
 

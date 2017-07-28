@@ -117,6 +117,7 @@ public class EventController {
 	@RequestMapping(value = { "/eventlist" }, method = RequestMethod.GET)
 	public String list(ModelMap model) {
 		loadMonth(model, LocalDateTime.now().toLocalDate());
+		loadIncompleteEvents(model);
 		return "eventlist";
 	}
 
@@ -124,7 +125,7 @@ public class EventController {
 	 * incomplete event is those event with dateAndHour equals to null
 	 * @param model
 	 */
-	private void getIncompleteEvents(ModelMap model){
+	private void loadIncompleteEvents(ModelMap model){
 		List<Event> events = eventService.findIncompleteEvents();
 		model.addAttribute("incompleteEvents",events);
 	}
@@ -135,6 +136,7 @@ public class EventController {
 		LocalDate monthToLoad = LocalDate.of(currentYear, currentMonth, 1);
 		monthToLoad = monthToLoad.minusMonths(1);
 		loadMonth(model, monthToLoad);
+		loadIncompleteEvents(model);
 		return "eventlist";
 	}
 
@@ -144,6 +146,7 @@ public class EventController {
 		LocalDate monthToLoad = LocalDate.of(currentYear, currentMonth, 1);
 		monthToLoad = monthToLoad.plusMonths(1);
 		loadMonth(model, monthToLoad);
+		loadIncompleteEvents(model);
 		return "eventlist";
 	}
 

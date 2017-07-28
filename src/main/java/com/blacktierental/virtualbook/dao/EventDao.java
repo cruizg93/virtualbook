@@ -16,6 +16,7 @@ public interface EventDao {
 	List<Event> findByLocation(Location location);
 	List<Event> findByItem(EventItem items);
 	List<Event> findByDate(LocalDate date);
+	List<Event> findIncompleteEvents();
 	List<Event> findAllEventsByDateRange(LocalDateTime initial, LocalDateTime end);
 	List findAllByYearGroupByMonth(int year);
 	List<Event> findAllUpComingEvent();
