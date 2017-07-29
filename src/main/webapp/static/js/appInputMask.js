@@ -12,7 +12,7 @@ $(document).ready(function(){
 	$('.appText').keypress(function (e) {
         var regex = new RegExp('^[a-zA-Z\\-\\s]+$');
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
+        if (regex.test(str) || tabOrArrows(e)) {
             return true;
         }else{
 	        e.preventDefault();
@@ -26,7 +26,7 @@ $(document).ready(function(){
 	$('.appNumber').keypress(function (e) {
         var regex = new RegExp('^[0-9]+$');
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
+        if (regex.test(str) || tabOrArrows(e)) {
             return true;
         }else{
 	        e.preventDefault();
@@ -40,7 +40,7 @@ $(document).ready(function(){
 	$('.appNumberDot').keypress(function (e) {
         var regex = new RegExp('^[0-9.]+$');
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
+        if (regex.test(str) || tabOrArrows(e)) {
             return true;
         }else{
 	        e.preventDefault();
@@ -54,7 +54,7 @@ $(document).ready(function(){
 	$('.appTextNumber').keypress(function (e) {
         var regex = new RegExp('^[a-zA-Z0-9\\-\\s&@/]+$');
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
+        if (regex.test(str) || tabOrArrows(e)) {
             return true;
         }else{
 	        e.preventDefault();
@@ -68,7 +68,7 @@ $(document).ready(function(){
 	$('.appEmail').keypress(function (e) {
         var regex = new RegExp('^[a-zA-Z0-9._+-@a-zA-Z0-9.-.a-zA-Z]+$');
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
+        if (regex.test(str) || tabOrArrows(e)) {
             return true;
         }else{
 	        e.preventDefault();
@@ -82,7 +82,7 @@ $(document).ready(function(){
 	$('.appAddress').keypress(function (e) {
         var regex = new RegExp('^[a-zA-Z0-9\\-\\s,a-zA-Z0-9\\-\\s,a-zA-Z0-9\\-\\s,a-zA-Z0-9\\-\\s]+$');
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
+        if (regex.test(str) || tabOrArrows(e)) {
             return true;
         }else{
 	        e.preventDefault();
@@ -95,3 +95,13 @@ $(document).ready(function(){
 	 */
 	$(".appUSPhoneNumber").mask('(000) 000-0000');
 });
+
+function tabOrArrows(e){
+	var key = e.keyCode;
+	if((key>=37 && key<= 40)||key==9){
+		return true;
+	}else{
+		return false;
+	}
+	
+}
