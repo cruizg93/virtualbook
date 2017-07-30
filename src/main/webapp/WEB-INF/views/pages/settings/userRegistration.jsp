@@ -2,7 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container well lead" >
    	<h3 class="text-center">User Registration Form</h3>
-    <form:form method="POST" modelAttribute="user">
+   	<c:set var="action" value="newuser" />
+	<c:if test="${edit}">
+		<c:set var="action" value="edit-user-${user.username}" />
+	</c:if>
+    <form:form method="POST" modelAttribute="user" action="${pageContext.request.contextPath}/${action}">
         <form:input type="hidden" path="id" id="id"/>
         <div class="col-lg-6 col-md-6 col-ms-6 col-xs-12">
             <div class="form-group input-group">

@@ -2,8 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container well lead">
 	<h3 class="text-center">Client Registration Form</h3>
+	<c:set var="action" value="newclient" />
+	<c:if test="${edit}">
+		<c:set var="action" value="edit-client-${client.id}" />
+	</c:if>
 	<form:form method="POST" modelAttribute="client"
-		class="form-horizontal">
+		class="form-horizontal"
+		action="${pageContext.request.contextPath}/${action}">
 		<form:input type="hidden" path="id" id="id" />
 		<div class="col-lg-6 col-md-6 col-ms-6 col-lg-offset-3 col-md-offset-3 col-ms-offset-3 col-xs-12">
 			<div class="form-group input-group">

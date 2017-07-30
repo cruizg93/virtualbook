@@ -8,7 +8,12 @@
 	rel="stylesheet">
 <div class="container well">
 	<h3 class="text-center">Event Registration Form</h3>
-	<form:form method="POST" modelAttribute="event" id="eventForm">
+	<c:set var="action" value="newEvent" />
+	<c:if test="${edit}">
+		<c:set var="action" value="edit-event-${event.id}" />
+	</c:if>
+	<form:form method="POST" modelAttribute="event" id="eventForm"
+		action="${pageContext.request.contextPath}/${action}">
 		<form:input type="hidden" path="id" id="id" />
 		<div class="col-md-12 col-ms-12 col-xs-12 text-right">
 			<label class="col-md-10 control-lable pull-right" for="contact_date"
