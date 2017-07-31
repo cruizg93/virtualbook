@@ -330,7 +330,7 @@
 				</c:choose>
 				<button type="button"
 					class="btn btn-danger btn-lg formDeleteButtonIcon"
-					onclick="window.location.href ='<c:url value="/eventlist" />'">
+					onclick="window.location.href ='<c:url value="${redirect}" />'">
 					<span class="glyphicon glyphicon-remove"></span><span class="hidden-ms hidden-xs"> CANCEL</span>
 				</button>
 				 <c:if test = "${edit}">

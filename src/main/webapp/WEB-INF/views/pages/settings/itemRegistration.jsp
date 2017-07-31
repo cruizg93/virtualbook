@@ -4,7 +4,7 @@
 		<h3 class="text-center">Item Registration Form</h3>
 		<c:set var="action" value="newitem" />
 		<c:if test="${edit}">
-			<c:set var="action" value="edit-item-${item.description}" />
+			<c:set var="action" value="edit-item-${item.id}" />
 		</c:if>
 		<form:form method="POST" modelAttribute="item" class="form-horizontal"
 			action="${pageContext.request.contextPath}/${action}">

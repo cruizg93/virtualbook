@@ -4,7 +4,7 @@
    	<h3 class="text-center">Location Registration Form</h3>
     <c:set var="action" value="newlocation" />
 	<c:if test="${edit}">
-		<c:set var="action" value="edit-location-${location.location}" />
+		<c:set var="action" value="edit-location-${location.id}" />
 	</c:if>
     <form:form method="POST" modelAttribute="location" class="form-horizontal" 
     	action="${pageContext.request.contextPath}/${action}">

@@ -73,7 +73,12 @@ var year = '${year}';
 										<c:if test="${event.isPaid() eq false}">
 											<c:set var="paid" value="notPaid" />
 										</c:if>
-										<p class="eventLabel ${paid}"><a href='<c:url value="/edit-event-${event.id}"/>'><span>${fn:substring(event.client.companyName, 0, 15)}</span></a></p>
+										<c:if test="${not empty event.client}">
+											<p class="eventLabel ${paid}"><a href='<c:url value="/edit-event-${event.id}"/>'><span>${fn:substring(event.client.companyName, 0, 15)}</span></a></p>
+										</c:if>
+										<c:if test="${empty event.client}">
+											<p class="eventLabel ${paid}"><a href='<c:url value="/edit-event-${event.id}"/>'><span>${fn:substring(event.eventName, 0, 15)}</span></a></p>
+										</c:if>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>

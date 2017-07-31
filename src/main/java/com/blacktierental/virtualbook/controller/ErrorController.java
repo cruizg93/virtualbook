@@ -29,6 +29,7 @@ public class ErrorController {
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ModelAndView handlerNoHandlerFoundException(NoHandlerFoundException ex ){
 	     ModelAndView mv = new ModelAndView("404");
+	     mv.addObject("message", ex.getMessage());
 	     return mv;
 	}
 	@RequestMapping(value ={"/404"},method= RequestMethod.GET)

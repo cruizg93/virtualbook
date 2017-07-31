@@ -26,13 +26,15 @@ public class ClientConverter implements Converter<Object, Client> {
 		if(element instanceof Client){
 			return (Client) element;
 		}else{
-			
 			try {
 				Integer id = Integer.parseInt((String)element);
 				Client client = clientService.findById(id);
 				logger.info("Client:",client);
 				return client;
-			} catch (ObjectNotFoundException e) {
+			}catch(NumberFormatException ex){
+				Client client = clientService.findByName((String)element);
+				return client;
+			}catch (ObjectNotFoundException e) {
 				return null;
 			}
 		}

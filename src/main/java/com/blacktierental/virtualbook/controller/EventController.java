@@ -10,12 +10,15 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
+import org.springframework.http.HttpRange;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -105,10 +108,14 @@ public class EventController {
 	}
 
 	@RequestMapping(value = { "/delete-event-{id}" }, method = RequestMethod.GET)
-	public String deleteEvent(@PathVariable int id, ModelMap model) {
+	public String deleteEvent(@PathVariable int id, ModelMap model, HttpServletRequest request) {
 		eventService.deleteById(id);
 		model.addAttribute("success", "EVENT DELETED SUCCESSFULLY");
-		return list(model);
+		String redirect = request.getSession().getAttribute("pervious_page").toString();
+		if(redirect!=null){
+			redirect = redirect.split("/")[redirect.split("/").length-1];
+		}
+		return "redirect:/"+redirect;
 	}
 	
 	/**
@@ -118,9 +125,11 @@ public class EventController {
 	 * @return view page name
 	 */
 	@RequestMapping(value = { "/eventlist" }, method = RequestMethod.GET)
-	public String list(ModelMap model) {
+	public String list(ModelMap model, HttpServletRequest request) {
 		loadMonth(model, LocalDateTime.now().toLocalDate());
 		loadIncompleteEvents(model);
+		String requestUrl=request.getRequestURL().toString();
+		request.getSession().setAttribute("pervious_page",requestUrl);
 		return "eventlist";
 	}
 
@@ -135,21 +144,25 @@ public class EventController {
 	
 	@RequestMapping(value = { "/previousMonth" }, method = RequestMethod.GET, params = { "m" })
 	public String previousMonth(@RequestParam(value = "m", required = true) int currentMonth,
-			@RequestParam(value = "y", required = true) int currentYear, ModelMap model) {
+			@RequestParam(value = "y", required = true) int currentYear, ModelMap model, HttpServletRequest request) {
 		LocalDate monthToLoad = LocalDate.of(currentYear, currentMonth, 1);
 		monthToLoad = monthToLoad.minusMonths(1);
 		loadMonth(model, monthToLoad);
 		loadIncompleteEvents(model);
+		String requestUrl=request.getRequestURL().toString();
+		request.getSession().setAttribute("pervious_page",requestUrl+"?m="+currentMonth+"&y="+currentYear);
 		return "eventlist";
 	}
 
 	@RequestMapping(value = { "/nextMonth" }, method = RequestMethod.GET, params = { "m" })
 	public String nextMonth(@RequestParam(value = "m", required = true) int currentMonth,
-			@RequestParam(value = "y", required = true) int currentYear, ModelMap model) {
+			@RequestParam(value = "y", required = true) int currentYear, ModelMap model,HttpServletRequest request) {
 		LocalDate monthToLoad = LocalDate.of(currentYear, currentMonth, 1);
 		monthToLoad = monthToLoad.plusMonths(1);
 		loadMonth(model, monthToLoad);
 		loadIncompleteEvents(model);
+		String requestUrl=request.getRequestURL().toString();
+		request.getSession().setAttribute("pervious_page",requestUrl+"?m="+currentMonth+"&y="+currentYear);
 		return "eventlist";
 	}
 
@@ -202,6 +215,7 @@ public class EventController {
 		model.addAttribute("event", event);
 		model.addAttribute("edit", false);
 		model.addAttribute("loggedinuser", getPrincipal());
+
 		return "eventRegistration";
 	}
 
@@ -211,7 +225,7 @@ public class EventController {
 	 */
 
 	@RequestMapping(value = { "/newEvent" }, method = RequestMethod.POST)
-	public String saveEvent(@Valid Event event, BindingResult result, ModelMap model) {
+	public String saveEvent(@Valid Event event, BindingResult result, ModelMap model, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("event", event);
@@ -242,14 +256,19 @@ public class EventController {
 		}
 		eventService.save(event);
 		model.addAttribute("success", "Event " + event.getEventName() + " registered successfully");
-		return "redirect:/eventlist";
+		//return "redirect:/eventlist";
+		String redirect = request.getSession().getAttribute("pervious_page").toString();
+		if(redirect!=null){
+			redirect = redirect.split("/")[redirect.split("/").length-1];
+		}
+		return "redirect:/"+redirect;
 	}
 
 	/**
 	 * This method will provide the medium to update an existing location.
 	 */
 	@RequestMapping(value = { "/edit-event-{id}" }, method = RequestMethod.GET)
-	public String editEvent(@PathVariable String id, ModelMap model) {
+	public String editEvent(@PathVariable String id, ModelMap model, HttpServletRequest request) {
 		Event eventObj = null;
 		try {
 			eventObj = eventService.findById(id != null ? Integer.parseInt(id) : 0);
@@ -257,6 +276,11 @@ public class EventController {
 			model.addAttribute("message",e.getMessage());
 			return "exception";
 		}
+		String redirect = request.getSession().getAttribute("pervious_page").toString();
+		if(redirect!=null){
+			redirect = redirect.split("/")[redirect.split("/").length-1];
+		}
+		model.addAttribute("redirect", "/"+redirect);
 		model.addAttribute("event", eventObj);
 		model.addAttribute("edit", true);
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -268,7 +292,7 @@ public class EventController {
 	 * updating client in database. It also validates the user input
 	 */
 	@RequestMapping(value = { "/edit-event-{id}" }, method = RequestMethod.POST)
-	public String updateEvent(@Valid Event eventObj, BindingResult result, ModelMap model, @PathVariable String id) {
+	public String updateEvent(@Valid Event eventObj, BindingResult result, ModelMap model, @PathVariable String id,HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("event", eventObj);
@@ -299,7 +323,12 @@ public class EventController {
 		}
 		model.addAttribute("success", "Event " + eventObj.getEventName() + " updated successfully");
 		model.addAttribute("loggedinuser", getPrincipal());
-		return "redirect:/eventlist";
+		//return "redirect:/eventlist";
+		String redirect = request.getSession().getAttribute("pervious_page").toString();
+		if(redirect!=null){
+			redirect = redirect.split("/")[redirect.split("/").length-1];
+		}
+		return "redirect:/"+redirect;
 	}
 
 	private String getPrincipal() {

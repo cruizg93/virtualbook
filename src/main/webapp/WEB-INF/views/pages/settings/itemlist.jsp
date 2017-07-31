@@ -79,7 +79,7 @@ rel="stylesheet"></link>
 					<span class="lead">List of Attachments</span>
 				</div>
 				<div class="table-responsive">
-					<table class="table table-bordered " width="100%" id="itemsTable">
+					<table class="table table-bordered " width="100%" id="attachmentTable">
 						<thead>
 							<tr>
 								<th width="80%">Description</th>
@@ -140,7 +140,8 @@ rel="stylesheet"></link>
 <script src="<c:url value='/static/js/dataTables.bootstrap.min.js' />" type="text/javascript"></script>
 <script type="text/javascript">
     	$("#itemsTable").DataTable();
-
+    	$("#attachmentTable").DataTable();
+    	
     	function deleteItem(id, description){
     		bootbox.confirm({
         	    title: "Delete Item?",
