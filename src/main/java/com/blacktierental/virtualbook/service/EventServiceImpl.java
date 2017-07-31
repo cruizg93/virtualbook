@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blacktierental.virtualbook.dao.EventDao;
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.Location;
@@ -40,7 +41,7 @@ public class EventServiceImpl implements EventService{
 	private EventDao dao;
 	
 	@Override
-	public Event findById(int id) {
+	public Event findById(int id) throws ObjectNotFoundException {
 		return dao.findById(id);
 	}
 
@@ -92,7 +93,7 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public void updateEvent(Event event) {
+	public void updateEvent(Event event) throws ObjectNotFoundException {
 		Event entity = dao.findById(event.getId());
 		if(entity != null){
 			entity.setAdvance(event.getAdvance());
@@ -115,7 +116,7 @@ public class EventServiceImpl implements EventService{
 	
 
 	@Override
-	public boolean isEventUnique(Event event) {
+	public boolean isEventUnique(Event event) throws ObjectNotFoundException {
 		Event result = dao.findByDateNClientNLocation(event);
 		if(event.equals(result)){
 			return true;
@@ -161,7 +162,7 @@ public class EventServiceImpl implements EventService{
 			// 8. Write to reponse stream
 			write(token, response, baos);
 		
-		} catch (JRException jre) {
+		} catch (JRException | ObjectNotFoundException jre) {
 			throw new RuntimeException(jre);
 		}
 	}

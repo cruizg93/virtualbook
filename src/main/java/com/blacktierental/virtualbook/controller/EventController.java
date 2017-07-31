@@ -15,6 +15,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.Item;
@@ -214,13 +217,18 @@ public class EventController {
 			model.addAttribute("event", event);
 			return "eventRegistration";
 		}
-		if (!eventService.isEventUnique(event)) {
-			FieldError clientUniqueError = new FieldError("event", "dateAndHour",
-					messageSource.getMessage("non.unique.event.clientNLocation", new
-					String[] { event.getClient().getName(),event.getLocation().getBuildingName(),event.getDateAndHour().toString()}, Locale.getDefault()));
-			result.addError(clientUniqueError);
-			model.addAttribute("event", event);
-			return "eventRegistration";
+		try {
+			if (!eventService.isEventUnique(event)) {
+				FieldError clientUniqueError = new FieldError("event", "dateAndHour",
+						messageSource.getMessage("non.unique.event.clientNLocation", new
+						String[] { event.getClient().getName(),event.getLocation().getBuildingName(),event.getDateAndHour().toString()}, Locale.getDefault()));
+				result.addError(clientUniqueError);
+				model.addAttribute("event", event);
+				return "eventRegistration";
+			}
+		} catch (NoSuchMessageException | ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
 		}
 		String hora = event.getDateAndHour().toString();
 		if(event.getDateAndHour()!=null && event.getDateAndHour().toString().equals(DATE_TO_NULL)){
@@ -242,7 +250,13 @@ public class EventController {
 	 */
 	@RequestMapping(value = { "/edit-event-{id}" }, method = RequestMethod.GET)
 	public String editEvent(@PathVariable String id, ModelMap model) {
-		Event eventObj = eventService.findById(id != null ? Integer.parseInt(id) : 0);
+		Event eventObj = null;
+		try {
+			eventObj = eventService.findById(id != null ? Integer.parseInt(id) : 0);
+		} catch (NumberFormatException | ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
 		model.addAttribute("event", eventObj);
 		model.addAttribute("edit", true);
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -260,24 +274,29 @@ public class EventController {
 			model.addAttribute("event", eventObj);
 			return "eventRegistration";
 		}
-		if (!eventService.isEventUnique(eventObj)) {
-			FieldError clientUniqueError = new FieldError("location", "location", messageSource
-					.getMessage("non.unique.location", new String[] { eventObj.getEventName() }, Locale.getDefault()));
-			result.addError(clientUniqueError);
-			model.addAttribute("event", eventObj);
-			return "eventRegistration";
-		}
-		if(eventObj.getDateAndHour()!=null && eventObj.getDateAndHour().toString().equals(DATE_TO_NULL)){
-			eventObj.setDateAndHour(null);
-		}
-		if(eventObj.getDropOffTime()!=null && eventObj.getDropOffTime().toString().equals(DATE_TO_NULL)){
-			eventObj.setDropOffTime(null);
-		}
-		if(eventObj.getPickUpTime()!=null && eventObj.getPickUpTime().toString().equals(DATE_TO_NULL)){
-			eventObj.setPickUpTime(null);
-		}
-		eventService.updateEvent(eventObj);
+		try {
+			if (!eventService.isEventUnique(eventObj)) {
+				FieldError clientUniqueError = new FieldError("location", "location", messageSource
+						.getMessage("non.unique.location", new String[] { eventObj.getEventName() }, Locale.getDefault()));
+				result.addError(clientUniqueError);
+				model.addAttribute("event", eventObj);
+				return "eventRegistration";
+			}
+			if(eventObj.getDateAndHour()!=null && eventObj.getDateAndHour().toString().equals(DATE_TO_NULL)){
+				eventObj.setDateAndHour(null);
+			}
+			if(eventObj.getDropOffTime()!=null && eventObj.getDropOffTime().toString().equals(DATE_TO_NULL)){
+				eventObj.setDropOffTime(null);
+			}
+			if(eventObj.getPickUpTime()!=null && eventObj.getPickUpTime().toString().equals(DATE_TO_NULL)){
+				eventObj.setPickUpTime(null);
+			}
+			eventService.updateEvent(eventObj);
 
+		} catch (NoSuchMessageException | ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
 		model.addAttribute("success", "Event " + eventObj.getEventName() + " updated successfully");
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "redirect:/eventlist";

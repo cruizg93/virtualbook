@@ -105,20 +105,25 @@
    
    <!-- ERROR -->
    <definition name="400" extends="base-definition">  
-       <put-attribute name="title" value="Event Form" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/stats/400.jsp" />  
+       <put-attribute name="title" value="Error 400" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/errors/400.jsp" />  
    </definition>
    <definition name="401" extends="base-definition">  
-       <put-attribute name="title" value="Event Form" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/stats/401.jsp" />  
+       <put-attribute name="title" value="Error 401" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/errors/401.jsp" />  
    </definition>
    <definition name="404" extends="base-definition">  
-       <put-attribute name="title" value="Event Form" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/stats/404.jsp" />  
+       <put-attribute name="title" value="Error 404" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/errors/404.jsp" />  
    </definition>
    <definition name="500" extends="base-definition">  
-       <put-attribute name="title" value="Event Form" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/stats/500.jsp" />  
+       <put-attribute name="title" value="Error 500" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/errors/500.jsp" />  
    </definition>
+   <definition name="exception" extends="base-definition">  
+       <put-attribute name="title" value="Error" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/errors/exception.jsp" />  
+   </definition>
+   
    
 </tiles-definitions>

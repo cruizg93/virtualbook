@@ -26,6 +26,4 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         boolean done = registration.setInitParameter("throwExceptionIfNoHandlerFound", "true"); // -> true
         if(!done) throw new RuntimeException();
     }
-	
-
 }

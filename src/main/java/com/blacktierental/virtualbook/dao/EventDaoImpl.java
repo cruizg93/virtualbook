@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.EventItem;
@@ -24,8 +25,11 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 	static final Logger logger = LoggerFactory.getLogger(EventDaoImpl.class);
 	
 	@Override
-	public Event findById(int id) {
+	public Event findById(int id) throws ObjectNotFoundException {
 		Event event = getByKey(id);
+		if(event==null){
+			throw new ObjectNotFoundException("Event with id: "+id+" was not found.");
+		}
 		return event;
 	}
 
