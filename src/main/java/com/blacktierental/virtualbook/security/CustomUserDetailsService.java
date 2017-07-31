@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.State;
 import com.blacktierental.virtualbook.model.User;
 import com.blacktierental.virtualbook.model.UserProfile;
@@ -29,14 +30,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username)throws UsernameNotFoundException{
-		User user = userService.findByUsername(username);
-		logger.info("User: {}",user);
-		if(user==null){
-			logger.info("USer not found");
+		try {
+			User user = userService.findByUsername(username);
+			return new org.springframework.security.core.userdetails.User
+					(user.getUsername(),user.getPassword(), user.getState().equals(State.ACTIVE.toString()),true,true ,true, getGrantedAuthorities(user));
+		} catch (ObjectNotFoundException e) {
+			logger.info("User not found");
 			throw new UsernameNotFoundException("Username not found");
 		}
-		return new org.springframework.security.core.userdetails.User
-				(user.getUsername(),user.getPassword(), user.getState().equals(State.ACTIVE.toString()),true,true ,true, getGrantedAuthorities(user));
+		
 	}
 	
 	private List<GrantedAuthority> getGrantedAuthorities(User user){

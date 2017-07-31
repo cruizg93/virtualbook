@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.model.State;
 
@@ -18,20 +19,24 @@ public class ItemDaoImpl extends AbstractDao<Integer,Item>implements ItemDao{
 	static final Logger logger = LoggerFactory.getLogger(ItemDaoImpl.class);
 
 	@Override
-	public Item findById(int id) {
+	public Item findById(int id) throws ObjectNotFoundException {
 		Item item = getByKey(id);
-		/*if(item != null ){
+		if(item == null){
+			throw new ObjectNotFoundException("Item with id: "+id+" was not found.");
+		}else{
 			Hibernate.initialize(item.getAttachments());
-		}*/
+		}
 		return item;
 	}
 
 	@Override
-	public Item findByDescription(String description) {
+	public Item findByDescription(String description) throws ObjectNotFoundException {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("description",description));
 		Item item = (Item)crit.uniqueResult();
-		if(item != null ){
+		if(item == null){
+			throw new ObjectNotFoundException("Item with description: "+description+" was not found.");
+		}else{
 			Hibernate.initialize(item.getAttachments());
 		}
 		return item;

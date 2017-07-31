@@ -38,7 +38,7 @@ rel="stylesheet"></link>
 									<td>
 										<sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
 											<button type="button" class="btn btn-success formEditButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
-													onclick="window.location.href ='<c:url value="/edit-item-${item.description}" />'">
+													onclick="window.location.href ='<c:url value="/edit-item-${item.id}" />'">
 													<span class="glyphicon glyphicon-pencil"></span><span
 														class="hidden-ms hidden-xs"> Edit</span>
 											</button>

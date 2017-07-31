@@ -16,6 +16,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.service.LocationService;
  
@@ -79,39 +81,49 @@ public class LocationController {
 	/**
 	 * This method will provide the medium to update an existing location.
 	 */
-	@RequestMapping(value = { "/edit-location-{location}" }, method = RequestMethod.GET)
-	public String editLocation(@PathVariable String location, ModelMap model) {
-		Location locationObj = locationService.findByLocation(location);
-		model.addAttribute("location", locationObj);
-		model.addAttribute("edit", true);
-		model.addAttribute("loggedinuser", getPrincipal());
-		return "locationRegistration";
+	@RequestMapping(value = { "/edit-location-{id}" }, method = RequestMethod.GET)
+	public String editLocation(@PathVariable int id, ModelMap model) {
+		try {
+			Location locationObj = locationService.findById(id);
+			model.addAttribute("location", locationObj);
+			model.addAttribute("edit", true);
+			model.addAttribute("loggedinuser", getPrincipal());
+			return "locationRegistration";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
 	}
 	
 	/**
      * This method will be called on form submission, handling POST request for
      * updating client in database. It also validates the user input
      */
-    @RequestMapping(value = { "/edit-location-{location}" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/edit-location-{id}" }, method = RequestMethod.POST)
     public String updateLocation(@Valid Location locationObj, BindingResult result,
-            ModelMap model, @PathVariable String location) {
+            ModelMap model, @PathVariable int id) {
  
-        if (result.hasErrors()) {
-            return "locationRegistration";
-        }
-        if(!locationService.isLocationUnique(locationObj.getId(), locationObj.getLocation())){
-        	FieldError clientUniqueError = new FieldError("location", "location",
-					messageSource.getMessage("non.unique.location", new
-					String[] {locationObj.getLocation()}, Locale.getDefault()));
-			result.addError(clientUniqueError);
-			return "locationRegistration";
+        try {
+        	if (result.hasErrors()) {
+                return "locationRegistration";
+            }
+            if(!locationService.isLocationUnique(locationObj.getId(), locationObj.getLocation())){
+            	FieldError clientUniqueError = new FieldError("location", "location",
+    					messageSource.getMessage("non.unique.location", new
+    					String[] {locationObj.getLocation()}, Locale.getDefault()));
+    			result.addError(clientUniqueError);
+    			return "locationRegistration";
+    		}
+            
+            locationService.updateLocation(locationObj);
+     
+            model.addAttribute("success", "LOCATION <strong>" + locationObj.getLocation() + "</strong> UPDATED SUCCESSFULLY");
+            model.addAttribute("loggedinuser",getPrincipal());
+            return "redirect:/locationlist";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
 		}
-        
-        locationService.updateLocation(locationObj);
- 
-        model.addAttribute("success", "LOCATION <strong>" + locationObj.getLocation() + "</strong> UPDATED SUCCESSFULLY");
-        model.addAttribute("loggedinuser",getPrincipal());
-        return "redirect:/locationlist";
     }
 	
 	/**
@@ -119,9 +131,14 @@ public class LocationController {
 	 */
 	@RequestMapping(value = { "/delete-location-{id}" }, method = RequestMethod.GET)
 	public String deleteLocation(@PathVariable int id, ModelMap model) {
-		locationService.deleteById(id);
-		model.addAttribute("success", "LOCATION DELETED SUCCESSFULLY");
-		return "redirect:/locationlist";
+		try {
+			locationService.deleteById(id);
+			model.addAttribute("success", "LOCATION DELETED SUCCESSFULLY");
+			return "redirect:/locationlist";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
 	}
 	
 	private String getPrincipal(){

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.State;
 
@@ -18,8 +19,11 @@ public class ClientDaoImpl extends AbstractDao<Integer, Client> implements Clien
 	static final Logger logger = LoggerFactory.getLogger(ClientDaoImpl.class);
 
 	@Override
-	public Client findById(int id) {
+	public Client findById(int id) throws ObjectNotFoundException {
 		Client client = getByKey(id);
+		if(client==null){
+			throw new ObjectNotFoundException("Client with id: "+id+" was not found");
+		}
 		return client;
 	}
 

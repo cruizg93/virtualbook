@@ -34,7 +34,7 @@
 								<td>
 									<button type="button"
 										class="btn btn-success formEditButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
-										onclick="window.location.href ='<c:url value="/edit-location-${location.location}" />'">
+										onclick="window.location.href ='<c:url value="/edit-location-${location.id}" />'">
 										<span class="glyphicon glyphicon-pencil"></span><span class="hidden-ms hidden-xs"> Edit</span>
 									</button>
 									<button type="button"

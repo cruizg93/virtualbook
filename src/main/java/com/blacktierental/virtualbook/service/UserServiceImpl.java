@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blacktierental.virtualbook.dao.UserDao;
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.User;
  
 
@@ -21,11 +22,11 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public User findById(int id) {
+	public User findById(int id) throws ObjectNotFoundException {
 		return dao.findById(id);
 	}
 
-	public User findByUsername(String username) {
+	public User findByUsername(String username) throws ObjectNotFoundException {
 		return dao.findByUsername(username);
 	}
 
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserService{
      * Just fetch the entity from db and update it with proper values within transaction.
      * It will be updated in db once transaction ends. 
      */
-	public void updateUser(User user) {
+	public void updateUser(User user) throws ObjectNotFoundException {
 		User entity = dao.findById(user.getId());
 		if(entity!=null){
 			entity.setAddress(user.getAddress());
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService{
 		return dao.findAllUsers();
 	}
 
-	public boolean isUserUsernameUnique(Integer id, String username) {
+	public boolean isUserUsernameUnique(Integer id, String username) throws ObjectNotFoundException {
 		User user = findByUsername(username);
 		return (user == null || ((id != null )&& (user.getId() == id)));
 	}

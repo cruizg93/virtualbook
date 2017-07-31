@@ -86,9 +86,12 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("id",id));
 		Event event = (Event)crit.uniqueResult();
-		/*event.setState(State.DELETED.toString());
-		save(event);*/
-		delete(event);
+		if(event!=null && event.getAdvance()>0){
+			event.setState(State.DELETED.toString());
+			save(event);
+		}else{
+			delete(event);
+		}
 	}
 
 	@Override

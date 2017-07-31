@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.User;
 
 @Repository("userDao")
@@ -16,19 +17,23 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao{
 
 	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	
-	public User findById(int id) {
+	public User findById(int id) throws ObjectNotFoundException {
 		User user = getByKey(id);
-		if(user!=null){
+		if(user==null){
+			throw new ObjectNotFoundException("User with id: "+id+" was not found");
+		}else{
 			Hibernate.initialize(user.getUserProfiles());
 		}
 		return user;
 	}
 
-	public User findByUsername(String username) {
+	public User findByUsername(String username) throws ObjectNotFoundException {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("username",username));
 		User user = (User)crit.uniqueResult();
-		if(user!=null){
+		if(user==null){
+			throw new ObjectNotFoundException("User with username: "+username+" was not found");
+		}else{
 			Hibernate.initialize(user.getUserProfiles());
 		}
 		return user;

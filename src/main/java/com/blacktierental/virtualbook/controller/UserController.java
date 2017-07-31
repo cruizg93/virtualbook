@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.User;
 import com.blacktierental.virtualbook.service.UserProfileService;
 import com.blacktierental.virtualbook.service.UserService;;
@@ -73,36 +75,40 @@ public class UserController {
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
 	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
 
-		if (result.hasErrors()) {
-			return "registration";
+		try {
+			if (result.hasErrors()) {
+				return "registration";
+			}
+
+			/*
+			 * Preferred way to achieve uniqueness of field [username] should be
+			 * implementing custom @Unique annotation and applying it on field
+			 * [username] of Model class [User].
+			 * 
+			 * Below mentioned peace of code [if block] is to demonstrate that you
+			 * can fill custom errors outside the
+			 * 
+			 * validation framework as well while still using internationalized
+			 * messages.
+			 * 
+			 */
+			if (!userService.isUserUsernameUnique(user.getId(), user.getUsername())) {
+				FieldError usernameError = new FieldError("user", "username",
+						messageSource.getMessage("non.unique.username", new
+
+						String[] { user.getUsername() }, Locale.getDefault()));
+				result.addError(usernameError);
+				return "registration";
+			}
+			userService.saveUser(user);
+
+			model.addAttribute("success", "USER <strong>" + user.getName() + "-"+user.getUsername()+"</strong> REGISTERED SUCCESSFULLY");
+			// return "success";
+			return "redirect:/list";
+		} catch (NoSuchMessageException | ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
 		}
-
-		/*
-		 * Preferred way to achieve uniqueness of field [username] should be
-		 * implementing custom @Unique annotation and applying it on field
-		 * [username] of Model class [User].
-		 * 
-		 * Below mentioned peace of code [if block] is to demonstrate that you
-		 * can fill custom errors outside the
-		 * 
-		 * validation framework as well while still using internationalized
-		 * messages.
-		 * 
-		 */
-		if (!userService.isUserUsernameUnique(user.getId(), user.getUsername())) {
-			FieldError usernameError = new FieldError("user", "username",
-					messageSource.getMessage("non.unique.username", new
-
-					String[] { user.getUsername() }, Locale.getDefault()));
-			result.addError(usernameError);
-			return "registration";
-		}
-
-		userService.saveUser(user);
-
-		model.addAttribute("success", "USER <strong>" + user.getName() + "-"+user.getUsername()+"</strong> REGISTERED SUCCESSFULLY");
-		// return "success";
-		return "redirect:/list";
 	}
 
 	/**
@@ -120,11 +126,17 @@ public class UserController {
 	 */
 	@RequestMapping(value = { "/edit-user-{username}" }, method = RequestMethod.GET)
 	public String editUser(@PathVariable String username, ModelMap model) {
-		User user = userService.findByUsername(username);
-		model.addAttribute("user", user);
-		model.addAttribute("edit", true);
-		model.addAttribute("loggedinuser", getPrincipal());
-		return "registration";
+		try {
+			User user = userService.findByUsername(username);
+			model.addAttribute("user", user);
+			model.addAttribute("edit", true);
+			model.addAttribute("loggedinuser", getPrincipal());
+			return "registration";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
+		
 	}
 	
 	/**
@@ -135,24 +147,29 @@ public class UserController {
     public String updateUser(@Valid User user, BindingResult result,
             ModelMap model, @PathVariable String username) {
  
-        if (result.hasErrors()) {
-            return "registration";
-        }
- 
-        /*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING USERNAME in UI which is a unique key to a User.
-        if(!userService.isUsernameUnique(user.getId(), user.getUsername())){
-            FieldError ssoError =new FieldError("user","username",messageSource.getMessage("non.unique.ssoId", new 
- 
-String[]{user.getUsername()}, Locale.getDefault()));
-            result.addError(ssoError);
-            return "registration";
-        }*/
- 
-        userService.updateUser(user);
- 
-        model.addAttribute("success", "USER <strong>" + user.getName().toUpperCase() + "</strong> UPDATED SUCCESSFULLY");
-        model.addAttribute("loggedinuser",getPrincipal());
-        return "redirect:/list";
+        try {
+        	if (result.hasErrors()) {
+                return "registration";
+            }
+     
+            /*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING USERNAME in UI which is a unique key to a User.
+            if(!userService.isUsernameUnique(user.getId(), user.getUsername())){
+                FieldError ssoError =new FieldError("user","username",messageSource.getMessage("non.unique.ssoId", new 
+     
+    String[]{user.getUsername()}, Locale.getDefault()));
+                result.addError(ssoError);
+                return "registration";
+            }*/
+     
+            userService.updateUser(user);
+     
+            model.addAttribute("success", "USER <strong>" + user.getName().toUpperCase() + "</strong> UPDATED SUCCESSFULLY");
+            model.addAttribute("loggedinuser",getPrincipal());
+            return "redirect:/list";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
     }
 	
 	private String getPrincipal(){

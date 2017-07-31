@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.model.State;
 
@@ -21,8 +22,11 @@ public class LocationDaoImpl extends AbstractDao<Integer, Location> implements L
 	EventDao eventDao;
 	
 	@Override
-	public Location findById(int id) {
+	public Location findById(int id) throws ObjectNotFoundException {
 		Location location = getByKey(id);
+		if(location==null){
+			throw new ObjectNotFoundException("Location with id: "+id+" was not found");
+		}
 		return location;
 	}
 

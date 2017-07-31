@@ -16,6 +16,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.service.ClientService;
  
@@ -82,9 +84,14 @@ public class ClientController {
 	 */
 	@RequestMapping(value = { "/delete-client-{id}" }, method = RequestMethod.GET)
 	public String deleteClient(@PathVariable int id, ModelMap model) {
-		clientService.deleteById(id);
-		model.addAttribute("success", "CLIENT DELETED SUCCESSFULLY");
-		return "redirect:/clientlist";
+		try {
+			clientService.deleteById(id);
+			model.addAttribute("success", "CLIENT DELETED SUCCESSFULLY");
+			return "redirect:/clientlist";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
 	}
 
 	/**
@@ -92,11 +99,18 @@ public class ClientController {
 	 */
 	@RequestMapping(value = { "/edit-client-{id}" }, method = RequestMethod.GET)
 	public String editUser(@PathVariable int id, ModelMap model) {
-		Client client = clientService.findById(id);
-		model.addAttribute("client", client);
-		model.addAttribute("edit", true);
-		model.addAttribute("loggedinuser", getPrincipal());
-		return "clientRegistration";
+		Client client;
+		try {
+			client = clientService.findById(id);
+			model.addAttribute("client", client);
+			model.addAttribute("edit", true);
+			model.addAttribute("loggedinuser", getPrincipal());
+			return "clientRegistration";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
+
 	}
 	
 	/**
@@ -106,16 +120,18 @@ public class ClientController {
     @RequestMapping(value = { "/edit-client-{id}" }, method = RequestMethod.POST)
     public String updateUser(@Valid Client client, BindingResult result,
             ModelMap model, @PathVariable int id) {
- 
-        if (result.hasErrors()) {
-            return "clientRegistration";
+        try {
+            if (result.hasErrors()) {
+                return "clientRegistration";
+            }
+        	clientService.updateClient(client);
+			model.addAttribute("success", "CLIENT <strong>" + client.getName() + "</strong> UPDATED SUCCESSFULLY");
+	        model.addAttribute("loggedinuser",getPrincipal());
+	        return "redirect:/clientlist";
+        } catch (ObjectNotFoundException e) {
+        	model.addAttribute("message",e.getMessage());
+        	return "exception";
         }
- 
-        clientService.updateClient(client);
- 
-        model.addAttribute("success", "CLIENT <strong>" + client.getName() + "</strong> UPDATED SUCCESSFULLY");
-        model.addAttribute("loggedinuser",getPrincipal());
-        return "redirect:/clientlist";
     }
 	
 	private String getPrincipal(){

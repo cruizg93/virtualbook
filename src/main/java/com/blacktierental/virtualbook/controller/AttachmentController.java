@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Attachment;
 import com.blacktierental.virtualbook.service.AttachmentService;
 
@@ -47,24 +49,36 @@ public class AttachmentController {
 	
 	@RequestMapping(value = {"/edit-attachment-{id}"}, method = RequestMethod.GET)
 	public String editAttachment(@PathVariable int id, ModelMap model){
-		Attachment attachment = attachmentService.findById(id);
-		model.addAttribute("attachment",attachment);
-		model.addAttribute("edit",true);
-		model.addAttribute("loggedinuser",getPrincipal());
-		return "attachmentRegistration";
+		Attachment attachment;
+		try {
+			attachment = attachmentService.findById(id);
+			model.addAttribute("attachment",attachment);
+			model.addAttribute("edit",true);
+			model.addAttribute("loggedinuser",getPrincipal());
+			return "attachmentRegistration";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
+		
 	}
 	
 	@RequestMapping(value = {"/edit-attachment-{id}"}, method = RequestMethod.POST)
 	public String updateAttachment(@Valid Attachment attachment, BindingResult result,
 			ModelMap model, @PathVariable int id){
-		if(result.hasErrors()){
-			model.addAttribute("edit",true);
-			return "attachmentRegistration";
+		try {
+			if(result.hasErrors()){
+				model.addAttribute("edit",true);
+				return "attachmentRegistration";
+			}
+			attachmentService.updateAttachment(attachment);
+			model.addAttribute("success","ATTACHMENT <strong>"+attachment.getDescription()+"</strong> UPDATED SUCCESSFULLY");
+			model.addAttribute("loggedinuser",getPrincipal());
+			return "redirect:/itemList";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
 		}
-		attachmentService.updateAttachment(attachment);
-		model.addAttribute("success","ATTACHMENT <strong>"+attachment.getDescription()+"</strong> UPDATED SUCCESSFULLY");
-		model.addAttribute("loggedinuser",getPrincipal());
-		return "redirect:/itemList";
 	}
 	
 	@RequestMapping(value={"/delete-attachment-{id}"}, method = RequestMethod.GET)

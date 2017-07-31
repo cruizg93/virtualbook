@@ -2,6 +2,7 @@ package com.blacktierental.virtualbook.controller;
 
 import java.sql.SQLException;
 
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,10 +17,17 @@ import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 @Controller
 @ControllerAdvice
 public class ErrorController {
-	
+	/*
+	@ExceptionHandler(Exception.class)
+	public ModelAndView handlerGenericAllException(Exception  ex ){
+	     ModelAndView mv = new ModelAndView("exception");
+	     mv.addObject("generic","Please show this message to your programmer");
+	     mv.addObject("message", ex.getMessage()+"</br>"+ex.getStackTrace());
+	     return mv;
+	}*/
 	
 	@ExceptionHandler(NoHandlerFoundException.class)
-	public ModelAndView handlerNoHandlerFoundException(SQLException ex ){
+	public ModelAndView handlerNoHandlerFoundException(NoHandlerFoundException ex ){
 	     ModelAndView mv = new ModelAndView("404");
 	     return mv;
 	}

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.service.ItemService;
 
@@ -29,10 +30,14 @@ public class ItemConverter implements Converter<Object, Item>  {
 				return (Item)element;
 			}
 		}else{
-			Integer id = Integer.parseInt((String)element);
-			Item item = itemService.findById(id);
-			logger.info("Item:",item);
-			return item;
+			try {
+				Integer id = Integer.parseInt((String)element);
+				Item item = itemService.findById(id);
+				logger.info("Item:",item);
+				return item;
+			} catch (ObjectNotFoundException e) {
+				return null;
+			}
 		}
 	}
 }

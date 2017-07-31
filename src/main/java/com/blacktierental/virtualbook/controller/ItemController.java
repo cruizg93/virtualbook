@@ -8,6 +8,7 @@ import javax.validation.Valid;
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Attachment;
 import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.service.AttachmentService;
@@ -75,19 +77,22 @@ public class ItemController {
 			return "itemRegistration";
 		}
 
-		if (!itemService.isItemDescriptionUnique(item.getId(),item.getDescription())) {
-			FieldError clientUniqueError = new FieldError("item", "description",
-					messageSource.getMessage("non.unique.item", new
-					String[] {item.getDescription()}, Locale.getDefault()));
-			result.addError(clientUniqueError);
-			return "itemRegistration";
+		try {
+			if (!itemService.isItemDescriptionUnique(item.getId(),item.getDescription())) {
+				FieldError clientUniqueError = new FieldError("item", "description",
+						messageSource.getMessage("non.unique.item", new
+						String[] {item.getDescription()}, Locale.getDefault()));
+				result.addError(clientUniqueError);
+				return "itemRegistration";
+			}
+			itemService.saveItem(item);
+			model.addAttribute("success", "ITEM <strong>" + item.getDescription()+ "</strong> REGISTERED SUCCESSFULLY");
+			// return "success";
+			return "redirect:/itemList";
+		} catch (Exception e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
 		}
-
-		itemService.saveItem(item);
-
-		model.addAttribute("success", "ITEM <strong>" + item.getDescription()+ "</strong> REGISTERED SUCCESSFULLY");
-		// return "success";
-		return "redirect:/itemList";
 	}
 	
 	/**
@@ -95,17 +100,28 @@ public class ItemController {
 	 */
 	@RequestMapping(value = { "/delete-item-{description}" }, method = RequestMethod.GET)
 	public String deleteItem(@PathVariable String description, ModelMap model) {
-		itemService.deleteItemByDescription(description);
-		model.addAttribute("success", "ITEM <strong>" + description + "</strong> DELETED SUCCESSFULLY");
-		return "redirect:/itemList";
+		try {
+			itemService.deleteItemByDescription(description);
+			model.addAttribute("success", "ITEM <strong>" + description + "</strong> DELETED SUCCESSFULLY");
+			return "redirect:/itemList";
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
 	}
 
 	/**
 	 * This method will provide the medium to update an existing item.
 	 */
-	@RequestMapping(value = { "/edit-item-{description}" }, method = RequestMethod.GET)
-	public String editItem(@PathVariable String description, ModelMap model) {
-		Item item = itemService.findByDescription(description);
+	@RequestMapping(value = { "/edit-item-{id}" }, method = RequestMethod.GET)
+	public String editItem(@PathVariable int id, ModelMap model) {
+		Item item = null;
+		try {
+			item = itemService.findById(id);
+		} catch (ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
 		model.addAttribute("item", item);
 		model.addAttribute("edit", true);
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -116,27 +132,32 @@ public class ItemController {
      * This method will be called on form submission, handling POST request for
      * updating item in database. It also validates the user input
      */
-    @RequestMapping(value = { "/edit-item-{description}" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/edit-item-{id}" }, method = RequestMethod.POST)
     public String updateUser(@Valid Item item, BindingResult result,
-            ModelMap model, @PathVariable String description) {
+            ModelMap model, @PathVariable String id) {
  
         if (result.hasErrors()) {
             return "itemRegistration";
         }
  
-        if(!itemService.isItemDescriptionUnique(item.getId(), item.getDescription())){
-            FieldError descriptionError =new FieldError("item","description",messageSource.getMessage("non.unique.item", new 
+        try {
+			if(!itemService.isItemDescriptionUnique(item.getId(), item.getDescription())){
+			    FieldError descriptionError =new FieldError("item","description",messageSource.getMessage("non.unique.item", new 
  
-            String[]{item.getDescription()}, Locale.getDefault()));
-            result.addError(descriptionError);
-            return "itemRegistration";
-        }
+			    String[]{item.getDescription()}, Locale.getDefault()));
+			    result.addError(descriptionError);
+			    return "itemRegistration";
+			}
+			itemService.updateItem(item);
+			 
+	        model.addAttribute("success", "ITEM <strong>" + item.getDescription() + "</strong> UPDATED SUCCESSFULLY");
+	        model.addAttribute("loggedinuser",getPrincipal());
+	        return "redirect:/itemList";
+		} catch (NoSuchMessageException | ObjectNotFoundException e) {
+			model.addAttribute("message",e.getMessage());
+			return "exception";
+		}
  
-        itemService.updateItem(item);
- 
-        model.addAttribute("success", "ITEM <strong>" + item.getDescription() + "</strong> UPDATED SUCCESSFULLY");
-        model.addAttribute("loggedinuser",getPrincipal());
-        return "redirect:/itemList";
     }
 	
 	private String getPrincipal(){

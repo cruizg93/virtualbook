@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.blacktierental.virtualbook.model.Attachment;
 import com.blacktierental.virtualbook.dao.AttachmentDao;
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 
 @Service("attachmentService")
 @Transactional
@@ -17,7 +18,7 @@ public class AttachmentServiceImpl implements AttachmentService{
 	private AttachmentDao dao;
 	
 	@Override
-	public Attachment findById(int id) {
+	public Attachment findById(int id) throws ObjectNotFoundException {
 		return dao.findById(id);
 	}
 
@@ -37,7 +38,7 @@ public class AttachmentServiceImpl implements AttachmentService{
 	}
 
 	@Override
-	public void updateAttachment(Attachment attachment) {
+	public void updateAttachment(Attachment attachment) throws ObjectNotFoundException {
 		Attachment entity = dao.findById(attachment.getId());
 		if(entity != null){
 			entity.setDescription(attachment.getDescription());

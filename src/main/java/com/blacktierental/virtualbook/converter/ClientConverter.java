@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.service.ClientService;
 
@@ -25,10 +26,15 @@ public class ClientConverter implements Converter<Object, Client> {
 		if(element instanceof Client){
 			return (Client) element;
 		}else{
-			Integer id = Integer.parseInt((String)element);
-			Client client= clientService.findById(id);
-			logger.info("Client:",client);
-			return client;
+			
+			try {
+				Integer id = Integer.parseInt((String)element);
+				Client client = clientService.findById(id);
+				logger.info("Client:",client);
+				return client;
+			} catch (ObjectNotFoundException e) {
+				return null;
+			}
 		}
 	}
 }

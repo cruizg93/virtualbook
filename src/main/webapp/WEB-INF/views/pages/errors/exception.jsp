@@ -3,5 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container well text-center">
 	<h1>Error</h1>
-	<h4>${message}</h4>
+	<c:if test="${not empty generic}">
+		<h4>${generic}</h4>
+	</c:if>
+	<h5>${message}</h5>
 </div>

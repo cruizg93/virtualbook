@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.blacktierental.virtualbook.dao.ClientDao;
 import com.blacktierental.virtualbook.dao.EventDao;
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.State;
@@ -24,7 +25,7 @@ public class ClientServiceImpl implements ClientService{
 	private EventDao eventDao;
 	
 	@Override
-	public Client findById(int id) {
+	public Client findById(int id) throws ObjectNotFoundException {
 		return dao.findById(id);
 	}
 
@@ -44,7 +45,7 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public void updateClient(Client client) {
+	public void updateClient(Client client) throws ObjectNotFoundException {
 		Client entity  = dao.findById(client.getId());
 		if(entity!= null){
 			entity.setCompanyName(client.getCompanyName());
@@ -60,7 +61,7 @@ public class ClientServiceImpl implements ClientService{
 	}
 	
 	@Override
-	public void deleteById(int id) {
+	public void deleteById(int id) throws ObjectNotFoundException {
 		Client client = dao.findById(id);
 		List<Event> events = eventDao.findByClient(client);
 		if(events!=null && !events.isEmpty()){

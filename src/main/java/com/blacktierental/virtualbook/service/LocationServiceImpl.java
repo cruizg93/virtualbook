@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.blacktierental.virtualbook.dao.EventDao;
 import com.blacktierental.virtualbook.dao.LocationDao;
+import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Event;
 import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.model.State;
@@ -24,7 +25,7 @@ public class LocationServiceImpl implements LocationService{
 	private EventDao eventDao;
 	
 	@Override
-	public Location findById(int id) {
+	public Location findById(int id) throws ObjectNotFoundException {
 		return dao.findById(id);
 	}
 
@@ -44,7 +45,7 @@ public class LocationServiceImpl implements LocationService{
 	}
 
 	@Override
-	public void updateLocation(Location location) {
+	public void updateLocation(Location location) throws ObjectNotFoundException {
 		Location entity = dao.findById(location.getId());
 		if(entity !=null){
 			entity.setBuildingName(location.getBuildingName());
@@ -59,7 +60,7 @@ public class LocationServiceImpl implements LocationService{
 	}
 	
 	@Override
-	public void deleteById(int id) {
+	public void deleteById(int id) throws ObjectNotFoundException {
 		Location location = dao.findById(id);
 		List<Event> events = eventDao.findByLocation(location);
 		if(events != null && !events.isEmpty()){
