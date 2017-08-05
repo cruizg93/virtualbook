@@ -20,8 +20,8 @@
 				id="lblcontact_date"></label>
 			<form:input type="hidden" path="contact_date" id="contact_date" />
 			<div class="has-error">
-					<form:errors path="contact_date" class="help-inline text-danger" />
-				</div>
+				<form:errors path="contact_date" class="help-inline text-danger" />
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">

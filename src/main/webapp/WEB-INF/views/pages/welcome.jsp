@@ -17,9 +17,9 @@
 				</div>
 			</div>
 			<div class="col-md-3 col-sm-3 col-xs-6">
-				<div class="card text-center clickable" onclick="window.location.href = '${pageContext.request.contextPath}/employee'">
+				<div class="card text-center clickable" onclick="window.location.href = '${pageContext.request.contextPath}/invoicelist'">
 				  <div class="card_title">
-				    <a href="#" class=""><span class="glyphicon glyphicon-piggy-bank" ></span><h2>Employee</h2></a>
+				    <a href="#" class=""><span class="glyphicon glyphicon-piggy-bank" ></span><h2>Invoices</h2></a>
 				  </div>
 				</div>
 			</div>

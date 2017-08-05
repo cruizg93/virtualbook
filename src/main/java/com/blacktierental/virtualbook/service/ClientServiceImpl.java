@@ -52,6 +52,7 @@ public class ClientServiceImpl implements ClientService{
 			entity.setEmail(client.getEmail());
 			entity.setName(client.getName());
 			entity.setPhoneNumber(client.getPhoneNumber());
+			entity.setInvoiceNumber(client.getInvoiceNumber());
 		}
 	}
 

@@ -44,6 +44,7 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 	public List<Event> findByClient(Client client) {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("client",client));
+		crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates
 		List<Event> events = (List<Event>)crit.list();
 		if(events != null){
 			//for(Event event : events){}
@@ -173,25 +174,4 @@ public class EventDaoImpl extends AbstractDao<Integer, Event> implements EventDa
 		}
 		return null;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import com.blacktierental.virtualbook.converter.AttachmentConverter;
 import com.blacktierental.virtualbook.converter.ClientConverter;
+import com.blacktierental.virtualbook.converter.EventConververter;
 import com.blacktierental.virtualbook.converter.EventItemConverter;
 import com.blacktierental.virtualbook.converter.ItemConverter;
 import com.blacktierental.virtualbook.converter.LocalDateTimeConverter;
@@ -50,7 +51,9 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	
 	@Autowired
 	AttachmentConverter attachmentConverter;
-	
+
+	@Autowired
+	EventConververter eventConverter;
 	
 	/**
 	 * Configure TilesConfigurer.
@@ -93,6 +96,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         registry.addConverter(eventItemConverter);
         registry.addConverter(locationConverter);
         registry.addConverter(attachmentConverter);
+        registry.addConverter(eventConverter);
     }
 
     /**

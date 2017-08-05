@@ -31,9 +31,14 @@ public abstract class AbstractDao<PK extends Serializable, T>{
 	
 	public void persist(T entity){
 		try {
-			getSession().persist(entity);
+			getSession().saveOrUpdate(entity);
 		} catch (Exception e) {
-			getSession().merge(entity);
+			try {
+				getSession().merge(entity);
+			} catch (Exception e2) {
+				e.printStackTrace();
+				e2.printStackTrace();
+			}
 		}
 	}
 	

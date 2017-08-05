@@ -58,6 +58,16 @@
        <put-attribute name="body" value="/WEB-INF/views/pages/settings/clientlist.jsp" />  
    </definition>
    
+   <!-- INVOICES -->
+   <definition name="invoicelist" extends="base-definition">  
+       <put-attribute name="title" value="Invoice List" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/events/invoices.jsp" />  
+   </definition>
+   <definition name="invoiceRegistration" extends="base-definition">  
+       <put-attribute name="title" value="Invoice Registration" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/events/invoiceRegistration.jsp" />  
+   </definition>
+   
    <definition name="clientRegistration" extends="base-definition">  
        <put-attribute name="title" value="Client Registration" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/settings/clientRegistration.jsp" />  

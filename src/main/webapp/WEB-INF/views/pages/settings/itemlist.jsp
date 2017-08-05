@@ -82,7 +82,7 @@ rel="stylesheet"></link>
 					<table class="table table-bordered " width="100%" id="attachmentTable">
 						<thead>
 							<tr>
-								<th width="80%">Description</th>
+								<th>Description</th>
 								<sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
 									<th width="100"></th>
 								</sec:authorize>

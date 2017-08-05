@@ -51,6 +51,16 @@
 				<form:errors path="companyName" class="help-inline" />
 			</div>
 		</div>
+		<div class="col-lg-6 col-md-6 col-ms-6 col-lg-offset-3 col-md-offset-3 col-ms-offset-3 col-xs-12">
+			<div class="form-group input-group">
+				<span class="glyphicon glyphicon-info-sign input-group-addon" id="addongInvoice"></span>
+				<form:input type="text" path="invoiceNumber" id="invoiceNumber"
+					class="form-control input-sm appTextNumber" placeholder="Invoice Number"/>
+			</div>
+			<div class="has-error">
+				<form:errors path="invoiceNumber" class="help-inline" />
+			</div>
+		</div>
 		<div class="col-lg-12 col-md-12 col-ms-12 col-xs-12">
 			<div class="form-actions text-center">
 				<c:choose>

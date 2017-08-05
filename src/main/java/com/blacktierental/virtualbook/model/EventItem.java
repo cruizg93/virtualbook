@@ -1,5 +1,7 @@
 package com.blacktierental.virtualbook.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +15,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="tbl_event_item")
-public class EventItem {
+public class EventItem implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public EventItem(){
 		

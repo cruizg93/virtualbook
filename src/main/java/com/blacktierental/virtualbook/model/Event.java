@@ -1,6 +1,7 @@
 package com.blacktierental.virtualbook.model;
 
 import java.util.List;
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.*;
@@ -22,7 +23,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="tbl_event")
-public class Event {
+public class Event implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public Event() {
 		contactPersonEmail = "";
@@ -66,7 +72,7 @@ public class Event {
 	
 	@Column(name="contact_person_email")
 	private String contactPersonEmail;
-	
+
 	@ManyToOne
 	@JoinColumn(name="location_id")
 	private Location location;
@@ -85,7 +91,6 @@ public class Event {
 	
 	@Column(name="comments")
 	private String Comments;
-	
 	
 	@Column(name="event_date")
 	private LocalDateTime dateAndHour;
@@ -280,12 +285,16 @@ public class Event {
 	
 	@Override
 	public String toString(){
-		return "Event [id="+id+",Client="+client!=null?client.getCompanyName():null+",Location="+location!=null?location.getBuildingName():null
-				+",Date="+dateAndHour+",Balance='N/A']";
+		try {
+			return "Event [id="+id+",Client="+client!=null?client.getCompanyName():" "+",Location="+location!=null?location.getBuildingName():" "
+					+",Date="+dateAndHour+",Balance='N/A']";
+		} catch (Exception e) {
+			return "";
+		}
 	}
 	
 	public boolean isPaid(){
-		if(advance >= getTotal()){
+		if((advance!=null)&&(advance >= getTotal())){
 			return true;
 		}else{
 			return false;
@@ -294,7 +303,7 @@ public class Event {
 	
 	public Double getTaxes(){
 		Double subTotal = getSubTotal();
-		if(taxPercentage>0){
+		if(taxPercentage!=null && taxPercentage>0){
 			DecimalFormatSymbols decimalSymbols = DecimalFormatSymbols.getInstance();
 	        decimalSymbols.setDecimalSeparator('.');
 	        DecimalFormat df = new DecimalFormat("#.##",decimalSymbols);
@@ -311,7 +320,7 @@ public class Event {
 				subTotal += eventItem.getPricePerUnit() * eventItem.getQuantity();
 			}
 		}
-		subTotal += delivery;
+		subTotal += delivery!=null?delivery:0;
 		return subTotal;
 	}
 	
@@ -356,5 +365,9 @@ public class Event {
         }else{
         	return "";
         }
+	}
+	
+	public String getInvoiceLable(){
+		return getFormatedDateAndHour()+"-"+(location!=null?location.getBuildingName():"");
 	}
 }

@@ -1,5 +1,6 @@
 package com.blacktierental.virtualbook.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,8 +18,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="tbl_item")
-public class Item {
+public class Item implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	@JoinTable(name="tbl_item_attachment",
 				joinColumns = {@JoinColumn(name="item_id")},
@@ -80,6 +86,9 @@ public class Item {
 	}
 
 	public String getStringAttachments(){
+		if(attachments==null){
+			return "";
+		}
 		StringBuilder result = new StringBuilder();
 		for(Attachment a: attachments){
 			result.append("__"+a.getDescription()+"  ");

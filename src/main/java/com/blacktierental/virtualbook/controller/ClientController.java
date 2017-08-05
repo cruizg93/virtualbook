@@ -1,8 +1,16 @@
 package com.blacktierental.virtualbook.controller;
 
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
  
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +21,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
+import com.blacktierental.virtualbook.model.Event;
+import com.blacktierental.virtualbook.model.EventItem;
+import com.blacktierental.virtualbook.model.Invoice;
+import com.blacktierental.virtualbook.model.Item;
+import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.service.ClientService;
+import com.blacktierental.virtualbook.service.EventService;
  
 @Controller
 public class ClientController {
-
+	
 	@Autowired
 	ClientService clientService;
+	
+	@Autowired
+	EventService eventService;
 	
 	@Autowired
 	MessageSource messageSource;
@@ -99,9 +120,8 @@ public class ClientController {
 	 */
 	@RequestMapping(value = { "/edit-client-{id}" }, method = RequestMethod.GET)
 	public String editUser(@PathVariable int id, ModelMap model) {
-		Client client;
 		try {
-			client = clientService.findById(id);
+			Client client = clientService.findById(id);
 			model.addAttribute("client", client);
 			model.addAttribute("edit", true);
 			model.addAttribute("loggedinuser", getPrincipal());
@@ -133,8 +153,8 @@ public class ClientController {
         	return "exception";
         }
     }
-	
-	private String getPrincipal(){
+    
+    private String getPrincipal(){
 	   String username = null;
 	   Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	   if(principal instanceof UserDetails){

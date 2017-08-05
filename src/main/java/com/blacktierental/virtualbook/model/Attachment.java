@@ -1,5 +1,6 @@
 package com.blacktierental.virtualbook.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,8 +19,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="tbl_attachment")
-public class Attachment {
+public class Attachment implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	

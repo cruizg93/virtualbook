@@ -13,6 +13,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name="tbl_client")
 public class Client {
+	
+	public Client() {
+		companyName = "";
+	}
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
@@ -28,12 +33,23 @@ public class Client {
 	@Pattern(regexp="\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}\\b")
 	private String email;
 	
-	@NotEmpty
 	@Column(name="company_name")
 	private String companyName;
 	
 	@Column(name="state",nullable=false)
 	private String state=State.ACTIVE.getState();
+
+	@NotEmpty
+	@Column(name="invoice_number")
+	private String invoiceNumber;
+
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
 
 	public Integer getId() {
 		return id;

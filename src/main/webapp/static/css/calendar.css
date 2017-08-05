@@ -78,25 +78,6 @@
 	margin-left: 0px;
 }
 
-span.paid, span.notPaid{
-	color:white;
-	font-weight: bolder;
-	padding:2px;
-	font-size:12px;
-	max-width: 57px;
-	min-width: 57px;
-}
-
-.paid{
-	background-color:#398439;
-	border-color: #255625;
-}
-
-.notPaid{
-	background-color:#d9534f;
-	border-color: #d43f3a;
-}
-
 .noMinHeight{
 	min-height: 0px !important;
 }

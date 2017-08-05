@@ -12,6 +12,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name="tbl_location")
 public class Location {
+	 
+	public Location() {}
+	public Location(String location,String buildingName){
+		this.location = location==null?"":location;
+		this.buildingName = buildingName==null?"":buildingName;
+	}
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
