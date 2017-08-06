@@ -210,7 +210,7 @@ public class EventController {
 	}
 	
 	private void loadYear(ModelMap model, LocalDate yearToLoad){
-		LocalDate initial = LocalDate.of(yearToLoad.getYear(), Month.JANUARY, Month.JANUARY.minLength());
+		LocalDate initial = LocalDate.of(yearToLoad.getYear(), Month.JANUARY, 1);
 		LocalDate last = LocalDate.of(yearToLoad.getYear(), Month.DECEMBER, Month.DECEMBER.maxLength());
 		List<Event> events = eventService.findAllEventsByDateRange(initial, last);
 		List<List<Event>> eventList = new ArrayList<List<Event>>();
@@ -219,7 +219,7 @@ public class EventController {
 		}
 		for(Event event: events){
 			int month = event.getDateAndHour().getMonth().getValue();
-			eventList.get(month).add(event);
+			eventList.get(month-1).add(event);
 		}
 		model.addAttribute("eventsList", events);
 		model.addAttribute("events", eventList);

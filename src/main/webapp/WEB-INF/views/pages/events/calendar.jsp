@@ -38,15 +38,15 @@ var year = '${year}';
 					<c:set var="row" value="even" />
 					<c:set var="paid" value="notPaid" />
 					<div class="row">
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${1}&y=${year}"></c:url>'"><p class="monthLabel">JANUARY - ${fn:length(events[1])}</p></div>
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${2}&y=${year}"></c:url>'"><p class="monthLabel">FEBRUARY - ${fn:length(events[2])}</p></div>
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${3}&y=${year}"></c:url>'"><p class="monthLabel">MARCH - ${fn:length(events[3])}</p></div>
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${4}&y=${year}"></c:url>'"><p class="monthLabel">APRIL - ${fn:length(events[4])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${1}&y=${year}"></c:url>'"><p class="monthLabel">JANUARY - ${fn:length(events[0])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${2}&y=${year}"></c:url>'"><p class="monthLabel">FEBRUARY - ${fn:length(events[1])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${3}&y=${year}"></c:url>'"><p class="monthLabel">MARCH - ${fn:length(events[2])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${4}&y=${year}"></c:url>'"><p class="monthLabel">APRIL - ${fn:length(events[3])}</p></div>
 					</div>
 					<div class="row">
 						<c:set var="row" value="even" />
 						<c:set var="paid" value="notPaid" />
-						<c:forEach begin="1" end="4" varStatus="loop">  
+						<c:forEach begin="0" end="3" varStatus="loop">  
 							<c:choose>
 								<c:when test="${fn:length(events[loop.index])>0}">
 									<div class="calendarMonth">
@@ -68,15 +68,15 @@ var year = '${year}';
 						</c:forEach>
 					</div>
 					<div class="row">
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${5}&y=${year}"></c:url>'"><p class="monthLabel">MAY - ${fn:length(events[5])}</p></div>
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${6}&y=${year}"></c:url>'"><p class="monthLabel">JUNE - ${fn:length(events[6])}</p></div>
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${7}&y=${year}"></c:url>'"><p class="monthLabel">JULY - ${fn:length(events[7])}</p></div>
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${8}&y=${year}"></c:url>'"><p class="monthLabel">AUGUST - ${fn:length(events[8])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${5}&y=${year}"></c:url>'"><p class="monthLabel">MAY - ${fn:length(events[4])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${6}&y=${year}"></c:url>'"><p class="monthLabel">JUNE - ${fn:length(events[5])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${7}&y=${year}"></c:url>'"><p class="monthLabel">JULY - ${fn:length(events[6])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${8}&y=${year}"></c:url>'"><p class="monthLabel">AUGUST - ${fn:length(events[7])}</p></div>
 					</div>
 					<div class="row">
 						<c:set var="row" value="even" />
 						<c:set var="paid" value="notPaid" />
-						<c:forEach begin="5" end="8" varStatus="loop">  
+						<c:forEach begin="4" end="7" varStatus="loop">  
 							<c:choose>
 								<c:when test="${fn:length(events[loop.index])>0}">
 									<div class="calendarMonth">
@@ -98,15 +98,15 @@ var year = '${year}';
 						</c:forEach>
 					</div>
 					<div class="row">
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${9}&y=${year}"></c:url>'"><p class="monthLabel">SEPTEMBER - ${fn:length(events[9])}</p></div>
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${10}&y=${year}"></c:url>'"><p class="monthLabel">OCTUBER - ${fn:length(events[10])}</p></div>
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${11}&y=${year}"></c:url>'"><p class="monthLabel">NOVEMBER - ${fn:length(events[11])}</p></div>
-						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${12}&y=${year}"></c:url>'"><p class="monthLabel">DECEMBER - ${fn:length(events[12])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${9}&y=${year}"></c:url>'"><p class="monthLabel">SEPTEMBER - ${fn:length(events[8])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${10}&y=${year}"></c:url>'"><p class="monthLabel">OCTUBER - ${fn:length(events[9])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${11}&y=${year}"></c:url>'"><p class="monthLabel">NOVEMBER - ${fn:length(events[10])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${12}&y=${year}"></c:url>'"><p class="monthLabel">DECEMBER - ${fn:length(events[11])}</p></div>
 					</div>
 					<div class="row">
 						<c:set var="row" value="even" />
 						<c:set var="paid" value="notPaid" />
-						<c:forEach begin="9" end="12" varStatus="loop">  
+						<c:forEach begin="8" end="11" varStatus="loop">  
 							<c:choose>
 								<c:when test="${fn:length(events[loop.index])>0}">
 									<div class="calendarMonth">
