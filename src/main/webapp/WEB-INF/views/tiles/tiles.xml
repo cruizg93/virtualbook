@@ -98,6 +98,10 @@
    </definition>
    
    <!-- EVENTS -->
+	<definition name="calendar" extends="base-definition">  
+       <put-attribute name="title" value="Calendar" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/events/calendar.jsp" />  
+   </definition>
 	<definition name="eventlist" extends="base-definition">  
        <put-attribute name="title" value="Events" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/events/events.jsp" />  

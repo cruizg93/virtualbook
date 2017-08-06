@@ -1,7 +1,11 @@
 $(document).ready(function(){
-	getMonthLabel();
-	var currentMonth= new Date();
-	currentMonth.setMonth(month);
+	if(month!=null){
+		getMonthLabel();
+		var currentMonth= new Date();
+		currentMonth.setMonth(month);
+	}else{
+		$("#hYeartitle").html(year);
+	}
 });
 
 
@@ -49,4 +53,15 @@ function getMonthLabel(){
 		break;
 	}
 	$("#hMonthtitle").html(label+" "+year);
+}
+
+
+function contract(id){
+	$('<form>', {
+         "id": "imprimir",
+         "html": '',
+         "target":'_blank',
+         'method':'GET',
+         "action": context+'/contract-'+id
+     }).appendTo(document.body).submit();
 }

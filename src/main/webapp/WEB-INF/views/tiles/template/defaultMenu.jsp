@@ -4,7 +4,7 @@
 <div class="container hidden-xs well wellMenu well-dark defaultMenu">
 	<div class="row">
 		<div class="col-md-3 col-sm-3 col-xs-6">
-		<div class="card defaultMenu text-center clickable" onclick="window.location.href = '${pageContext.request.contextPath}/eventlist'">
+		<div class="card defaultMenu text-center clickable" onclick="window.location.href = '${pageContext.request.contextPath}/calendar'">
 			  <div class="card_title">
 			    <a href="#"><span class="glyphicon glyphicon-calendar"></span><h2>Calendar</h2></a>
 			  </div>

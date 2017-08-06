@@ -4,7 +4,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <link href="<c:url value='/static/css/calendar.css' />" rel="stylesheet"></link>
 <script>
-var month = ${month};
+var month = null;
 var year = '${year}';
 </script>
 <div id="divCurrentMonth" class="container well text-center" style="padding-top:0px;">
@@ -13,10 +13,10 @@ var year = '${year}';
 		 	<div class="col-md-12 col-sm-12">
 		 		<h2>
 		 			<span class="arrow clickable glyphicon glyphicon-menu-left" 
-						onclick="window.location.href ='<c:url value="/previousMonth?m=${month}&y=${year}"></c:url>'"></span>
-					<span id="hMonthtitle"></span>
+						onclick="window.location.href ='<c:url value="/previousYear?y=${year}"></c:url>'"></span>
+					<span id="hYeartitle"></span>
 					<span class="arrow clickable glyphicon glyphicon-menu-right"
-					onclick="window.location.href ='<c:url value="/nextMonth?m=${month}&y=${year}"></c:url>'"></span>
+					onclick="window.location.href ='<c:url value="/nextYear?y=${year}"></c:url>'"></span>
 		 		</h2>
 		 		<h4 id="hMonthtitle">Events:<span id="spanEventTitleCount">${count}</span></h4>
 			</div>
@@ -35,62 +35,98 @@ var year = '${year}';
 		<div class="tab-pane active" id="tab_calendar">
 			<div class="row">
 				<div class="col-md-12 col-sm-12" id="divCalendar" style="padding:0px !important;">
-					<div class="row">
-						<div class="calendarDay noMinHeight hidden-xs"><p class="dayLabel">MONDAY</p></div>
-						<div class="calendarDay noMinHeight hidden-xs"><p class="dayLabel">TUESDAY</p></div>
-						<div class="calendarDay noMinHeight hidden-xs"><p class="dayLabel">WEDNESDAY</p></div>
-						<div class="calendarDay noMinHeight hidden-xs"><p class="dayLabel">THURSDAY</p></div>
-						<div class="calendarDay noMinHeight hidden-xs"><p class="dayLabel">FRIDAY</p></div>
-						<div class="calendarDay noMinHeight hidden-xs"><p class="dayLabel">SATURDAY</p></div>
-						<div class="calendarDay noMinHeight hidden-xs"><p class="dayLabel">SUNDAY</p></div>
-					</div>
 					<c:set var="row" value="even" />
 					<c:set var="paid" value="notPaid" />
-					
-					<c:forEach var="dayEvents" items="${events}" varStatus="loopindex">
-						<c:set var="hiddenXS" value=" " />
-						<c:if test="${fn:length(dayEvents) eq 0}">
-							<c:set var="hiddenXS" value="hidden-xs" />
-						</c:if>
-						<c:if test="${loopindex.index mod 7 == 0}">
+					<div class="row">
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${1}&y=${year}"></c:url>'"><p class="monthLabel">JANUARY - ${fn:length(events[1])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${2}&y=${year}"></c:url>'"><p class="monthLabel">FEBRUARY - ${fn:length(events[2])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${3}&y=${year}"></c:url>'"><p class="monthLabel">MARCH - ${fn:length(events[3])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${4}&y=${year}"></c:url>'"><p class="monthLabel">APRIL - ${fn:length(events[4])}</p></div>
+					</div>
+					<div class="row">
+						<c:set var="row" value="even" />
+						<c:set var="paid" value="notPaid" />
+						<c:forEach begin="1" end="4" varStatus="loop">  
 							<c:choose>
-								<c:when test="${row eq 'odd'}"><c:set var="row" value="even" /></c:when>
-								<c:otherwise><c:set var="row" value="odd" /></c:otherwise>
-							</c:choose>				
-						</c:if>
-						<c:if test="${(loopindex.index == 0)|| (loopindex.index == 7) || (loopindex.index == 14) || (loopindex.index == 21) || (loopindex.index == 28)|| (loopindex.index == 35) || (loopindex.index == 42) || (loopindex.index == 49)}">
-							<c:out value="<div class='row ${row}'>" escapeXml="false"/>
-						</c:if>
-						<div class="calendarDay ${row} ${hiddenXS}">
+								<c:when test="${fn:length(events[loop.index])>0}">
+									<div class="calendarMonth">
+								</c:when>
+								<c:otherwise>
+									<div class="calendarMonth hidden-xs">
+								</c:otherwise>
+							</c:choose>
+								<c:forEach var="event" items="${events[loop.index]}">
+									<c:if test="${event.isPaid()}">
+										<c:set var="paid" value="paid" />
+									</c:if>
+									<c:if test="${event.isPaid() eq false}">
+										<c:set var="paid" value="notPaid" />
+									</c:if>
+									<p class="eventLabel ${paid}"><a href='<c:url value="/edit-event-${event.id}"/>'><span>${event.calendarLabel}</span></a></p>
+								</c:forEach>	
+							</div>
+						</c:forEach>
+					</div>
+					<div class="row">
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${5}&y=${year}"></c:url>'"><p class="monthLabel">MAY - ${fn:length(events[5])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${6}&y=${year}"></c:url>'"><p class="monthLabel">JUNE - ${fn:length(events[6])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${7}&y=${year}"></c:url>'"><p class="monthLabel">JULY - ${fn:length(events[7])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${8}&y=${year}"></c:url>'"><p class="monthLabel">AUGUST - ${fn:length(events[8])}</p></div>
+					</div>
+					<div class="row">
+						<c:set var="row" value="even" />
+						<c:set var="paid" value="notPaid" />
+						<c:forEach begin="5" end="8" varStatus="loop">  
 							<c:choose>
-								<c:when
-									test="${(loopindex.count > emptySpotsAtBegin) && (loopindex.count < fn:length(events)-emptySpotsAtEnd)}">
-									<p class="dayNumber">${loopindex.count - emptySpotsAtBegin}</p>
-									<c:forEach var="event" items="${dayEvents}">
+								<c:when test="${fn:length(events[loop.index])>0}">
+									<div class="calendarMonth">
+								</c:when>
+								<c:otherwise>
+									<div class="calendarMonth hidden-xs">
+								</c:otherwise>
+							</c:choose>
+								<c:forEach var="event" items="${events[loop.index]}">
 										<c:if test="${event.isPaid()}">
 											<c:set var="paid" value="paid" />
 										</c:if>
 										<c:if test="${event.isPaid() eq false}">
 											<c:set var="paid" value="notPaid" />
 										</c:if>
-										<c:if test="${not empty event.client}">
-											<p class="eventLabel ${paid}"><a href='<c:url value="/edit-event-${event.id}"/>'><span>${fn:substring(event.client.companyName, 0, 15)}</span></a></p>
-										</c:if>
-										<c:if test="${empty event.client}">
-											<p class="eventLabel ${paid}"><a href='<c:url value="/edit-event-${event.id}"/>'><span>${fn:substring(event.eventName, 0, 15)}</span></a></p>
-										</c:if>
-									</c:forEach>
+											<p class="eventLabel ${paid}"><a href='<c:url value="/edit-event-${event.id}"/>'><span>${event.calendarLabel}</span></a></p>									
+								</c:forEach>
+							</div>
+						</c:forEach>
+					</div>
+					<div class="row">
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${9}&y=${year}"></c:url>'"><p class="monthLabel">SEPTEMBER - ${fn:length(events[9])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${10}&y=${year}"></c:url>'"><p class="monthLabel">OCTUBER - ${fn:length(events[10])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${11}&y=${year}"></c:url>'"><p class="monthLabel">NOVEMBER - ${fn:length(events[11])}</p></div>
+						<div class="calendarMonth noMinHeight" onclick="window.location.href ='<c:url value="/month?m=${12}&y=${year}"></c:url>'"><p class="monthLabel">DECEMBER - ${fn:length(events[12])}</p></div>
+					</div>
+					<div class="row">
+						<c:set var="row" value="even" />
+						<c:set var="paid" value="notPaid" />
+						<c:forEach begin="9" end="12" varStatus="loop">  
+							<c:choose>
+								<c:when test="${fn:length(events[loop.index])>0}">
+									<div class="calendarMonth">
 								</c:when>
 								<c:otherwise>
-									<p class="dayNumber hidden-xs">-</p>
+									<div class="calendarMonth hidden-xs">
 								</c:otherwise>
 							</c:choose>
-						</div>
-						<c:if test="${(loopindex.index == 6) || (loopindex.index == 13) || (loopindex.index == 20) || (loopindex.index == 27)
-							|| (loopindex.index == 34) || (loopindex.index == 41) || (loopindex.index == 48)}">
-							<c:out value="</div>" escapeXml="false"/>
-						</c:if>
-					</c:forEach>
+								<c:forEach var="event" items="${events[loop.index]}">
+									<c:if test="${event.isPaid()}">
+										<c:set var="paid" value="paid" />
+									</c:if>
+									<c:if test="${event.isPaid() eq false}">
+										<c:set var="paid" value="notPaid" />
+									</c:if>
+									<p class="eventLabel ${paid}"><a href='<c:url value="/edit-event-${event.id}"/>'><span>${event.calendarLabel}</span></a></p>
+								</c:forEach>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -176,4 +212,5 @@ var year = '${year}';
 <script type="text/javascript">
 	var context = '${pageContext.request.contextPath}';
 	$("#eventsTable").DataTable();
+	
 </script>

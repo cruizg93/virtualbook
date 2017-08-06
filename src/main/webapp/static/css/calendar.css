@@ -78,31 +78,47 @@
 	margin-left: 0px;
 }
 
-.noMinHeight{
-	min-height: 0px !important;
+.noMinHeight, .noMinHeight:hover{
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    white-space: normal !important;
+    min-height: 0px !important;
+    height: auto !important;
 }
 
 .arrow{
 	vertical-align: bottom;
 	cursor: pointer;
 }
-.calendarDay:hover{
+.calendarDay:hover,
+.calendarMonth:hover{
 	background-color:#a2c8e8;
-	border-bottom: 1px solid #337AB7
+	border-bottom: 1px solid #337AB7;
+	overflow-y:scroll;
 }
 
-.calendarDay{
+.calendarMonth{cursor: pointer;}
+
+.calendarDay,
+.calendarMonth{
+	height:100px;
+	overflow-y:hidden;
+	overflow-x:hidden;
+	white-space: nowrap;
+	border-radius: 0 0 4px 4px;
 	position: relative;
   	float:left;
   	width:100%;	
   	min-height: 100px;
 }
 
-.calendarDay p{
+.calendarDay p,
+.calendarMonth p{
 	margin-bottom:0px;
 }
 
-.calendarDay > .dayLabel{
+.calendarDay > .dayLabel,
+.calendarMonth > .monthLabel{
 	background-color:#337AB7;
 	margin:0px;
 	width:100%;
@@ -110,7 +126,8 @@
 	font-weight: bold;
 }
 
-.calendarDay > .dayNumber{
+.calendarDay > .dayNumber,
+.calendarMonth > .MonthNumber{
 	background-color:#89b7dd;
 	font-size:1.2em;
 	font-weight: 400;
@@ -128,7 +145,8 @@
 
 /* xxs  like iphone*/
 @media screen and (max-width: 459px) {
-	.calendarDay{
+	.calendarDay,
+	.calendarMonth{
 		width: 100%;
 	}
 	.formAddButtonIcon{
@@ -139,7 +157,8 @@
 
 /* xs < 768 */
 @media screen and (min-width:460px) and (max-width: 767px) {
-	.calendarDay{
+	.calendarDay,
+	.calendarMonth{
 		width:100%;
 	}
 	.formAddButtonIcon{
@@ -153,6 +172,11 @@
 	.calendarDay{
 		width:14.285%;	
 	}
+	
+	.calendarMonth{
+		width:25%;
+	}
+	
 	.formAddButtonIcon{
 		position:absolute;
 		bottom:0px;
@@ -172,6 +196,10 @@
 	.calendarDay{
 		width:14.285%;	
 	}
+	
+	.calendarMonth{
+		width:25%;
+	}
 	.formAddButtonIcon{
 		position:absolute;
 		right:0.5px;
@@ -190,6 +218,9 @@
 @media screen and (min-width: 1200px) {
 	.calendarDay{
 		width:14.285%;	
+	}
+	.calendarMonth{
+		width:25%;
 	}
 	.formAddButtonIcon{
 		position:absolute;

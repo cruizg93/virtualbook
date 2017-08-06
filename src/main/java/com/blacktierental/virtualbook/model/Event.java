@@ -370,4 +370,24 @@ public class Event implements Serializable{
 	public String getInvoiceLable(){
 		return getFormatedDateAndHour()+"-"+(location!=null?location.getBuildingName():"");
 	}
+	
+	public String getCalendarLabel(){
+		StringBuilder label = new StringBuilder();
+		if(dateAndHour!=null){
+			label.append(dateAndHour.getDayOfMonth());
+			label.append("-");
+		}
+		if(client != null){
+			label.append(client.getName());
+			label.append("-");
+		}
+		if(location != null){
+			if(location.getBuildingName().length()>10){
+				label.append(location.getBuildingName().substring(0,9));
+			}else{
+				label.append(location.getBuildingName());
+			}
+		}
+		return label.toString();
+	}
 }

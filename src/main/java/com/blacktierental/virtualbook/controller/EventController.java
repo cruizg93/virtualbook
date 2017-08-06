@@ -1,6 +1,7 @@
 package com.blacktierental.virtualbook.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.beans.PropertyEditorSupport;
 import java.time.DayOfWeek;
@@ -165,7 +166,68 @@ public class EventController {
 		request.getSession().setAttribute("pervious_page",requestUrl+"?m="+currentMonth+"&y="+currentYear);
 		return "eventlist";
 	}
+	
+	@RequestMapping(value = { "/month" }, method = RequestMethod.GET, params = { "m" })
+	public String month(@RequestParam(value = "m", required = true) int currentMonth,
+			@RequestParam(value = "y", required = true) int currentYear, ModelMap model,HttpServletRequest request) {
+		LocalDate monthToLoad = LocalDate.of(currentYear, currentMonth, 1);
+		loadMonth(model, monthToLoad);
+		loadIncompleteEvents(model);
+		String requestUrl=request.getRequestURL().toString();
+		request.getSession().setAttribute("pervious_page",requestUrl+"?m="+currentMonth+"&y="+currentYear);
+		return "eventlist";
+	}
 
+	@RequestMapping(value = { "/calendar" }, method = RequestMethod.GET)
+	public String calendarList(ModelMap model, HttpServletRequest request) {
+		String requestUrl=request.getRequestURL().toString();
+		request.getSession().setAttribute("pervious_page",requestUrl);
+		loadYear(model, LocalDate.now());
+		loadIncompleteEvents(model);
+		return "calendar";
+	}
+	
+	@RequestMapping(value = { "/previousYear" }, method = RequestMethod.GET, params = { "y" })
+	public String previousYear(@RequestParam(value = "y", required = true) int currentYear, ModelMap model, HttpServletRequest request) {
+		LocalDate yearToLoad = LocalDate.of(currentYear,1, 1);
+		yearToLoad = yearToLoad.minusYears(1);
+		loadYear(model, yearToLoad );
+		loadIncompleteEvents(model);
+		String requestUrl=request.getRequestURL().toString();
+		request.getSession().setAttribute("pervious_page",requestUrl+"?y="+currentYear);
+		return "calendar";
+	}
+
+	@RequestMapping(value = { "/nextYear" }, method = RequestMethod.GET, params = { "y" })
+	public String nextYear(@RequestParam(value = "y", required = true) int currentYear, ModelMap model,HttpServletRequest request) {
+		LocalDate yearToLoad = LocalDate.of(currentYear,1, 1);
+		yearToLoad= yearToLoad.plusYears(1);
+		loadYear(model, yearToLoad);
+		loadIncompleteEvents(model);
+		String requestUrl=request.getRequestURL().toString();
+		request.getSession().setAttribute("pervious_page",requestUrl+"?y="+currentYear);
+		return "calendar";
+	}
+	
+	private void loadYear(ModelMap model, LocalDate yearToLoad){
+		LocalDate initial = LocalDate.of(yearToLoad.getYear(), Month.JANUARY, Month.JANUARY.minLength());
+		LocalDate last = LocalDate.of(yearToLoad.getYear(), Month.DECEMBER, Month.DECEMBER.maxLength());
+		List<Event> events = eventService.findAllEventsByDateRange(initial, last);
+		List<List<Event>> eventList = new ArrayList<List<Event>>();
+		for(int i=1;i<=12;i++){
+			eventList.add(new ArrayList<Event>());
+		}
+		for(Event event: events){
+			int month = event.getDateAndHour().getMonth().getValue();
+			eventList.get(month).add(event);
+		}
+		model.addAttribute("eventsList", events);
+		model.addAttribute("events", eventList);
+		model.addAttribute("year", initial.getYear());
+		model.addAttribute("count", events.size());
+	}
+	
+	
 	private void loadMonth(ModelMap model, LocalDate monthToLoad) {
 		int emptySpotsAtBegin = 0;
 		int emptySpotsAtEnd = 0;
@@ -186,19 +248,14 @@ public class EventController {
 		if (last.getDayOfWeek() != DayOfWeek.SUNDAY) {
 			emptySpotsAtEnd = (DayOfWeek.SUNDAY.getValue() - last.getDayOfWeek().getValue()) - 1;
 		}
-
+		
 		for (int i = (emptySpotsAtBegin * -1); i <= (numDays + emptySpotsAtEnd); i++) {
-			List<Event> list = new ArrayList<Event>();
-			if (i > 0 || i <= numDays) {
-				for (Event event : events) {
-					if ((i + 1) == event.getDateAndHour().getDayOfMonth()) {
-						list.add(event);
-					}
-				}
-			}
-			eventList.add(list);
+			eventList.add(new ArrayList<Event>());
 		}
-
+		for(Event event: events){
+			int day = event.getDateAndHour().getDayOfMonth() + emptySpotsAtBegin;
+			eventList.get(day).add(event);
+		}
 		model.addAttribute("emptySpotsAtBegin", emptySpotsAtBegin);
 		model.addAttribute("emptySpotsAtEnd", emptySpotsAtEnd);
 		model.addAttribute("eventsList", events);
@@ -209,13 +266,17 @@ public class EventController {
 	}
 
 	@RequestMapping(value = { "/newEvent" }, method = RequestMethod.GET)
-	public String newEvent(ModelMap model) {
+	public String newEvent(ModelMap model, HttpServletRequest request) {
 		Event event = new Event();
 		event.setItems(eventItemService.onePerItem());
+		String redirect = request.getSession().getAttribute("pervious_page").toString();
+		if(redirect!=null){
+			redirect = redirect.split("/")[redirect.split("/").length-1];
+		}
+		model.addAttribute("redirect", "/"+redirect);
 		model.addAttribute("event", event);
 		model.addAttribute("edit", false);
 		model.addAttribute("loggedinuser", getPrincipal());
-
 		return "eventRegistration";
 	}
 
