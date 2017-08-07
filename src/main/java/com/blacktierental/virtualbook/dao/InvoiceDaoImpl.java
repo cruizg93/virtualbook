@@ -71,4 +71,13 @@ public class InvoiceDaoImpl extends AbstractDao<Integer, Invoice> implements Inv
 		return new ArrayList<Invoice>();
 	}
 
+	@Override
+	public List findInvoicesNumberById(int id) throws ObjectNotFoundException{
+		Query q = getSession().createQuery("SELECT i.invoiceNumber " 
+				+"FROM Invoice i, InvoiceEvent ie, Event e "
+				+"WHERE i.id = ie.invoice.id and ie.event.id = ? and e.state ='ACTIVE' "
+				+"GROUP BY i.invoiceNumber ");
+		q.setParameter(0, id);
+		return q.getResultList();
+	}
 }

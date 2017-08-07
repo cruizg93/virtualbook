@@ -16,4 +16,5 @@ public interface EventItemService {
 	List<EventItem> findAllEventItems();
 	List<String[]> itemCountByYear(int year);
 	List<EventItem> onePerItem();
+	
 }

@@ -143,11 +143,13 @@ function collect(){
 	        		contentType : "application/json",
 	        		url : contextPath+'/collectInvoice',
 	        		data : data,
+	        		timeout : 100000,
 	        		dataType : 'json',
 	        		success : function(data) {
 	        			alert(data);
 	        		},
 	        		error : function(e) {
+	        			alert("error");
 	        			console.log("ERROR: ", e);
 	        		},
 	        		done : function(e) {

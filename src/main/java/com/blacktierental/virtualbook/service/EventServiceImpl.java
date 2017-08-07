@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blacktierental.virtualbook.dao.EventDao;
+import com.blacktierental.virtualbook.dao.InvoiceDao;
 import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
@@ -40,11 +41,15 @@ public class EventServiceImpl implements EventService{
 	@Autowired
 	private EventDao dao;
 	
+	@Autowired
+	private InvoiceDao invoiceDao;
+	
 	@Override
 	public Event findById(int id) throws ObjectNotFoundException {
-		return dao.findById(id);
+		Event event = dao.findById(id);
+		return event;
 	}
-
+	
 	@Override
 	public List<Event> findByClient(Client client) {
 		return dao.findByClient(client);

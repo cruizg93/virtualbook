@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.blacktierental.virtualbook.exceptions.ObjectNotFoundException;
 import com.blacktierental.virtualbook.model.Client;
 import com.blacktierental.virtualbook.model.Event;
+import com.blacktierental.virtualbook.model.Invoice;
 import com.blacktierental.virtualbook.model.Item;
 import com.blacktierental.virtualbook.model.Location;
 import com.blacktierental.virtualbook.service.ClientService;

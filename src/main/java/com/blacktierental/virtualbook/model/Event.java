@@ -1,6 +1,9 @@
 package com.blacktierental.virtualbook.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -15,6 +18,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -46,14 +51,12 @@ public class Event implements Serializable{
 	@JoinColumn(name="event_id",referencedColumnName="id")
 	private List<EventItem> items;
 	
-	public List<EventItem> getItems() {
-		return items;
-	}
-
-	public void setItems(List<EventItem> items) {
-		this.items = items;
-	}
-
+	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REMOVE,CascadeType.PERSIST})
+	@JoinTable(name="tbl_invoice_event",
+				joinColumns = {@JoinColumn(name="event_id")},
+				inverseJoinColumns = {@JoinColumn(name="invoice_id")})
+	private Set<Invoice> invoices= new HashSet<Invoice>();
+	
 	@ManyToOne
 	@JoinColumn(name="client_id")
 	private Client client;
@@ -111,6 +114,22 @@ public class Event implements Serializable{
 	@NotEmpty
 	@Column(name="state",nullable=false)
 	private String state = State.ACTIVE.getState();
+	
+	public List<EventItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<EventItem> items) {
+		this.items = items;
+	}
+	
+	public Set<Invoice> getInvoices() {
+		return invoices;
+	}
+
+	public void setInvoices(Set<Invoice> invoices) {
+		this.invoices = invoices;
+	}
 
 	public Integer getId() {
 		return id;
@@ -390,4 +409,19 @@ public class Event implements Serializable{
 		}
 		return label.toString();
 	}
+	
+	public String getInvoiceNumbers(){
+		List numbers = new ArrayList();
+		for(Invoice i: invoices){
+			if(!numbers.contains(i.getInvoiceNumber())){
+				numbers.add(i.getInvoiceNumber());
+			}
+		}
+		if(!numbers.isEmpty()){
+			return numbers.toString();
+		}else{
+			return "";
+		}
+	}
+
 }

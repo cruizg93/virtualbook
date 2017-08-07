@@ -23,6 +23,12 @@
 				<form:errors path="contact_date" class="help-inline text-danger" />
 			</div>
 		</div>
+		<c:if test="${not empty event.invoiceNumbers}">
+			<div class="col-md-12 col-ms-12 col-xs-12 text-right">
+				<label class="col-md-10 control-lable pull-right" for="invoiceNumbers"
+					id="invoiceNumber">Invoice Number ${event.invoiceNumbers}</label>
+			</div>
+		</c:if>
 		<div class="row">
 			<div class="col-lg-4 col-md-4 col-ms-4 col-xs-12">
 				<div class="form-group input-group">

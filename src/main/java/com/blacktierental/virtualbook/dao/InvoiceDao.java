@@ -13,4 +13,5 @@ public interface InvoiceDao {
 	List<Invoice> findAllInvoices();
 	List<Invoice> findByClient(Invoice invoice);
 	List<Invoice> findByEvent(Invoice invoice);
+	List findInvoicesNumberById(int id) throws ObjectNotFoundException;
 }

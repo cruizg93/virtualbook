@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,6 +87,8 @@ public class InvoiceController {
 	public String saveInvoice(@Valid Invoice invoice, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
+	    	model.addAttribute("invoice",invoice);
+	    	model.addAttribute("edit", false);
 			return "invoiceRegistration";
 		}
 		invoiceService.save(invoice);
@@ -186,5 +189,10 @@ public class InvoiceController {
 			model.addAttribute("message",e.getMessage());
 			return "exception";
 		}
+	}
+
+	@ModelAttribute("clients")
+	public List<Client> initializeClients() {
+		return clientService.findAllClients();
 	}
 }

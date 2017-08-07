@@ -22,7 +22,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="tbl_invoice")
 public class Invoice {
 
-	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REMOVE,CascadeType.PERSIST})
+	@ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinTable(name="tbl_invoice_event",
 				joinColumns = {@JoinColumn(name="invoice_id")},
 				inverseJoinColumns = {@JoinColumn(name="event_id")})
