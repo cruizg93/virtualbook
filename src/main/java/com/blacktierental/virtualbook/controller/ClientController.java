@@ -82,6 +82,8 @@ public class ClientController {
 	public String saveClient(@Valid Client client, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
+			model.addAttribute("client", client);
+			model.addAttribute("edit", false);
 			return "clientRegistration";
 		}
 
@@ -92,11 +94,10 @@ public class ClientController {
 			result.addError(clientUniqueError);
 			return "clientRegistration";
 		}
-
+		
 		clientService.saveClient(client);
 
 		model.addAttribute("success", "CLIENT <strong>" + client.getName() + "<strong> REGISTERED SUCCESSFULLY");
-		// return "success";
 		return "redirect:/clientlist";
 	}
 	

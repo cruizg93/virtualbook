@@ -97,7 +97,7 @@ where c.id = e.client_id and l.id=e.location_id]]>
 	<field name="taxes" class="java.lang.Double"/>
 	<field name="items" class="java.util.List"/>
 	<detail>
-		<band height="708" splitType="Stretch">
+		<band height="794" splitType="Immediate">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<image isUsingCache="true">
 				<reportElement x="0" y="0" width="139" height="70" uuid="697aa840-6aeb-45bf-9629-4c9e1fb635eb"/>
@@ -165,6 +165,9 @@ $F{client.companyName}]]></textFieldExpression>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[CONTACT PHONE NUMBER:]]></text>
 			</staticText>
 			<staticText>
@@ -288,14 +291,14 @@ $F{client.email}]]></textFieldExpression>
 				<text><![CDATA[THIS CONTRACT PRICE/AGREEMENT IS BASED ON THE QUANTITY INDICATED AT ORIGINAL SIGNING. A DECREASE IN CHAIR AMOUNTS WILL/MAY AFFECT THE RENTAL PRICE PER CHAIR]]></text>
 			</staticText>
 			<frame>
-				<reportElement x="0" y="333" width="555" height="135" uuid="963f57da-0201-46a5-bba2-8ff109c02689">
+				<reportElement x="0" y="333" width="555" height="187" uuid="963f57da-0201-46a5-bba2-8ff109c02689">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<box>
 					<pen lineWidth="2.0"/>
 				</box>
 				<componentElement>
-					<reportElement x="5" y="18" width="395" height="83" uuid="9f0edcb1-354f-4620-8f72-5c93b3f0f750">
+					<reportElement x="5" y="18" width="395" height="134" uuid="9f0edcb1-354f-4620-8f72-5c93b3f0f750">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -447,18 +450,18 @@ $F{client.email}]]></textFieldExpression>
 					<textFieldExpression><![CDATA["$"+$F{total}.toString()]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement key="" style="Labels" positionType="FixRelativeToBottom" x="5" y="103" width="545" height="11" backcolor="#FBFF00" uuid="90781f02-085b-45ec-ab23-38a11d3b9271">
+					<reportElement key="" style="Labels" positionType="FixRelativeToBottom" x="5" y="155" width="545" height="11" backcolor="#FBFF00" uuid="90781f02-085b-45ec-ab23-38a11d3b9271">
 						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font size="8" isUnderline="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Make Checks Payable to Black Tie Rentals of Florida: (We do accept credit card. Thru PAY PAL). deposit nonrefundable retainer: $"+$F{advance}.toString()]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Make Checks Payable to Black Tie Rentals of Florida: (We do accept credit card. Thru PAY PAL). deposit nonrefundable retainer"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement positionType="FixRelativeToBottom" x="6" y="116" width="545" height="16" backcolor="#FBFF00" uuid="de34601f-af41-4adf-8fe5-6022611c8537">
+					<reportElement positionType="FixRelativeToBottom" x="6" y="168" width="545" height="16" backcolor="#FBFF00" uuid="de34601f-af41-4adf-8fe5-6022611c8537">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
 					<box>
@@ -468,19 +471,59 @@ $F{client.email}]]></textFieldExpression>
 						<bottomPen lineWidth="0.0" lineStyle="Solid"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid"/>
 					</box>
-					<textElement textAlignment="Right">
+					<textElement textAlignment="Center">
 						<font fontName="SansSerif" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Due date on 30 days prior to event - NO EXCEPTIONS. Balance of: $"+($F{total}.doubleValue()-$F{advance}.doubleValue())]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Due date on 30 days prior to event - NO EXCEPTIONS."]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="6" y="4" width="394" height="14" uuid="5eace474-bf9e-4798-97aa-4e7ddf0ef6c9"/>
 					<textElement verticalAlignment="Bottom"/>
 					<text><![CDATA[Mark with an X please ]]></text>
 				</staticText>
+				<textField>
+					<reportElement style="Field" x="480" y="119" width="70" height="15" uuid="e886e364-08e8-44eb-b1e6-487b251f1ec1">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Field" x="480" y="137" width="70" height="15" uuid="f81c6436-c759-4b65-913e-8c7de38d8069">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="labelMoney" x="400" y="119" width="80" height="18" uuid="d80fd4f2-e7bf-43be-be27-6dbd21a25730">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[INITIAL DEPOSIT:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="labelMoney" x="400" y="134" width="80" height="18" uuid="00d6289d-0c4c-4727-90f5-37089fe3b171">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[BALANCE:]]></text>
+				</staticText>
 			</frame>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="470" width="555" height="49" uuid="9798c81f-6502-4043-a9d7-736f38e2a091">
+				<reportElement positionType="Float" x="0" y="538" width="555" height="49" uuid="9798c81f-6502-4043-a9d7-736f38e2a091">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -491,7 +534,7 @@ P.O. BOX 7448, WESLEY CHAPEL, FL, 33545
 For questions please e-mail:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="519" width="555" height="20" forecolor="#001EFF" uuid="c50a9abf-75ca-4b9c-aa82-8e9fdff203a3">
+				<reportElement positionType="Float" x="0" y="587" width="555" height="20" forecolor="#001EFF" uuid="c50a9abf-75ca-4b9c-aa82-8e9fdff203a3">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -500,7 +543,7 @@ For questions please e-mail:]]></text>
 				<text><![CDATA[Eddie@BlackTieRental.com]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="539" width="555" height="20" uuid="a8b2403d-f6a0-48f0-9e6e-4620950d3e7b">
+				<reportElement positionType="Float" x="0" y="607" width="555" height="20" uuid="a8b2403d-f6a0-48f0-9e6e-4620950d3e7b">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -508,8 +551,11 @@ For questions please e-mail:]]></text>
 				</textElement>
 				<text><![CDATA[OR CALL: (727) 409 1979]]></text>
 			</staticText>
+			<break>
+				<reportElement x="0" y="631" width="555" height="1" uuid="50fe8f06-dc9f-4cba-b8b2-ee58dd2bda36"/>
+			</break>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="559" width="555" height="10" uuid="444c3f64-5b02-4f9a-8288-f8503aa2e1af">
+				<reportElement positionType="Float" x="0" y="632" width="555" height="10" uuid="444c3f64-5b02-4f9a-8288-f8503aa2e1af">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -520,7 +566,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">A Black Tie Enterprises LLC Company \nBOOKING FEE AND DEPOSITS: Booking Fee DEPOSIT of $ 100.00 is required with every rental agreement. <style backcolor=\"yellow\">Dates will not be held without a deposit.</style>\n\nTERMS AND CONDITIONS SECTION 1. TERM</style> The term of this rental is for <style backcolor=\"yellow\">_______________________ (date of event).</style> Black Tie Rentals shall determine the date and times of delivery in relation to their event schedules.\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="569" width="555" height="10" uuid="6f6de7c4-0aff-4f0c-941b-7509e7f212b1">
+				<reportElement positionType="Float" x="0" y="642" width="555" height="10" uuid="6f6de7c4-0aff-4f0c-941b-7509e7f212b1">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -530,7 +576,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 2.  RENTAL/BOOKING FEE.</style> Lessee shall pay the rental payments shown on invoice, upon signing. Booking Fee is due to HOLD the date. Black Tie Rentals does not hold dates unless booking fee deposits are received. <style backcolor=\"yellow\">The balance is due 30 days prior to the event date.  Rental payments shall be due whether or not lessee has received any notice that such payments are due.</style>\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="579" width="555" height="10" uuid="8294abc5-db1a-4b12-825b-45c12c6202ff">
+				<reportElement positionType="Float" x="0" y="652" width="555" height="10" uuid="8294abc5-db1a-4b12-825b-45c12c6202ff">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -540,7 +586,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 3. CHAIR AMOUNTS: INCREASE OF CHAIRS:</style> If the Lessee’s number of chairs increases after the final payment is made, and more chairs are required, the Lessee shall sign an amendment to the contract, with added sales taxes, and appropriate delivery fees. This payment must be received via money order or cashier’s check before the event date, or Black Tie will not deliver the add-on chairs. DECREASE OF CHAIRS: If the Lessee’s number of chairs decreases after the signing of the contract but before the 30 day due date, an adjustment can be made. If the decrease occurs after the 30 day due date, the original chair agreement will be upheld. After the final payment has been made,  REFUNDS OR ADJUSTMENTS will be made or given; unless other written arrangements have been made. All verbal and oral agreements are null and void.\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="589" width="555" height="10" uuid="4086bbb5-271a-43ae-8d75-2c1871a5ba16">
+				<reportElement positionType="Float" x="0" y="662" width="555" height="10" uuid="4086bbb5-271a-43ae-8d75-2c1871a5ba16">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -550,7 +596,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 4. INDEMNITY.</style> Lessee shall indemnify Black Tie Rentals of Florida against, and hold Black Tie Rentals of Florida harmless from, any and all claims, actions, suits, proceedings, costs, expenses, damages, and liabilities, including reasonable attorney fees arising out of, connected with, or resulting from the property subject to this rental, including, but not limited to the manufacture, selection, delivery, use, operation, or return of such property.\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="599" width="555" height="10" uuid="234da6be-2b5e-4c4b-978b-c866ed3598c1">
+				<reportElement positionType="Float" x="0" y="672" width="555" height="10" uuid="234da6be-2b5e-4c4b-978b-c866ed3598c1">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -560,7 +606,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 5. SALES TAXES.</style> Lessee shall PAY Black Tie Rentals of Florida for (or pay directly if instructed by Black Tie Rentals of Florida) all charges and taxes (local, state, and federal) that may now or hereafter be imposed or levied on the sale, purchase, ownership, leasing, or use of the equipment. Sales Tax Exception - If Lessee can provide a legal, current Business Sales Tax Certificate attached to the signed contract.\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="609" width="555" height="10" uuid="8b3e7a5f-1225-4c91-b5d4-8b37bd81cc39">
+				<reportElement positionType="Float" x="0" y="682" width="555" height="10" uuid="8b3e7a5f-1225-4c91-b5d4-8b37bd81cc39">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -570,7 +616,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 6. LOSS OR DAMAGE.</style> Lessee assumes and shall bear the entire risk of loss, theft, destruction, or damage of or to any part of the equipment (“loss or damage”) from any cause whatsoever, whether or not covered by insurance, and no such loss shall release lessee of its obligation under this agreement in the event of loss or damage. Lessee, at the sole option of Black Tie Rentals of Florida, shall (a) at lessee’s expense, repair the equipment to the satisfaction of Black Tie Rentals of Florida; or (b) at lessee’s expense, and to the satisfaction of Black Tie Rentals of Florida, replace the equipment with similar or like equipment in good condition and repair and of comparable value, with clear title thereto in Black Tie Rentals of Florida; or (c) make payment to Black Tie Rentals of Florida the total of the REPLACEMENT VALUE PER CHAIR EQUALS $75.00.  REPLACEMENT VALUE PER CUSHION EQUALS $4.00. <style backcolor=\"yellow\">The chairs have a maximum weight limit of 300 pounds. The Lessee agrees that no such person weighing over 300 will be using these chairs.</style> Upon pick up of the rentals, Black Tie will inspect the condition of the chairs, cushions, etc. If such damage or loss has occurred, the LESSEE will be notified, and all required monies shall be due within 20 days of certified letter. If monies are not collected, The Lessee shall assume all legal costs, in effort for Black Tie to collect these fees.\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="619" width="555" height="10" uuid="ce010d86-5af6-42f4-985a-0a424c31b128">
+				<reportElement positionType="Float" x="0" y="692" width="555" height="10" uuid="ce010d86-5af6-42f4-985a-0a424c31b128">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -580,7 +626,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 7: CHARGER RENTAL.</style> Lessee agrees that when chargers are rented, they will not be used in conjunction with a buffet (Plated Dinner Charger or décor only). That all chargers will be cleaned and placed back into the containers they were delivered in, and returned in the same condition they were rented. The Lessee will assume additional fees if the chargers require excessive cleaning, if any are broken or cracked, or missing. The Lessee agrees to pay $4 for each charger that needs replacement. This shall be invoiced after the event.\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="629" width="555" height="10" uuid="bfa540b7-6988-4668-a76f-d3a963c82821">
+				<reportElement positionType="Float" x="0" y="702" width="555" height="10" uuid="bfa540b7-6988-4668-a76f-d3a963c82821">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -590,7 +636,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 8. ASSIGNABILITY.</style> Without Black Tie Rentals of Florida’s prior written consent, lessee shall not (a) assign, transfer, pledge, or otherwise dispose of this rental, the equipment, or any interest therein or (b) sublet or lend the equipment or permit it to be used by anyone other than lessee or lessee’s employees.  Black Tie Rentals of Florida may assign this rental or grant a subsidiary interest in the equipment in whole or part without notice to lessee, and Black Tie Rentals of Florida’s assignee or secured party may then assign this rental or the security agreement without notice to lessee. Each such assignee or secured party shall have all the rights, but none of the obligations, of Black Tie Rentals of Florida under this rental. Lessee shall recognize such assignments or security agreements and shall not assert against the assignees or the secured parties any defense counterclaim or offset lessee may have against Black Tie Rentals of Florida. In spite of any such assignment, Black Tie Rentals of Florida warrants that lessee shall quietly enjoy use of the equipment, subject to the terms and conditions of this rental. Subject to the foregoing, the rental inures to the benefit of and is binding on the respective heirs, legatees, personal representatives, successors, and assigns of Black Tie Rentals of Florida and lessee.\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="639" width="555" height="10" uuid="ad0810cc-2271-405c-b8b3-9995e0187c4b">
+				<reportElement positionType="Float" x="0" y="712" width="555" height="10" uuid="ad0810cc-2271-405c-b8b3-9995e0187c4b">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -600,7 +646,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 9. LOCATION AND MAINTENANCE.</style> At lessee’s own risk, lessee shall use or permit the use of the equipment solely at the location specified in this rental, or if none is specified, at lessee’s billing address set forth above and such equipment shall not be moved without Black Tie Rentals of Florida’s prior written consent. Lessee, at lessee’s expense, shall maintain the equipment in good repair, condition, and functional order, shall not use the equipment unlawfully, and shall not alter the equipment without Black Tie Rentals of Florida’s prior written consent. Black Tie Rentals of Florida shall not be liable for loss of profit or other consequential damages resulting from the theft, destruction, or disrepair of the equipment, and there shall be no abatement of rental payments on account of any such theft, destruction, or disrepair.\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="649" width="555" height="10" uuid="9e2c9d44-0c18-479f-bef2-085a7ab4da09">
+				<reportElement positionType="Float" x="0" y="722" width="555" height="10" uuid="9e2c9d44-0c18-479f-bef2-085a7ab4da09">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -610,7 +656,7 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 10. WARRANTIES.</style> Black Tie Rentals of Florida does not warrant the fitness, merchantability, design, condition, capacity, suitability, or performance of the property rented. Black Tie Rentals of Florida makes no express or implied warranties and rentals the property “as is” and “with all faults.” Warranties made by the seller and/or manufacturer of the rental equipment are assigned by Black Tie Rentals of Florida to lessee. In event of any claim concerning the location, installation, repair, or use of the property rented or any other claim concerning the property, regardless of cause or consequence, lessee’s only remedy, if any, is against the seller or manufacturer of the property. No defect regardless the cause or consequence shall relieve lessee from performance under this rental, including rental payments.\n"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="659" width="555" height="10" uuid="d0b43017-3a06-4ebe-8593-ff90134fa78d">
+				<reportElement positionType="Float" x="0" y="732" width="555" height="10" uuid="d0b43017-3a06-4ebe-8593-ff90134fa78d">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -620,8 +666,9 @@ For questions please e-mail:]]></text>
 				<textFieldExpression><![CDATA["<style fontName=\"SansSerif\" isBold=\"true\">SECTION 11. MISCELLANEOUS.</style> This instrument constitutes the entire agreement between Black Tie Rentals of Florida and lessee and is irrevocable for its term and for the aggregate Rentals reserved above, and it shall not be amended, altered, or changed except by a written agreement signed by the parties.\n\n<style fontName=\"SansSerif\" isBold=\"true\">SECTION 12. ACTS OF GOD.</style> On wedding/event day, Black Tie Rentals of Florida will not be held responsible for any uncontrollable delays or mishaps that are beyond control; such as: Any acts of God, bad weather, structural problems, other hired professionals, other vendor or outside hired props or displays, or any such occurrences having to do with the property at the above venues.  HURRICANE: In the event of a hurricane, when the event needs to be rescheduled to an alternate date and time, a new deposit may be required. The availability of our services may also be altered if the NEW date interferes with a previously contracted event.\n\n<style fontName=\"SansSerif\" isBold=\"true\">SECTION 13. CANCELLATION POLICY:</style> If this event is canceled or postponed for any reason, within any amount of time after the contract and deposit is received, the Lessee forfeits the booking fee deposit. <style backcolor=\"yellow\">If the Lessee fails to pay the required balance when due (30 days prior), Black Tie Rentals of Florida reserves the right to consider the rental agreement null and void. No refunds are given for any reason, and no rental items shall be delivered.</style>\n\n<style fontName=\"SansSerif\" isBold=\"true\">SECTION 14. RETURNED CHECKS:</style> There will be a returned/bounced check fee of $35 payable to Black Tie in the form of cashier’s check/money order or cash.  If the lessee’s check is returned - no other payment besides cashier’s check, money order, or cash will be accepted. Black Tie reserves the right to refuse service, delivery, rental of chairs upon notice of returned check, if no prior arrangements are made in writing.\n\n<style fontName=\"SansSerif\" isBold=\"true\">SECTION 15. SURCHARGES:</style> Under some circumstances, Black Tie will impose a gas surcharge, even after the above contract has been signed and agreed. This will be imposed based on a large increase in fuel. Lessee will be notified in writing if this is imposed.In witness whereof, each party has caused this agreement to be executed on the date indicated below. Signing of this agreement indicates Lessee’s agreeance with ALL of above sections and ALL pricing listed on page one of this contract."]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="678" width="555" height="30" uuid="7f1b9213-a84e-41a7-9dbe-4c003bd41449">
+				<reportElement positionType="Float" x="0" y="742" width="555" height="30" uuid="ca070c86-baba-46b7-92ca-cc37e04b70b2">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
@@ -630,18 +677,18 @@ For questions please e-mail:]]></text>
 			</textField>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="41">
+	<lastPageFooter>
+		<band height="56">
 			<textField>
-				<reportElement x="390" y="0" width="110" height="30" uuid="2732c99e-5590-46af-a822-ac059d030f5a"/>
+				<reportElement x="390" y="26" width="110" height="30" uuid="3e6d7e67-4906-4552-95d0-4462ff806312"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of "]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="500" y="0" width="54" height="30" uuid="9509dc9c-1e72-4d23-a72e-9eed7593de6a"/>
+				<reportElement x="500" y="26" width="54" height="30" uuid="481018c4-43fa-4339-aa26-e78ef34e586a"/>
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[" "+$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
-	</pageFooter>
+	</lastPageFooter>
 </jasperReport>
