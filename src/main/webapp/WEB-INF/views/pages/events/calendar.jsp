@@ -27,7 +27,7 @@ var year = '${year}';
 		</div>
 	</div>
 	<div class="divTopButton">
-		<button type="button" class="btn btn-primary btn-lg " 
+		<button type="button" class="btn btn-success btn-lg " 
 			onclick="window.location.href ='<c:url value="/newEvent" />'">
 		<span class="glyphicon glyphicon-plus"></span>New Event</button>
 	</div>
@@ -169,7 +169,7 @@ var year = '${year}';
 										</button>
 									</sec:authorize>
 									<sec:authorize access="hasRole('ADMIN')">
-										<button type="button" class="btn btn-primary formDeleteButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
+										<button type="button" class="btn btn-success formDeleteButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
 												onclick="contract(${event.id})">
 												<span class="glyphicon glyphicon-download-alt"></span><span
 													class="hidden-ms hidden-xs"> Contract</span>
@@ -187,7 +187,7 @@ var year = '${year}';
 	</div>
 </div>
 <div class="container divBottomButton">
-	<button type="button" class="btn btn-primary btn-lg " 
+	<button type="button" class="btn btn-success btn-lg " 
 		onclick="window.location.href ='<c:url value="/newEvent" />'">
 	<span class="glyphicon glyphicon-plus"></span>New Event</button>
 </div>

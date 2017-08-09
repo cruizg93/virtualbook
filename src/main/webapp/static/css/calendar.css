@@ -126,6 +126,8 @@
 	font-weight: bold;
 }
 
+.dayNumber{cursor:pointer;}
+
 .calendarDay > .dayNumber,
 .calendarMonth > .MonthNumber{
 	background-color:#89b7dd;

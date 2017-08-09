@@ -265,6 +265,26 @@ public class EventController {
 		model.addAttribute("year", initial.getYear());
 		model.addAttribute("count", events.size());
 	}
+	
+	@RequestMapping(value = { "/newEvent-{year}-{month}-{day}" }, method = RequestMethod.GET)
+	public String newEventWithEventDate(@PathVariable String year,@PathVariable String month,@PathVariable String day, ModelMap model, HttpServletRequest request) {
+		Event event = new Event();
+		event.setItems(eventItemService.onePerItem());
+		if(month.length()==1){month="0"+month;}
+		if(day.length()==1){day="0"+day;}
+		event.setDateAndHour(LocalDateTime.parse(year+"-"+month+"-"+day+" 16:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+		
+		String redirect = request.getSession().getAttribute("pervious_page").toString();
+		if(redirect!=null){
+			redirect = redirect.split("/")[redirect.split("/").length-1];
+		}
+		model.addAttribute("redirect", "/"+redirect);
+		model.addAttribute("event", event);
+		model.addAttribute("hasDate",true);
+		model.addAttribute("edit", false);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "eventRegistration";
+	}
 
 	@RequestMapping(value = { "/newEvent" }, method = RequestMethod.GET)
 	public String newEvent(ModelMap model, HttpServletRequest request) {

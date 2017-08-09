@@ -374,6 +374,12 @@
 <script>
 	var context = '${pageContext.request.contextPath}';
 	var editing = "${edit}";
+	var hasDate = "${hasDate}";
+	if(hasDate=='true'){
+		var date = '${event.dateAndHour}';
+		date = date.replace("T"," ");
+		$("#dateAndHourControl").val(date);
+	}
 	if(editing!=='true'){
 		$("#location").prepend("<option value='' selected='selected'>LOCATION</option>");
 		$("#client").prepend("<option value='' selected='selected'>CLIENT</option>");
