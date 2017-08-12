@@ -23,7 +23,7 @@ USE `virtualbook`;
 
 LOCK TABLES `tbl_persistent_logins` WRITE;
 /*!40000 ALTER TABLE `tbl_persistent_logins` DISABLE KEYS */;
-INSERT INTO `tbl_persistent_logins` (`series`, `last_used`, `token`, `username`) VALUES ('MBlZ2xwd3luGGNxzoVQv7g==','2017-07-27','Gy/eSPl4h0Pyk1qMRCdQ9g==','ADMIN');
+INSERT INTO `tbl_persistent_logins` (`series`, `last_used`, `token`, `username`) VALUES ('7P0ERfks68mbUYqkDBZUXQ==','2017-08-11','vmi0IwTJ/BcAMeucKyOb4w==','ADMIN');
 /*!40000 ALTER TABLE `tbl_persistent_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -36,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-27 23:58:49
+-- Dump completed on 2017-08-11 23:44:21

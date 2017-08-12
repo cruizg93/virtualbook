@@ -18,14 +18,22 @@ USE `virtualbook`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `tbl_attachment`
+-- Table structure for table `tbl_invoice`
 --
 
-LOCK TABLES `tbl_attachment` WRITE;
-/*!40000 ALTER TABLE `tbl_attachment` DISABLE KEYS */;
-INSERT INTO `tbl_attachment` (`id`, `description`) VALUES (10,'IVORY'),(11,'WHITE'),(12,'BLACK'),(13,'GOLD'),(14,'SILVER'),(15,'MAHOGANY'),(16,'ROUND 6'),(17,'ROUND 8'),(18,'RECTANGLE 6');
-/*!40000 ALTER TABLE `tbl_attachment` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `tbl_invoice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl_invoice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `due_date` datetime NOT NULL,
+  `invoice_number` varchar(45) NOT NULL,
+  `state` varchar(45) DEFAULT 'ACTIVE',
+  `comment` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `invoice_number_UNIQUE` (`invoice_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +44,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-11 23:44:21
+-- Dump completed on 2017-08-11 23:44:29

@@ -23,7 +23,7 @@ USE `virtualbook`;
 
 LOCK TABLES `tbl_item_attachment` WRITE;
 /*!40000 ALTER TABLE `tbl_item_attachment` DISABLE KEYS */;
-INSERT INTO `tbl_item_attachment` (`item_id`, `attachment_id`) VALUES (37,10),(32,11),(32,12),(37,12),(32,13),(32,15),(35,16),(35,17),(35,18);
+INSERT INTO `tbl_item_attachment` (`item_id`, `attachment_id`) VALUES (32,12),(32,13),(32,15),(32,14),(37,12),(37,15),(37,11);
 /*!40000 ALTER TABLE `tbl_item_attachment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -36,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-27 23:58:48
+-- Dump completed on 2017-08-11 23:44:20

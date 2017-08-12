@@ -23,7 +23,7 @@ USE `virtualbook`;
 
 LOCK TABLES `tbl_event` WRITE;
 /*!40000 ALTER TABLE `tbl_event` DISABLE KEYS */;
-INSERT INTO `tbl_event` (`id`, `comments`, `forward_payment`, `client_same_as_client`, `contact_person_email`, `contact_person_name`, `contact_person_number`, `contact_date`, `event_date`, `drop_off_time`, `pick_up_time`, `delivery`, `event_name`, `state`, `taxPercentage`, `client_id`, `location_id`) VALUES (44,'',0,0,'','','','2017-07-27','2017-07-27 22:34:00',NULL,NULL,50,'TEST NULL','ACTIVE',7,10,NULL),(45,'',0,0,'','','','2017-07-27',NULL,NULL,NULL,0,'TEST NULL 2','ACTIVE',0,15,NULL),(46,'',0,1,'','','','2017-07-27',NULL,NULL,NULL,0,'TEST NULL3','ACTIVE',0,7,NULL),(47,'',0,0,'','','','2017-07-27',NULL,NULL,NULL,0,'TEST NULL 4','ACTIVE',0,9,NULL),(48,'',0,1,'','','','2017-07-27',NULL,NULL,NULL,0,'TEST 5','ACTIVE',0,5,NULL);
+INSERT INTO `tbl_event` (`id`, `comments`, `forward_payment`, `client_same_as_client`, `contact_person_email`, `contact_person_name`, `contact_person_number`, `contact_date`, `event_date`, `drop_off_time`, `pick_up_time`, `delivery`, `event_name`, `state`, `taxPercentage`, `client_id`, `location_id`) VALUES (64,'',0,1,'HOBI@DANA.COM','DANA HOBI','(222) 222-2222','2017-07-31','2017-01-14 11:55:00',NULL,NULL,0,'TEST','ACTIVE',0,13,12),(66,'prueba \n COLLECTED BY INVOICE #TC2 \npaid thru paypal, confirmation #665654',1123.5,1,'','','','2017-08-05','2017-08-05 17:48:00','2017-08-05 17:48:00','2017-08-05 17:48:00',50,'TEST','ACTIVE',7,5,9),(67,'',0,1,'','','','2017-08-06',NULL,NULL,NULL,0,'DFGDFG','ACTIVE',0,NULL,NULL),(68,'',0,1,'','','','2017-08-06','2017-12-31 15:55:00',NULL,NULL,0,'DECEMBER TEST','ACTIVE',0,5,NULL),(69,'',0,1,'','','','2017-08-06','2017-01-01 05:10:00',NULL,NULL,0,'JANUARY TEST','ACTIVE',0,NULL,NULL),(70,'',0,1,'','','','2017-08-11',NULL,NULL,NULL,50,'NEW CLIENT','ACTIVE',7,17,16);
 /*!40000 ALTER TABLE `tbl_event` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -36,4 +36,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-27 23:58:50
+-- Dump completed on 2017-08-11 23:44:21

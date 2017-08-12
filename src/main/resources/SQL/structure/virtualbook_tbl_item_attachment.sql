@@ -25,12 +25,9 @@ DROP TABLE IF EXISTS `tbl_item_attachment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tbl_item_attachment` (
-  `item_id` int(11) NOT NULL,
-  `attachment_id` int(11) NOT NULL,
-  PRIMARY KEY (`item_id`,`attachment_id`),
-  KEY `FK_ATTACHMENT_ATTACHMENT_ID_idx` (`attachment_id`),
-  CONSTRAINT `FK_ATTACHMENT_ATTACHMENT_ID` FOREIGN KEY (`attachment_id`) REFERENCES `tbl_attachment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_ITEM_ITEM_ID` FOREIGN KEY (`item_id`) REFERENCES `tbl_item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `item_id` int(11) DEFAULT NULL,
+  `attachment_id` int(11) DEFAULT NULL,
+  KEY `FK_ATTACHMENT_ATTACHMENT_ID_idx` (`attachment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -43,4 +40,4 @@ CREATE TABLE `tbl_item_attachment` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-27 23:58:37
+-- Dump completed on 2017-08-11 23:44:28
