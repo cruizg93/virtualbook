@@ -40,7 +40,6 @@ public class User {
 	@Column(name="phone_number")
 	private String phoneNumber;
 	
-	@NotEmpty
 	@Column(name="email")
 	@Pattern(regexp="\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}\\b")
 	private String email;

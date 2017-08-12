@@ -33,6 +33,14 @@ public class ClientConverter implements Converter<Object, Client> {
 				return client;
 			}catch(NumberFormatException ex){
 				Client client = clientService.findByName((String)element);
+				if(client == null){
+					client = new Client();
+					client.setCompanyName((String)element);
+					client.setName((String)element);
+					client.setPhoneNumber("(000) 000-0000");
+					client.setInvoiceNumber("INV000");
+					clientService.saveClient(client);
+				}
 				return client;
 			}catch (ObjectNotFoundException e) {
 				return null;

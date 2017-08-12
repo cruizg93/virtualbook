@@ -127,14 +127,14 @@ var year = '${year}';
 								<td>${event.location.buildingName}</td>
 								<td>
 									<sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
-										<button type="button" class="btn btn-success formEditButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
+										<button type="button" class="btn btn-primary formEditButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
 												onclick="window.location.href ='<c:url value="/edit-event-${event.id}" />'">
 												<span class="glyphicon glyphicon-pencil"></span><span
 													class="hidden-ms hidden-xs"> Edit</span>
 										</button>
 									</sec:authorize>
 									<sec:authorize access="hasRole('ADMIN')">
-										<button type="button" class="btn btn-success formDeleteButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
+										<button type="button" class="btn btn-default formDeleteButtonIcon col-lg-6 col-md-6 col-ms-6 col-xs-6"
 												onclick="contract(${event.id})">
 												<span class="glyphicon glyphicon-download-alt"></span><span
 													class="hidden-ms hidden-xs"> Contract</span>
@@ -158,6 +158,7 @@ var year = '${year}';
 </div>
 <c:if test="${not empty incompleteEvents}">
 <div class="container well incompleteContainer">
+	<p>INCOMPLETE EVENTS</p>
 	<c:forEach items="${incompleteEvents}" var="event" varStatus="loopindex">
 		<div class="incompleteCards" onclick="location.href = '<c:url value="/edit-event-${event.id}"/>'">
 			<p class="client">${event.client.name}</p>
@@ -176,6 +177,5 @@ var year = '${year}';
 <script src="<c:url value='/static/js/dataTables.bootstrap.min.js' />" type="text/javascript"></script>
 <script type="text/javascript">
 	var context = '${pageContext.request.contextPath}';
-	
 	$("#eventsTable").DataTable();
 </script>

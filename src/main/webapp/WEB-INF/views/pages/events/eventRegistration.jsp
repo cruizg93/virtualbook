@@ -384,8 +384,17 @@
 		$("#location").prepend("<option value='' selected='selected'>LOCATION</option>");
 		$("#client").prepend("<option value='' selected='selected'>CLIENT</option>");
 	}
-	$("#location").selectize();
-	$("#client").selectize();
+	$("#location").selectize({
+        create:function (input){
+            return { value:input, text:input};
+        }
+        
+     });
+	$("#client").selectize({
+        create:function (input){
+            return { value:input, text:input};
+        }
+     });
 	
 	function deleteEvent(id){
 		bootbox.confirm({

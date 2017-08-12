@@ -192,7 +192,8 @@ var year = '${year}';
 	<span class="glyphicon glyphicon-plus"></span>New Event</button>
 </div>
 <c:if test="${not empty incompleteEvents}">
-<div class="container well incompleteContainer">
+<div class="container well incompleteContainer text-center">
+	<p>INCOMPLETE EVENTS</p>
 	<c:forEach items="${incompleteEvents}" var="event" varStatus="loopindex">
 		<div class="incompleteCards" onclick="location.href = '<c:url value="/edit-event-${event.id}"/>'">
 			<p class="client">${event.client.name}</p>

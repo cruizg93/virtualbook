@@ -32,6 +32,13 @@ public class LocationConverter implements Converter<Object, Location>  {
 				return location;
 			} catch (Exception e) {
 				Location location= locationService.findByLocation((String)element);
+				if(location==null){
+					location = new Location();
+					location.setBuildingName((String)element);
+					location.setLocation((String)element);
+					location.setPhoneNumber("(000) 000-0000");
+					locationService.save(location);
+				}
 				logger.info("Location:",location);
 				return location;
 			}

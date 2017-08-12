@@ -23,6 +23,7 @@
 	</sec:authorize>
 	<script type="text/javascript">
 		var contextPath='<%=request.getContextPath()%>';
+		var context = '${pageContext.request.contextPath}';
 	</script>
 </head>
 <body>
